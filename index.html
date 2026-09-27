@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>আমার গ্রাম হিজলী</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
@@ -16,44 +18,121 @@ body{
   margin:0;
   background:#f3f7f5;
   color:#222;
+  padding-bottom:75px;
 }
 
-header{
-  background:#087f5b;
+/* ================= HEADER ================= */
+
+.top-header{
+  background:linear-gradient(135deg,#087f5b,#099268);
   color:white;
-  padding:22px 15px;
-  text-align:center;
-}
-
-header h1{
-  margin:0;
-  font-size:27px;
-}
-
-header p{
-  margin:7px 0 0;
-}
-
-nav{
-  background:white;
-  padding:10px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 2px 8px #0002;
+  padding:18px 15px;
   display:flex;
-  gap:7px;
-  overflow-x:auto;
+  justify-content:space-between;
+  align-items:center;
 }
 
-nav button{
-  white-space:nowrap;
-  border:0;
-  padding:10px 14px;
-  border-radius:8px;
-  background:#e6fcf5;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:50px;
+  height:50px;
+  background:white;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:29px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:23px;
+}
+
+.brand p{
+  margin:5px 0 0;
+  font-size:13px;
+}
+
+.search-button{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#ffffff22;
+  color:white;
+  font-size:21px;
+  padding:0;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome{
+  padding:15px;
+}
+
+.welcome-image{
+  min-height:210px;
+  border-radius:20px;
+  background:
+    linear-gradient(#0006,#0006),
+    linear-gradient(135deg,#74c69d,#40916c);
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+}
+
+.welcome-overlay{
+  color:white;
+  padding:25px;
+}
+
+.welcome-overlay h2{
+  color:white;
+  margin:0 0 8px;
+  font-size:25px;
+}
+
+.welcome-overlay p{
+  margin:0;
+  line-height:1.6;
+}
+
+/* ================= QUICK STATS ================= */
+
+.quick-stats{
+  width:94%;
+  max-width:1000px;
+  margin:0 auto 20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.quick-stat{
+  background:white;
+  border-radius:13px;
+  padding:14px 5px;
+  text-align:center;
+  box-shadow:0 2px 8px #0001;
+}
+
+.quick-stat strong{
+  display:block;
+  font-size:23px;
   color:#087f5b;
 }
+
+.quick-stat span{
+  font-size:13px;
+  color:#666;
+}
+
+/* ================= CONTAINER ================= */
 
 .container{
   width:94%;
@@ -61,9 +140,65 @@ nav button{
   margin:18px auto;
 }
 
+.section-title{
+  color:#087f5b;
+  margin:20px 0 12px;
+}
+
+/* ================= MENU ================= */
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.menu-card{
+  border:0;
+  border-radius:17px;
+  padding:18px 10px;
+  text-align:left;
+  background:white;
+  box-shadow:0 2px 9px #0001;
+  cursor:pointer;
+  transition:.2s;
+  margin:0;
+}
+
+.menu-card:active{
+  transform:scale(.97);
+}
+
+.menu-icon{
+  width:45px;
+  height:45px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin-bottom:10px;
+  background:#e6fcf5;
+}
+
+.menu-card h3{
+  margin:0 0 5px;
+  color:#087f5b;
+  font-size:16px;
+}
+
+.menu-card p{
+  margin:0;
+  color:#777;
+  font-size:12px;
+  line-height:1.4;
+}
+
+/* ================= CARD ================= */
+
 .card{
   background:white;
-  border-radius:13px;
+  border-radius:15px;
   padding:18px;
   margin-bottom:18px;
   box-shadow:0 2px 10px #0001;
@@ -74,13 +209,16 @@ h2{
   margin-top:0;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:12px;
   margin:6px 0;
   border:1px solid #ccc;
   border-radius:8px;
   font-size:15px;
+  background:white;
 }
 
 textarea{
@@ -116,40 +254,102 @@ button{
   color:white;
 }
 
-.blue{
-  background:#1971c2;
-  color:white;
-}
-
 .hidden{
   display:none!important;
 }
 
+/* ================= ITEMS ================= */
+
 .item{
-  border:1px solid #ddd;
-  padding:14px;
-  border-radius:10px;
+  border:1px solid #e0e0e0;
+  padding:15px;
+  border-radius:12px;
   margin:10px 0;
   background:#fff;
 }
 
 .item h3{
-  margin:0 0 8px;
+  margin:0 0 9px;
   color:#087f5b;
 }
 
 .item p{
-  margin:6px 0;
+  margin:7px 0;
+  line-height:1.6;
 }
 
 .badge{
   display:inline-block;
   background:#e6fcf5;
   color:#087f5b;
-  padding:4px 8px;
+  padding:5px 9px;
   border-radius:20px;
   font-size:12px;
 }
+
+/* ================= PERSON ================= */
+
+.person-card{
+  display:flex;
+  gap:13px;
+  align-items:flex-start;
+}
+
+.person-icon{
+  min-width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#e6fcf5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+
+.person-info{
+  flex:1;
+}
+
+.person-info h3{
+  margin:0 0 7px;
+}
+
+/* ================= PLACE ICON ================= */
+
+.place-icon{
+  width:55px;
+  height:55px;
+  border-radius:15px;
+  background:#e7f5ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.stat{
+  background:#e6fcf5;
+  padding:15px 5px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  color:#087f5b;
+}
+
+/* ================= MESSAGE ================= */
 
 .message{
   padding:10px;
@@ -168,95 +368,478 @@ button{
   color:#c92a2a;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.stat{
-  background:#e6fcf5;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-}
-
-.stat strong{
-  display:block;
-  font-size:24px;
-  color:#087f5b;
-}
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
 .public-info{
   line-height:1.8;
   white-space:pre-wrap;
 }
 
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal-content{
+  background:white;
+  width:100%;
+  max-width:500px;
+  border-radius:18px;
+  padding:20px;
+  max-height:90vh;
+  overflow:auto;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:10px;
+  top:10px;
+  font-size:24px;
+  background:#eee;
+  width:38px;
+  height:38px;
+  padding:0;
+}
+
+.large-icon{
+  font-size:45px;
+  text-align:center;
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  height:65px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  box-shadow:0 -2px 10px #0002;
+  z-index:50;
+}
+
+.bottom-nav button{
+  margin:0;
+  padding:5px;
+  border-radius:0;
+  background:white;
+  color:#555;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.bottom-nav span{
+  font-size:21px;
+}
+
+.bottom-nav small{
+  font-size:11px;
+}
+
+/* ================= FOOTER ================= */
+
 footer{
   text-align:center;
   padding:30px;
   color:#666;
+  line-height:1.8;
 }
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px){
-  .stats{
-    grid-template-columns:1fr 1fr;
+
+  .brand h1{
+    font-size:20px;
   }
 
-  header h1{
-    font-size:23px;
+  .brand p{
+    font-size:11px;
   }
+
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>🏡 আমার গ্রাম হিজলী</h1>
-  <p>আমাদের গ্রামের তথ্য ও পরিচিতি</p>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="top-header">
+
+  <div class="brand">
+
+    <div class="logo">
+      🏡
+    </div>
+
+    <div>
+      <h1>আমার গ্রাম হিজলী</h1>
+      <p>আমাদের গ্রাম, আমাদের পরিচয়</p>
+    </div>
+
+  </div>
+
+  <button
+    class="search-button"
+    onclick="openSearch()">
+
+    🔍
+
+  </button>
+
 </header>
 
-<nav>
-  <button onclick="goTo('home')">🏠 হোম</button>
-  <button onclick="goTo('villageInfo')">🏡 গ্রামের পরিচিতি</button>
-  <button onclick="goTo('notices')">📢 নোটিশ</button>
-  <button onclick="goTo('people')">👥 মানুষ</button>
-  <button onclick="goTo('places')">🏫 প্রতিষ্ঠান</button>
-  <button onclick="goTo('contacts')">📞 যোগাযোগ</button>
-  <button onclick="showAdminLogin()">🔐 Admin</button>
-</nav>
 
-<div class="container">
+<!-- =====================================================
+     WELCOME
+===================================================== -->
 
-<!-- ================= HOME ================= -->
+<section class="welcome">
 
-<section id="home" class="card">
+  <div class="welcome-image">
 
-  <h2>🏡 আমাদের গ্রাম হিজলী</h2>
+    <div class="welcome-overlay">
 
-  <div id="homeText" class="public-info">
-    আমাদের গ্রামের তথ্য এখানে দেখা যাবে।
+      <h2>
+        আমাদের হিজলীতে স্বাগতম
+      </h2>
+
+      <p>
+        হিজলীর মানুষ, ইতিহাস ও স্মৃতি
+        এক জায়গায়
+      </p>
+
+    </div>
+
   </div>
 
 </section>
 
 
-<!-- ================= VILLAGE INFO ================= -->
+<!-- =====================================================
+     QUICK STATS
+===================================================== -->
 
-<section id="villageInfo" class="card">
+<section class="quick-stats">
 
-  <div class="section-title">
-    <h2>📜 গ্রামের পরিচিতি ও ইতিহাস</h2>
+  <div class="quick-stat">
+
+    <strong id="peopleCount">
+      ০
+    </strong>
+
+    <span>
+      মানুষ
+    </span>
+
   </div>
+
+  <div class="quick-stat">
+
+    <strong id="institutionCount">
+      ০
+    </strong>
+
+    <span>
+      প্রতিষ্ঠান
+    </span>
+
+  </div>
+
+  <div class="quick-stat">
+
+    <strong id="photoCount">
+      ০
+    </strong>
+
+    <span>
+      ছবি
+    </span>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOME / CATEGORY
+===================================================== -->
+
+<main class="container">
+
+  <h2 class="section-title">
+    গ্রামের তথ্য
+  </h2>
+
+  <div class="menu-grid">
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('people')">
+
+      <div class="menu-icon">
+        👥
+      </div>
+
+      <h3>
+        গ্রামের মানুষ
+      </h3>
+
+      <p>
+        মানুষের নাম, পিতা, পাড়া,
+        শিক্ষা ও পেশা
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('family')">
+
+      <div class="menu-icon">
+        🌳
+      </div>
+
+      <h3>
+        পরিবার ও বংশ
+      </h3>
+
+      <p>
+        পরিবার ও পারিবারিক সম্পর্ক
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('places')">
+
+      <div class="menu-icon">
+        🏫
+      </div>
+
+      <h3>
+        প্রতিষ্ঠান
+      </h3>
+
+      <p>
+        স্কুল, মাদ্রাসা ও অন্যান্য
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('education')">
+
+      <div class="menu-icon">
+        🎓
+      </div>
+
+      <h3>
+        শিক্ষা
+      </h3>
+
+      <p>
+        গ্রামের শিক্ষার তথ্য
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('profession')">
+
+      <div class="menu-icon">
+        💼
+      </div>
+
+      <h3>
+        পেশা
+      </h3>
+
+      <p>
+        কে কোন পেশায়
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('statistics')">
+
+      <div class="menu-icon">
+        📊
+      </div>
+
+      <h3>
+        পরিসংখ্যান
+      </h3>
+
+      <p>
+        গ্রামের মোট তথ্য
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('gallery')">
+
+      <div class="menu-icon">
+        🖼️
+      </div>
+
+      <h3>
+        ছবি গ্যালারি
+      </h3>
+
+      <p>
+        গ্রামের ছবি
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('history')">
+
+      <div class="menu-icon">
+        🕰️
+      </div>
+
+      <h3>
+        পুরোনো স্মৃতি
+      </h3>
+
+      <p>
+        পুরোনো ছবি ও ইতিহাস
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('notices')">
+
+      <div class="menu-icon">
+        📢
+      </div>
+
+      <h3>
+        নোটিশ
+      </h3>
+
+      <p>
+        গ্রামের ঘোষণা
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('places')">
+
+      <div class="menu-icon">
+        🗺️
+      </div>
+
+      <h3>
+        গ্রামের স্থান
+      </h3>
+
+      <p>
+        গুরুত্বপূর্ণ স্থানসমূহ
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('mosque')">
+
+      <div class="menu-icon">
+        🕌
+      </div>
+
+      <h3>
+        মসজিদ ও ঈদগাহ
+      </h3>
+
+      <p>
+        ধর্মীয় প্রতিষ্ঠান
+      </p>
+
+    </button>
+
+
+    <button
+      class="menu-card"
+      onclick="openPage('more')">
+
+      <div class="menu-icon">
+        ➕
+      </div>
+
+      <h3>
+        আরও তথ্য
+      </h3>
+
+      <p>
+        অন্যান্য তথ্য
+      </p>
+
+    </button>
+
+
+  </div>
+
+
+<!-- =====================================================
+     PUBLIC VILLAGE
+===================================================== -->
+
+<section id="villageInfo" class="card hidden">
+
+  <h2>
+    📜 গ্রামের পরিচিতি ও ইতিহাস
+  </h2>
 
   <div id="villageList">
     তথ্য লোড হচ্ছে...
@@ -265,13 +848,59 @@ footer{
 </section>
 
 
-<!-- ================= NOTICES ================= -->
+<!-- =====================================================
+     PUBLIC PEOPLE
+===================================================== -->
 
-<section id="notices" class="card">
+<section id="people" class="card hidden">
 
-  <div class="section-title">
-    <h2>📢 নোটিশ / ঘোষণা</h2>
+  <h2>
+    👥 গ্রামের মানুষের পরিচয়
+  </h2>
+
+  <input
+    id="peopleSearch"
+    placeholder="নাম / বাবার নাম / পাড়া / শিক্ষা / পেশা খুঁজুন..."
+    oninput="showPeople()">
+
+  <div id="peopleList">
+    তথ্য লোড হচ্ছে...
   </div>
+
+</section>
+
+
+<!-- =====================================================
+     PUBLIC PLACES
+===================================================== -->
+
+<section id="places" class="card hidden">
+
+  <h2>
+    🏫 প্রতিষ্ঠান ও গুরুত্বপূর্ণ স্থান
+  </h2>
+
+  <input
+    id="placeSearch"
+    placeholder="প্রতিষ্ঠান / ধরন / স্থান খুঁজুন..."
+    oninput="showPlaces()">
+
+  <div id="placeList">
+    তথ্য লোড হচ্ছে...
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PUBLIC NOTICES
+===================================================== -->
+
+<section id="notices" class="card hidden">
+
+  <h2>
+    📢 নোটিশ / ঘোষণা
+  </h2>
 
   <input
     id="noticeSearch"
@@ -285,53 +914,15 @@ footer{
 </section>
 
 
-<!-- ================= PEOPLE ================= -->
+<!-- =====================================================
+     CONTACTS
+===================================================== -->
 
-<section id="people" class="card">
+<section id="contacts" class="card hidden">
 
-  <div class="section-title">
-    <h2>👥 গ্রামের মানুষের তথ্য</h2>
-  </div>
-
-  <input
-    id="peopleSearch"
-    placeholder="নাম / পিতার নাম / গ্রাম খুঁজুন..."
-    oninput="showPeople()">
-
-  <div id="peopleList">
-    তথ্য লোড হচ্ছে...
-  </div>
-
-</section>
-
-
-<!-- ================= PLACES ================= -->
-
-<section id="places" class="card">
-
-  <div class="section-title">
-    <h2>🏫 গ্রামের প্রতিষ্ঠান ও গুরুত্বপূর্ণ স্থান</h2>
-  </div>
-
-  <input
-    id="placeSearch"
-    placeholder="প্রতিষ্ঠান / স্থান খুঁজুন..."
-    oninput="showPlaces()">
-
-  <div id="placeList">
-    তথ্য লোড হচ্ছে...
-  </div>
-
-</section>
-
-
-<!-- ================= CONTACTS ================= -->
-
-<section id="contacts" class="card">
-
-  <div class="section-title">
-    <h2>📞 প্রয়োজনীয় যোগাযোগ</h2>
-  </div>
+  <h2>
+    📞 প্রয়োজনীয় যোগাযোগ
+  </h2>
 
   <div id="contactList">
     তথ্য লোড হচ্ছে...
@@ -340,11 +931,97 @@ footer{
 </section>
 
 
-<!-- ================= ADMIN LOGIN ================= -->
+</main>
 
-<section id="adminLogin" class="card hidden">
 
-  <h2>🔐 Admin Login</h2>
+<!-- =====================================================
+     SEARCH MODAL
+===================================================== -->
+
+<div id="searchBox" class="modal">
+
+  <div class="modal-content">
+
+    <button
+      class="close"
+      onclick="closeSearch()">
+
+      ×
+
+    </button>
+
+    <h2>
+      🔍 হিজলী খুঁজুন
+    </h2>
+
+    <input
+      id="searchInput"
+      placeholder="নাম লিখুন...">
+
+    <button
+      class="primary"
+      onclick="searchPerson()">
+
+      খুঁজুন
+
+    </button>
+
+    <div id="searchResult"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     PAGE MESSAGE MODAL
+===================================================== -->
+
+<div id="pageBox" class="modal">
+
+  <div class="modal-content">
+
+    <button
+      class="close"
+      onclick="closePage()">
+
+      ×
+
+    </button>
+
+    <div
+      id="pageIcon"
+      class="large-icon">
+
+      🏡
+
+    </div>
+
+    <h2 id="pageTitle">
+      আমার গ্রাম হিজলী
+    </h2>
+
+    <p id="pageText">
+      এই বিভাগটি পরবর্তী ধাপে তৈরি করা হবে।
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN LOGIN
+===================================================== -->
+
+<section
+  id="adminLogin"
+  class="card hidden"
+  style="width:94%;max-width:1000px;margin:20px auto;">
+
+  <h2>
+    🔐 Admin Login
+  </h2>
 
   <input
     type="email"
@@ -356,34 +1033,60 @@ footer{
     id="password"
     placeholder="Password">
 
-  <button class="primary" onclick="login()">
+  <button
+    class="primary"
+    onclick="login()">
+
     Login
+
   </button>
 
-  <button class="gray" onclick="hideAdminLogin()">
+  <button
+    class="gray"
+    onclick="hideAdminLogin()">
+
     Cancel
+
   </button>
 
-  <div id="loginMsg" class="message"></div>
+  <div
+    id="loginMsg"
+    class="message">
+  </div>
 
 </section>
 
 
-<!-- ================= ADMIN PANEL ================= -->
+<!-- =====================================================
+     ADMIN PANEL
+===================================================== -->
 
-<section id="adminPanel" class="hidden">
+<section
+  id="adminPanel"
+  class="hidden"
+  style="width:94%;max-width:1000px;margin:20px auto;">
+
 
   <div class="card">
 
     <div class="section-title">
 
       <div>
-        <h2>🔐 Admin Dashboard</h2>
+
+        <h2>
+          🔐 Admin Dashboard
+        </h2>
+
         <div id="adminEmail"></div>
+
       </div>
 
-      <button class="danger" onclick="logout()">
+      <button
+        class="danger"
+        onclick="logout()">
+
         Logout
+
       </button>
 
     </div>
@@ -398,18 +1101,33 @@ footer{
     <div class="stats">
 
       <div class="stat">
-        <strong id="statPeople">0</strong>
+
+        <strong id="statPeople">
+          0
+        </strong>
+
         মানুষ
+
       </div>
 
       <div class="stat">
-        <strong id="statNotice">0</strong>
+
+        <strong id="statNotice">
+          0
+        </strong>
+
         নোটিশ
+
       </div>
 
       <div class="stat">
-        <strong id="statPlaces">0</strong>
+
+        <strong id="statPlaces">
+          0
+        </strong>
+
         প্রতিষ্ঠান
+
       </div>
 
     </div>
@@ -417,47 +1135,65 @@ footer{
   </div>
 
 
-  <!-- VILLAGE FORM -->
+  <!-- VILLAGE -->
 
   <div class="card">
 
-    <h2>🏡 গ্রামের তথ্য যোগ / পরিবর্তন</h2>
+    <h2>
+      🏡 গ্রামের তথ্য যোগ / পরিবর্তন
+    </h2>
 
-    <input type="hidden" id="villageId">
+    <input
+      type="hidden"
+      id="villageId">
 
     <input
       id="vTitle"
-      placeholder="শিরোনাম, যেমন: আমাদের গ্রামের পরিচিতি">
+      placeholder="শিরোনাম">
 
     <textarea
       id="vDescription"
-      placeholder="গ্রামের পরিচিতি / ইতিহাস / অবস্থান / অন্যান্য তথ্য"></textarea>
+      placeholder="গ্রামের পরিচিতি / ইতিহাস / অন্যান্য তথ্য">
+    </textarea>
 
-    <button class="primary" onclick="saveVillage()">
+    <button
+      class="primary"
+      onclick="saveVillage()">
+
       💾 সংরক্ষণ
+
     </button>
 
     <button
       id="vCancel"
       class="gray hidden"
       onclick="clearVillageForm()">
+
       বাতিল
+
     </button>
 
-    <div id="vMsg" class="message"></div>
+    <div
+      id="vMsg"
+      class="message">
+    </div>
 
     <div id="adminVillageList"></div>
 
   </div>
 
 
-  <!-- NOTICE FORM -->
+  <!-- NOTICE -->
 
   <div class="card">
 
-    <h2>📢 নোটিশ যোগ / পরিবর্তন</h2>
+    <h2>
+      📢 নোটিশ যোগ / পরিবর্তন
+    </h2>
 
-    <input type="hidden" id="noticeId">
+    <input
+      type="hidden"
+      id="noticeId">
 
     <input
       id="nTitle"
@@ -465,132 +1201,226 @@ footer{
 
     <textarea
       id="nDescription"
-      placeholder="নোটিশের বিস্তারিত"></textarea>
+      placeholder="নোটিশের বিস্তারিত">
+    </textarea>
 
-    <button class="primary" onclick="saveNotice()">
+    <button
+      class="primary"
+      onclick="saveNotice()">
+
       💾 নোটিশ সংরক্ষণ
+
     </button>
 
     <button
       id="nCancel"
       class="gray hidden"
       onclick="clearNoticeForm()">
+
       বাতিল
+
     </button>
 
-    <div id="nMsg" class="message"></div>
+    <div
+      id="nMsg"
+      class="message">
+    </div>
 
     <div id="adminNoticeList"></div>
 
   </div>
 
 
-  <!-- PEOPLE FORM -->
+  <!-- PEOPLE -->
 
   <div class="card">
 
-    <h2>👤 মানুষের তথ্য যোগ / পরিবর্তন</h2>
+    <h2>
+      👤 মানুষের তথ্য যোগ / পরিবর্তন
+    </h2>
 
-    <input type="hidden" id="personId">
+    <input
+      type="hidden"
+      id="personId">
 
-    <input id="pName" placeholder="নাম">
 
-    <input id="pFather" placeholder="পিতার নাম">
+    <input
+      id="pName"
+      placeholder="নিজের নাম">
 
-    <input id="pMother" placeholder="মাতার নাম">
 
-    <select id="pGender">
-      <option value="">লিঙ্গ নির্বাচন করুন</option>
-      <option value="পুরুষ">পুরুষ</option>
-      <option value="নারী">নারী</option>
-    </select>
+    <input
+      id="pFather"
+      placeholder="বাবার নাম">
 
-    <input id="pDob" type="date">
 
-    <input id="pPhone" placeholder="মোবাইল নম্বর">
+    <input
+      id="pVillage"
+      placeholder="পাড়া">
 
-    <input id="pVillage" value="হিজলী" placeholder="গ্রাম">
 
-    <input id="pAddress" placeholder="ঠিকানা">
+    <input
+      id="pEducation"
+      placeholder="শিক্ষাগত যোগ্যতা (না দিলে খালি রাখুন)">
 
-    <textarea id="pNote" placeholder="অতিরিক্ত তথ্য"></textarea>
+
+    <input
+      id="pProfession"
+      placeholder="পেশা (না দিলে খালি রাখুন)">
+
 
     <select id="pPublic">
-      <option value="yes">Public — সবাই দেখতে পারবে</option>
-      <option value="no">Private — শুধু Admin দেখতে পারবে</option>
+
+      <option value="yes">
+        Public — সবাই দেখতে পারবে
+      </option>
+
+      <option value="no">
+        Private — শুধু Admin দেখতে পারবে
+      </option>
+
     </select>
 
-    <button class="primary" onclick="savePerson()">
+
+    <button
+      class="primary"
+      onclick="savePerson()">
+
       💾 ব্যক্তির তথ্য সংরক্ষণ
+
     </button>
 
     <button
       id="pCancel"
       class="gray hidden"
       onclick="clearPersonForm()">
+
       বাতিল
+
     </button>
 
-    <div id="pMsg" class="message"></div>
+    <div
+      id="pMsg"
+      class="message">
+    </div>
 
     <div id="adminPeopleList"></div>
 
   </div>
 
 
-  <!-- PLACE FORM -->
+  <!-- PLACES -->
 
   <div class="card">
 
-    <h2>🏫 প্রতিষ্ঠান / গুরুত্বপূর্ণ স্থান যোগ</h2>
+    <h2>
+      🏫 প্রতিষ্ঠান / গুরুত্বপূর্ণ স্থান যোগ
+    </h2>
 
-    <input type="hidden" id="placeId">
+    <input
+      type="hidden"
+      id="placeId">
+
 
     <input
       id="plName"
-      placeholder="নাম, যেমন: হিজলী সরকারি প্রাথমিক বিদ্যালয়">
+      placeholder="প্রতিষ্ঠানের নাম">
 
-    <input
-      id="plType"
-      placeholder="ধরন, যেমন: স্কুল / মসজিদ / মাদরাসা / হাসপাতাল">
+
+    <select id="plType">
+
+      <option value="">
+        ধরন নির্বাচন করুন
+      </option>
+
+      <option value="স্কুল">
+        🏫 স্কুল
+      </option>
+
+      <option value="মাদ্রাসা">
+        🕌 মাদ্রাসা
+      </option>
+
+      <option value="মসজিদ">
+        🕌 মসজিদ
+      </option>
+
+      <option value="ঈদগাহ">
+        🕋 ঈদগাহ
+      </option>
+
+      <option value="হাসপাতাল">
+        🏥 হাসপাতাল / ক্লিনিক
+      </option>
+
+      <option value="বাজার">
+        🛒 বাজার
+      </option>
+
+      <option value="অন্যান্য">
+        🏢 অন্যান্য
+      </option>
+
+    </select>
+
 
     <input
       id="plLocation"
       placeholder="ঠিকানা / অবস্থান">
 
+
     <input
       id="plPhone"
       placeholder="মোবাইল / ফোন">
 
+
     <textarea
       id="plDescription"
-      placeholder="বিস্তারিত তথ্য"></textarea>
+      placeholder="বিস্তারিত তথ্য">
+    </textarea>
 
-    <button class="primary" onclick="savePlace()">
+
+    <button
+      class="primary"
+      onclick="savePlace()">
+
       💾 সংরক্ষণ
+
     </button>
+
 
     <button
       id="plCancel"
       class="gray hidden"
       onclick="clearPlaceForm()">
+
       বাতিল
+
     </button>
 
-    <div id="plMsg" class="message"></div>
+
+    <div
+      id="plMsg"
+      class="message">
+    </div>
+
 
     <div id="adminPlaceList"></div>
 
   </div>
 
 
-  <!-- CONTACT FORM -->
+  <!-- CONTACT -->
 
   <div class="card">
 
-    <h2>📞 প্রয়োজনীয় যোগাযোগ যোগ</h2>
+    <h2>
+      📞 প্রয়োজনীয় যোগাযোগ যোগ
+    </h2>
 
-    <input type="hidden" id="contactId">
+    <input
+      type="hidden"
+      id="contactId">
 
     <input
       id="cName"
@@ -606,33 +1436,88 @@ footer{
 
     <textarea
       id="cDescription"
-      placeholder="বিস্তারিত"></textarea>
+      placeholder="বিস্তারিত">
+    </textarea>
 
-    <button class="primary" onclick="saveContact()">
+    <button
+      class="primary"
+      onclick="saveContact()">
+
       💾 সংরক্ষণ
+
     </button>
 
     <button
       id="cCancel"
       class="gray hidden"
       onclick="clearContactForm()">
+
       বাতিল
+
     </button>
 
-    <div id="cMsg" class="message"></div>
+    <div
+      id="cMsg"
+      class="message">
+    </div>
 
     <div id="adminContactList"></div>
 
   </div>
 
+
 </section>
 
-</div>
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<nav class="bottom-nav">
+
+  <button onclick="goHome()">
+
+    <span>🏠</span>
+    <small>হোম</small>
+
+  </button>
+
+  <button onclick="scrollToCategories()">
+
+    <span>▦</span>
+    <small>ক্যাটাগরি</small>
+
+  </button>
+
+  <button onclick="openPage('notices')">
+
+    <span>🔔</span>
+    <small>নোটিশ</small>
+
+  </button>
+
+  <button onclick="showAdminLogin()">
+
+    <span>👤</span>
+    <small>Admin</small>
+
+  </button>
+
+</nav>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
+
   🏡 আমার গ্রাম হিজলী
+
   <br>
-  গ্রামের তথ্য সবার জন্য
+
+  আমাদের গ্রাম • আমাদের ইতিহাস • আমাদের স্মৃতি
+
 </footer>
 
 
@@ -661,9 +1546,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
-/* =========================
+/* =====================================================
    FIREBASE
-========================= */
+===================================================== */
 
 const firebaseConfig = {
 
@@ -690,19 +1575,23 @@ const firebaseConfig = {
 
   measurementId:
   "G-S7STZ1RZJ9"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+getAuth(app);
 
-const db = getDatabase(app);
+const db =
+getDatabase(app);
 
 
-/* =========================
+/* =====================================================
    ADMIN UID
-========================= */
+===================================================== */
 
 const ADMIN_UIDS = [
 
@@ -713,9 +1602,9 @@ const ADMIN_UIDS = [
 ];
 
 
-/* =========================
+/* =====================================================
    DATA
-========================= */
+===================================================== */
 
 let villageData = {};
 let notices = {};
@@ -724,13 +1613,16 @@ let places = {};
 let contacts = {};
 
 
-/* =========================
+/* =====================================================
    AUTH
-========================= */
+===================================================== */
 
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth,user=>{
 
-  if(user && ADMIN_UIDS.includes(user.uid)){
+  if(
+    user &&
+    ADMIN_UIDS.includes(user.uid)
+  ){
 
     document
     .getElementById("adminLogin")
@@ -743,7 +1635,7 @@ onAuthStateChanged(auth, user => {
     document
     .getElementById("adminEmail")
     .textContent =
-    "Admin: " + user.email;
+    "Admin: "+user.email;
 
     renderAdmin();
 
@@ -758,13 +1650,15 @@ onAuthStateChanged(auth, user => {
 });
 
 
-window.login = async function(){
+window.login=async function(){
 
-  const email =
-  document.getElementById("email").value.trim();
+  const email=
+  document.getElementById("email")
+  .value.trim();
 
-  const password =
-  document.getElementById("password").value;
+  const password=
+  document.getElementById("password")
+  .value;
 
   if(!email || !password){
 
@@ -775,18 +1669,23 @@ window.login = async function(){
     );
 
     return;
+
   }
 
   try{
 
-    const result =
+    const result=
     await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    if(!ADMIN_UIDS.includes(result.user.uid)){
+    if(
+      !ADMIN_UIDS.includes(
+        result.user.uid
+      )
+    ){
 
       await signOut(auth);
 
@@ -802,7 +1701,7 @@ window.login = async function(){
 
     msg(
       "loginMsg",
-      "Login হয়নি: " + error.message,
+      "Login হয়নি: "+error.message,
       "error"
     );
 
@@ -811,7 +1710,7 @@ window.login = async function(){
 };
 
 
-window.logout = async function(){
+window.logout=async function(){
 
   await signOut(auth);
 
@@ -820,11 +1719,11 @@ window.logout = async function(){
 };
 
 
-/* =========================
-   ADMIN LOGIN UI
-========================= */
+/* =====================================================
+   ADMIN UI
+===================================================== */
 
-window.showAdminLogin = function(){
+window.showAdminLogin=function(){
 
   document
   .getElementById("adminLogin")
@@ -838,7 +1737,7 @@ window.showAdminLogin = function(){
 };
 
 
-window.hideAdminLogin = function(){
+window.hideAdminLogin=function(){
 
   document
   .getElementById("adminLogin")
@@ -847,18 +1746,20 @@ window.hideAdminLogin = function(){
 };
 
 
-/* =========================
-   LOAD ALL DATA
-========================= */
+/* =====================================================
+   LOAD DATA
+===================================================== */
 
 onValue(
   ref(db,"village"),
-  snap => {
+  snap=>{
 
-    villageData =
-    snap.val() || {};
+    villageData=
+    snap.val()||{};
 
     showVillage();
+
+    renderAdminVillage();
 
   }
 );
@@ -866,16 +1767,19 @@ onValue(
 
 onValue(
   ref(db,"notices"),
-  snap => {
+  snap=>{
 
-    notices =
-    snap.val() || {};
+    notices=
+    snap.val()||{};
 
     showNotices();
 
-    document.getElementById("statNotice")
-    .textContent =
+    document
+    .getElementById("statNotice")
+    .textContent=
     Object.keys(notices).length;
+
+    renderAdminNotices();
 
   }
 );
@@ -883,16 +1787,28 @@ onValue(
 
 onValue(
   ref(db,"people"),
-  snap => {
+  snap=>{
 
-    people =
-    snap.val() || {};
+    people=
+    snap.val()||{};
 
     showPeople();
 
-    document.getElementById("statPeople")
-    .textContent =
-    Object.keys(people).length;
+    const publicPeople=
+    Object.values(people)
+    .filter(p=>p.public!=="no");
+
+    document
+    .getElementById("statPeople")
+    .textContent=
+    publicPeople.length;
+
+    document
+    .getElementById("peopleCount")
+    .textContent=
+    toBanglaNumber(publicPeople.length);
+
+    renderAdminPeople();
 
   }
 );
@@ -900,16 +1816,24 @@ onValue(
 
 onValue(
   ref(db,"places"),
-  snap => {
+  snap=>{
 
-    places =
-    snap.val() || {};
+    places=
+    snap.val()||{};
 
     showPlaces();
 
-    document.getElementById("statPlaces")
-    .textContent =
+    document
+    .getElementById("statPlaces")
+    .textContent=
     Object.keys(places).length;
+
+    document
+    .getElementById("institutionCount")
+    .textContent=
+    toBanglaNumber(Object.keys(places).length);
+
+    renderAdminPlaces();
 
   }
 );
@@ -917,40 +1841,50 @@ onValue(
 
 onValue(
   ref(db,"contacts"),
-  snap => {
+  snap=>{
 
-    contacts =
-    snap.val() || {};
+    contacts=
+    snap.val()||{};
 
     showContacts();
+
+    renderAdminContacts();
 
   }
 );
 
 
-/* =========================
+/* =====================================================
    VILLAGE
-========================= */
+===================================================== */
 
-window.saveVillage = async function(){
+window.saveVillage=async function(){
 
-  const id =
-  document.getElementById("villageId").value;
+  const id=
+  document.getElementById("villageId")
+  .value;
 
-  const title =
-  document.getElementById("vTitle").value.trim();
+  const title=
+  document.getElementById("vTitle")
+  .value.trim();
 
-  const description =
-  document.getElementById("vDescription").value.trim();
+  const description=
+  document.getElementById("vDescription")
+  .value.trim();
 
   if(!title){
 
-    msg("vMsg","শিরোনাম দিন।","error");
+    msg(
+      "vMsg",
+      "শিরোনাম দিন।",
+      "error"
+    );
 
     return;
+
   }
 
-  const data = {
+  const data={
 
     title,
     description,
@@ -969,7 +1903,7 @@ window.saveVillage = async function(){
 
     }else{
 
-      const newRef =
+      const newRef=
       push(ref(db,"village"));
 
       await set(
@@ -1005,114 +1939,108 @@ window.saveVillage = async function(){
 
 function showVillage(){
 
-  const list =
+  const list=
   document.getElementById("villageList");
 
-  const entries =
+  const entries=
   Object.entries(villageData);
 
-  if(entries.length===0){
+  if(!entries.length){
 
-    list.innerHTML =
+    list.innerHTML=
     "<p>এখনো গ্রামের কোনো তথ্য যোগ করা হয়নি।</p>";
 
-    document.getElementById("homeText")
-    .textContent =
-    "আমাদের গ্রামের তথ্য শীঘ্রই এখানে যোগ করা হবে।";
-
     return;
+
   }
 
-  list.innerHTML = "";
-
-  let homeText = "";
+  list.innerHTML="";
 
   entries.forEach(([id,item])=>{
 
-    const div =
+    const div=
     document.createElement("div");
 
     div.className="item";
 
-    div.innerHTML = `
+    div.innerHTML=`
 
-      <h3>${esc(item.title || "")}</h3>
+      <h3>
+        📜 ${esc(item.title||"")}
+      </h3>
 
       <div class="public-info">
-      ${esc(item.description || "")}
+        ${esc(item.description||"")}
       </div>
 
     `;
 
     list.appendChild(div);
 
-    homeText +=
-    item.title + "\n" +
-    (item.description || "") +
-    "\n\n";
-
   });
-
-  document.getElementById("homeText")
-  .textContent =
-  homeText.trim();
 
 }
 
 
 function clearVillageForm(){
 
-  document.getElementById("villageId").value="";
+  document
+  .getElementById("villageId")
+  .value="";
 
-  document.getElementById("vTitle").value="";
+  document
+  .getElementById("vTitle")
+  .value="";
 
-  document.getElementById("vDescription").value="";
+  document
+  .getElementById("vDescription")
+  .value="";
 
-  document.getElementById("vCancel")
+  document
+  .getElementById("vCancel")
   .classList.add("hidden");
 
 }
 
 
-function renderAdmin(){
-
-  renderAdminVillage();
-  renderAdminNotices();
-  renderAdminPeople();
-  renderAdminPlaces();
-  renderAdminContacts();
-
-}
+window.clearVillageForm=
+clearVillageForm;
 
 
-/* =========================
-   NOTICES
-========================= */
+/* =====================================================
+   NOTICE
+===================================================== */
 
-window.saveNotice = async function(){
+window.saveNotice=async function(){
 
-  const id =
-  document.getElementById("noticeId").value;
+  const id=
+  document.getElementById("noticeId")
+  .value;
 
-  const title =
-  document.getElementById("nTitle").value.trim();
+  const title=
+  document.getElementById("nTitle")
+  .value.trim();
 
-  const description =
-  document.getElementById("nDescription").value.trim();
+  const description=
+  document.getElementById("nDescription")
+  .value.trim();
 
   if(!title){
 
-    msg("nMsg","নোটিশের শিরোনাম দিন।","error");
+    msg(
+      "nMsg",
+      "নোটিশের শিরোনাম দিন।",
+      "error"
+    );
 
     return;
+
   }
 
-  const data = {
-
+  const data={
     title,
     description,
     updatedAt:Date.now()
-
   };
 
   try{
@@ -1126,7 +2054,7 @@ window.saveNotice = async function(){
 
     }else{
 
-      const newRef =
+      const newRef=
       push(ref(db,"notices"));
 
       await set(
@@ -1149,53 +2077,67 @@ window.saveNotice = async function(){
 
   }catch(error){
 
-    msg("nMsg",error.message,"error");
+    msg(
+      "nMsg",
+      error.message,
+      "error"
+    );
 
   }
 
 };
 
 
-window.showNotices = function(){
+window.showNotices=function(){
 
-  const list =
+  const list=
   document.getElementById("noticeList");
 
-  const search =
-  document.getElementById("noticeSearch")
-  .value.toLowerCase();
+  const input=
+  document.getElementById("noticeSearch");
 
-  const entries =
+  const search=
+  input ? input.value.toLowerCase() : "";
+
+  const entries=
   Object.entries(notices)
   .filter(([id,item])=>
-    ((item.title||"")+" "+(item.description||""))
+
+    (
+      (item.title||"")+" "+
+      (item.description||"")
+    )
     .toLowerCase()
     .includes(search)
+
   );
 
-  if(entries.length===0){
+  if(!entries.length){
 
-    list.innerHTML =
+    list.innerHTML=
     "<p>কোনো নোটিশ পাওয়া যায়নি।</p>";
 
     return;
+
   }
 
   list.innerHTML="";
 
   entries.forEach(([id,item])=>{
 
-    const div =
+    const div=
     document.createElement("div");
 
     div.className="item";
 
     div.innerHTML=`
 
-      <h3>📢 ${esc(item.title||"")}</h3>
+      <h3>
+        📢 ${esc(item.title||"")}
+      </h3>
 
       <p>
-      ${esc(item.description||"")}
+        ${esc(item.description||"")}
       </p>
 
     `;
@@ -1209,67 +2151,78 @@ window.showNotices = function(){
 
 function clearNoticeForm(){
 
-  document.getElementById("noticeId").value="";
+  document
+  .getElementById("noticeId")
+  .value="";
 
-  document.getElementById("nTitle").value="";
+  document
+  .getElementById("nTitle")
+  .value="";
 
-  document.getElementById("nDescription").value="";
+  document
+  .getElementById("nDescription")
+  .value="";
 
-  document.getElementById("nCancel")
+  document
+  .getElementById("nCancel")
   .classList.add("hidden");
 
 }
 
 
-/* =========================
+window.clearNoticeForm=
+clearNoticeForm;
+
+
+/* =====================================================
    PEOPLE
-========================= */
+===================================================== */
 
-window.savePerson = async function(){
+window.savePerson=async function(){
 
-  const id =
-  document.getElementById("personId").value;
+  const id=
+  document.getElementById("personId")
+  .value;
 
-  const name =
-  document.getElementById("pName").value.trim();
+  const name=
+  document.getElementById("pName")
+  .value.trim();
 
   if(!name){
 
-    msg("pMsg","নাম দিন।","error");
+    msg(
+      "pMsg",
+      "নিজের নাম দিন।",
+      "error"
+    );
 
     return;
+
   }
 
-  const data = {
+  const data={
 
     name,
 
     father:
-    document.getElementById("pFather").value.trim(),
-
-    mother:
-    document.getElementById("pMother").value.trim(),
-
-    gender:
-    document.getElementById("pGender").value,
-
-    dob:
-    document.getElementById("pDob").value,
-
-    phone:
-    document.getElementById("pPhone").value.trim(),
+    document.getElementById("pFather")
+    .value.trim(),
 
     village:
-    document.getElementById("pVillage").value.trim(),
+    document.getElementById("pVillage")
+    .value.trim(),
 
-    address:
-    document.getElementById("pAddress").value.trim(),
+    education:
+    document.getElementById("pEducation")
+    .value.trim(),
 
-    note:
-    document.getElementById("pNote").value.trim(),
+    profession:
+    document.getElementById("pProfession")
+    .value.trim(),
 
     public:
-    document.getElementById("pPublic").value,
+    document.getElementById("pPublic")
+    .value,
 
     updatedAt:
     Date.now()
@@ -1287,7 +2240,7 @@ window.savePerson = async function(){
 
     }else{
 
-      const newRef =
+      const newRef=
       push(ref(db,"people"));
 
       await set(
@@ -1310,73 +2263,146 @@ window.savePerson = async function(){
 
   }catch(error){
 
-    msg("pMsg",error.message,"error");
+    msg(
+      "pMsg",
+      error.message,
+      "error"
+    );
 
   }
 
 };
 
 
-window.showPeople = function(){
+window.showPeople=function(){
 
-  const list =
+  const list=
   document.getElementById("peopleList");
 
-  const search =
-  document.getElementById("peopleSearch")
-  .value.toLowerCase();
+  const input=
+  document.getElementById("peopleSearch");
 
-  const entries =
+  const search=
+  input ? input.value.toLowerCase() : "";
+
+  const entries=
   Object.entries(people)
   .filter(([id,p])=>{
 
-    if(p.public==="no") return false;
+    if(p.public==="no")
+      return false;
 
-    const text =
+    const text=
 
       (p.name||"")+" "+
       (p.father||"")+" "+
-      (p.mother||"")+" "+
       (p.village||"")+" "+
-      (p.address||"");
+      (p.education||"")+" "+
+      (p.profession||"");
 
-    return text.toLowerCase()
+    return text
+    .toLowerCase()
     .includes(search);
 
   });
 
-  if(entries.length===0){
+
+  if(!entries.length){
 
     list.innerHTML=
     "<p>কোনো তথ্য পাওয়া যায়নি।</p>";
 
     return;
+
   }
+
 
   list.innerHTML="";
 
+
   entries.forEach(([id,p])=>{
 
-    const div =
+    const div=
     document.createElement("div");
 
     div.className="item";
 
-    div.innerHTML=`
 
-      <h3>👤 ${esc(p.name||"")}</h3>
+    let html=`
 
-      <p><b>পিতা:</b> ${esc(p.father||"-")}</p>
+      <div class="person-card">
 
-      <p><b>মাতা:</b> ${esc(p.mother||"-")}</p>
+        <div class="person-icon">
+          👤
+        </div>
 
-      <p><b>লিঙ্গ:</b> ${esc(p.gender||"-")}</p>
+        <div class="person-info">
 
-      <p><b>গ্রাম:</b> ${esc(p.village||"-")}</p>
-
-      <p><b>ঠিকানা:</b> ${esc(p.address||"-")}</p>
+          <h3>
+            ${esc(p.name||"")}
+          </h3>
 
     `;
+
+
+    if(p.father){
+
+      html+=`
+        <p>
+          <b>পিতা:</b>
+          ${esc(p.father)}
+        </p>
+      `;
+
+    }
+
+
+    if(p.village){
+
+      html+=`
+        <p>
+          <b>পাড়া:</b>
+          ${esc(p.village)}
+        </p>
+      `;
+
+    }
+
+
+    if(p.education){
+
+      html+=`
+        <p>
+          <b>🎓 শিক্ষাগত যোগ্যতা:</b>
+          ${esc(p.education)}
+        </p>
+      `;
+
+    }
+
+
+    if(p.profession){
+
+      html+=`
+        <p>
+          <b>💼 পেশা:</b>
+          ${esc(p.profession)}
+        </p>
+      `;
+
+    }
+
+
+    html+=`
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    div.innerHTML=html;
 
     list.appendChild(div);
 
@@ -1385,44 +2411,92 @@ window.showPeople = function(){
 };
 
 
-/* =========================
-   PLACES
-========================= */
+/* =====================================================
+   PLACE ICON
+===================================================== */
 
-window.savePlace = async function(){
+function getPlaceIcon(type){
 
-  const id =
-  document.getElementById("placeId").value;
+  const t=
+  String(type||"")
+  .toLowerCase();
 
-  const name =
-  document.getElementById("plName").value.trim();
+  if(t.includes("স্কুল"))
+    return "🏫";
+
+  if(t.includes("মাদ্রাসা") ||
+     t.includes("মাদরাসা"))
+    return "🕌";
+
+  if(t.includes("মসজিদ"))
+    return "🕌";
+
+  if(t.includes("ঈদগাহ"))
+    return "🕋";
+
+  if(t.includes("হাসপাতাল") ||
+     t.includes("ক্লিনিক"))
+    return "🏥";
+
+  if(t.includes("বাজার"))
+    return "🛒";
+
+  return "🏢";
+
+}
+
+
+/* =====================================================
+   PLACE
+===================================================== */
+
+window.savePlace=async function(){
+
+  const id=
+  document.getElementById("placeId")
+  .value;
+
+  const name=
+  document.getElementById("plName")
+  .value.trim();
 
   if(!name){
 
-    msg("plMsg","নাম দিন।","error");
+    msg(
+      "plMsg",
+      "প্রতিষ্ঠানের নাম দিন।",
+      "error"
+    );
 
     return;
+
   }
 
-  const data = {
+  const data={
 
     name,
 
     type:
-    document.getElementById("plType").value.trim(),
+    document.getElementById("plType")
+    .value.trim(),
 
     location:
-    document.getElementById("plLocation").value.trim(),
+    document.getElementById("plLocation")
+    .value.trim(),
 
     phone:
-    document.getElementById("plPhone").value.trim(),
+    document.getElementById("plPhone")
+    .value.trim(),
 
     description:
-    document.getElementById("plDescription").value.trim(),
+    document.getElementById("plDescription")
+    .value.trim(),
 
-    updatedAt:Date.now()
+    updatedAt:
+    Date.now()
 
   };
+
 
   try{
 
@@ -1435,7 +2509,7 @@ window.savePlace = async function(){
 
     }else{
 
-      const newRef =
+      const newRef=
       push(ref(db,"places"));
 
       await set(
@@ -1458,70 +2532,120 @@ window.savePlace = async function(){
 
   }catch(error){
 
-    msg("plMsg",error.message,"error");
+    msg(
+      "plMsg",
+      error.message,
+      "error"
+    );
 
   }
 
 };
 
 
-window.showPlaces = function(){
+window.showPlaces=function(){
 
-  const list =
+  const list=
   document.getElementById("placeList");
 
-  const search =
-  document.getElementById("placeSearch")
-  .value.toLowerCase();
+  const input=
+  document.getElementById("placeSearch");
 
-  const entries =
+  const search=
+  input ? input.value.toLowerCase() : "";
+
+  const entries=
   Object.entries(places)
   .filter(([id,p])=>{
 
-    const text =
-    (p.name||"")+" "+
-    (p.type||"")+" "+
-    (p.location||"");
+    const text=
 
-    return text.toLowerCase()
+      (p.name||"")+" "+
+      (p.type||"")+" "+
+      (p.location||"");
+
+    return text
+    .toLowerCase()
     .includes(search);
 
   });
 
-  if(entries.length===0){
+
+  if(!entries.length){
 
     list.innerHTML=
     "<p>কোনো তথ্য পাওয়া যায়নি।</p>";
 
     return;
+
   }
+
 
   list.innerHTML="";
 
+
   entries.forEach(([id,p])=>{
 
-    const div =
+    const div=
     document.createElement("div");
 
     div.className="item";
 
+
     div.innerHTML=`
 
-      <h3>🏫 ${esc(p.name||"")}</h3>
+      <div class="place-icon">
+        ${getPlaceIcon(p.type)}
+      </div>
 
-      <span class="badge">
-      ${esc(p.type||"")}
-      </span>
+      <h3>
+        ${esc(p.name||"")}
+      </h3>
 
-      <p><b>অবস্থান:</b>
-      ${esc(p.location||"-")}</p>
+      ${
+        p.type
+        ?
+        `<span class="badge">
+          ${esc(p.type)}
+        </span>`
+        :
+        ""
+      }
 
-      <p><b>ফোন:</b>
-      ${esc(p.phone||"-")}</p>
+      ${
+        p.location
+        ?
+        `<p>
+          <b>📍 অবস্থান:</b>
+          ${esc(p.location)}
+        </p>`
+        :
+        ""
+      }
 
-      <p>${esc(p.description||"")}</p>
+      ${
+        p.phone
+        ?
+        `<p>
+          <b>📞 ফোন:</b>
+          ${esc(p.phone)}
+        </p>`
+        :
+        ""
+      }
+
+      ${
+        p.description
+        ?
+        `<p>
+          ${esc(p.description)}
+        </p>`
+        :
+        ""
+      }
 
     `;
+
 
     list.appendChild(div);
 
@@ -1532,59 +2656,88 @@ window.showPlaces = function(){
 
 function clearPlaceForm(){
 
-  document.getElementById("placeId").value="";
+  document
+  .getElementById("placeId")
+  .value="";
 
-  document.getElementById("plName").value="";
+  document
+  .getElementById("plName")
+  .value="";
 
-  document.getElementById("plType").value="";
+  document
+  .getElementById("plType")
+  .value="";
 
-  document.getElementById("plLocation").value="";
+  document
+  .getElementById("plLocation")
+  .value="";
 
-  document.getElementById("plPhone").value="";
+  document
+  .getElementById("plPhone")
+  .value="";
 
-  document.getElementById("plDescription").value="";
+  document
+  .getElementById("plDescription")
+  .value="";
 
-  document.getElementById("plCancel")
+  document
+  .getElementById("plCancel")
   .classList.add("hidden");
 
 }
 
 
-/* =========================
+window.clearPlaceForm=
+clearPlaceForm;
+
+
+/* =====================================================
    CONTACTS
-========================= */
+===================================================== */
 
-window.saveContact = async function(){
+window.saveContact=async function(){
 
-  const id =
-  document.getElementById("contactId").value;
+  const id=
+  document.getElementById("contactId")
+  .value;
 
-  const name =
-  document.getElementById("cName").value.trim();
+  const name=
+  document.getElementById("cName")
+  .value.trim();
 
   if(!name){
 
-    msg("cMsg","নাম দিন।","error");
+    msg(
+      "cMsg",
+      "নাম দিন।",
+      "error"
+    );
 
     return;
+
   }
 
-  const data = {
+  const data={
 
     name,
 
     type:
-    document.getElementById("cType").value.trim(),
+    document.getElementById("cType")
+    .value.trim(),
 
     phone:
-    document.getElementById("cPhone").value.trim(),
+    document.getElementById("cPhone")
+    .value.trim(),
 
     description:
-    document.getElementById("cDescription").value.trim(),
+    document.getElementById("cDescription")
+    .value.trim(),
 
-    updatedAt:Date.now()
+    updatedAt:
+    Date.now()
 
   };
+
 
   try{
 
@@ -1597,7 +2750,7 @@ window.saveContact = async function(){
 
     }else{
 
-      const newRef =
+      const newRef=
       push(ref(db,"contacts"));
 
       await set(
@@ -1620,7 +2773,11 @@ window.saveContact = async function(){
 
   }catch(error){
 
-    msg("cMsg",error.message,"error");
+    msg(
+      "cMsg",
+      error.message,
+      "error"
+    );
 
   }
 
@@ -1629,42 +2786,71 @@ window.saveContact = async function(){
 
 function showContacts(){
 
-  const list =
+  const list=
   document.getElementById("contactList");
 
-  const entries =
+  const entries=
   Object.entries(contacts);
 
-  if(entries.length===0){
+
+  if(!entries.length){
 
     list.innerHTML=
     "<p>কোনো যোগাযোগের তথ্য নেই।</p>";
 
     return;
+
   }
+
 
   list.innerHTML="";
 
+
   entries.forEach(([id,p])=>{
 
-    const div =
+    const div=
     document.createElement("div");
 
     div.className="item";
 
+
     div.innerHTML=`
 
-      <h3>📞 ${esc(p.name||"")}</h3>
+      <h3>
+        📞 ${esc(p.name||"")}
+      </h3>
 
-      <p><b>ধরন:</b>
-      ${esc(p.type||"-")}</p>
+      ${
+        p.type
+        ?
+        `<p>
+          <b>ধরন:</b>
+          ${esc(p.type)}
+        </p>`
+        :
+        ""
+      }
 
-      <p><b>ফোন:</b>
-      ${esc(p.phone||"-")}</p>
+      ${
+        p.phone
+        ?
+        `<p>
+          <b>ফোন:</b>
+          ${esc(p.phone)}
+        </p>`
+        :
+        ""
+      }
 
-      <p>
-      ${esc(p.description||"")}
-      </p>
+      ${
+        p.description
+        ?
+        `<p>
+          ${esc(p.description)}
+        </p>`
+        :
+        ""
+      }
 
     `;
 
@@ -1675,59 +2861,67 @@ function showContacts(){
 }
 
 
-function clearContactForm(){
+/* =====================================================
+   ADMIN RENDER
+===================================================== */
 
-  document.getElementById("contactId").value="";
+function renderAdmin(){
 
-  document.getElementById("cName").value="";
-
-  document.getElementById("cType").value="";
-
-  document.getElementById("cPhone").value="";
-
-  document.getElementById("cDescription").value="";
-
-  document.getElementById("cCancel")
-  .classList.add("hidden");
+  renderAdminVillage();
+  renderAdminNotices();
+  renderAdminPeople();
+  renderAdminPlaces();
+  renderAdminContacts();
 
 }
 
 
-/* =========================
-   ADMIN LISTS
-========================= */
+/* =====================================================
+   ADMIN VILLAGE
+===================================================== */
 
 function renderAdminVillage(){
 
-  const box =
-  document.getElementById("adminVillageList");
+  const box=
+  document.getElementById(
+    "adminVillageList"
+  );
+
+  if(!box)return;
 
   box.innerHTML="";
+
 
   Object.entries(villageData)
   .forEach(([id,p])=>{
 
-    const div =
+    const div=
     document.createElement("div");
 
     div.className="item";
 
     div.innerHTML=`
 
-      <b>${esc(p.title||"")}</b>
+      <b>
+        ${esc(p.title||"")}
+      </b>
 
       <br>
 
       <button
-      class="edit"
-      onclick="editVillage('${id}')">
-      ✏️ Edit
+        class="edit"
+        onclick="editVillage('${id}')">
+
+        ✏️ Edit
+
       </button>
 
       <button
-      class="danger"
-      onclick="deleteData('village','${id}')">
-      🗑️ Delete
+        class="danger"
+        onclick="deleteData('village','${id}')">
+
+        🗑️ Delete
+
       </button>
 
     `;
@@ -1741,50 +2935,74 @@ function renderAdminVillage(){
 
 window.editVillage=function(id){
 
-  const p=villageData[id];
+  const p=
+  villageData[id];
 
-  document.getElementById("villageId").value=id;
+  document
+  .getElementById("villageId")
+  .value=id;
 
-  document.getElementById("vTitle").value=p.title||"";
+  document
+  .getElementById("vTitle")
+  .value=p.title||"";
 
-  document.getElementById("vDescription").value=p.description||"";
+  document
+  .getElementById("vDescription")
+  .value=p.description||"";
 
-  document.getElementById("vCancel")
+  document
+  .getElementById("vCancel")
   .classList.remove("hidden");
 
 };
 
 
+/* =====================================================
+   ADMIN NOTICE
+===================================================== */
+
 function renderAdminNotices(){
 
-  const box =
-  document.getElementById("adminNoticeList");
+  const box=
+  document.getElementById(
+    "adminNoticeList"
+  );
+
+  if(!box)return;
 
   box.innerHTML="";
+
 
   Object.entries(notices)
   .forEach(([id,p])=>{
 
-    const div=document.createElement("div");
+    const div=
+    document.createElement("div");
 
     div.className="item";
 
     div.innerHTML=`
 
-      <b>${esc(p.title||"")}</b>
+      <b>
+        ${esc(p.title||"")}
+      </b>
 
       <br>
 
       <button
-      class="edit"
-      onclick="editNotice('${id}')">
-      ✏️ Edit
+        class="edit"
+        onclick="editNotice('${id}')">
+
+        ✏️ Edit
+
       </button>
 
       <button
-      class="danger"
-      onclick="deleteData('notices','${id}')">
-      🗑️ Delete
+        class="danger"
+        onclick="deleteData('notices','${id}')">
+
+        🗑️ Delete
+
       </button>
 
     `;
@@ -1798,56 +3016,89 @@ function renderAdminNotices(){
 
 window.editNotice=function(id){
 
-  const p=notices[id];
+  const p=
+  notices[id];
 
-  document.getElementById("noticeId").value=id;
+  document
+  .getElementById("noticeId")
+  .value=id;
 
-  document.getElementById("nTitle").value=p.title||"";
+  document
+  .getElementById("nTitle")
+  .value=p.title||"";
 
-  document.getElementById("nDescription").value=p.description||"";
+  document
+  .getElementById("nDescription")
+  .value=p.description||"";
 
-  document.getElementById("nCancel")
+  document
+  .getElementById("nCancel")
   .classList.remove("hidden");
 
 };
 
 
+/* =====================================================
+   ADMIN PEOPLE
+===================================================== */
+
 function renderAdminPeople(){
 
-  const box =
-  document.getElementById("adminPeopleList");
+  const box=
+  document.getElementById(
+    "adminPeopleList"
+  );
+
+  if(!box)return;
 
   box.innerHTML="";
+
 
   Object.entries(people)
   .forEach(([id,p])=>{
 
-    const div=document.createElement("div");
+    const div=
+    document.createElement("div");
 
     div.className="item";
 
+
     div.innerHTML=`
 
-      <b>👤 ${esc(p.name||"")}</b>
+      <b>
+        👤 ${esc(p.name||"")}
+      </b>
 
       <br>
 
       <span class="badge">
-      ${p.public==="yes" ? "Public" : "Private"}
+
+        ${
+          p.public==="yes"
+          ?
+          "Public"
+          :
+          "Private"
+        }
+
       </span>
 
       <br>
 
       <button
-      class="edit"
-      onclick="editPerson('${id}')">
-      ✏️ Edit
+        class="edit"
+        onclick="editPerson('${id}')">
+
+        ✏️ Edit
+
       </button>
 
       <button
-      class="danger"
-      onclick="deleteData('people','${id}')">
-      🗑️ Delete
+        class="danger"
+        onclick="deleteData('people','${id}')">
+
+        🗑️ Delete
+
       </button>
 
     `;
@@ -1861,66 +3112,98 @@ function renderAdminPeople(){
 
 window.editPerson=function(id){
 
-  const p=people[id];
+  const p=
+  people[id];
 
-  document.getElementById("personId").value=id;
+  document
+  .getElementById("personId")
+  .value=id;
 
-  document.getElementById("pName").value=p.name||"";
+  document
+  .getElementById("pName")
+  .value=p.name||"";
 
-  document.getElementById("pFather").value=p.father||"";
+  document
+  .getElementById("pFather")
+  .value=p.father||"";
 
-  document.getElementById("pMother").value=p.mother||"";
+  document
+  .getElementById("pVillage")
+  .value=p.village||"";
 
-  document.getElementById("pGender").value=p.gender||"";
+  document
+  .getElementById("pEducation")
+  .value=p.education||"";
 
-  document.getElementById("pDob").value=p.dob||"";
+  document
+  .getElementById("pProfession")
+  .value=p.profession||"";
 
-  document.getElementById("pPhone").value=p.phone||"";
+  document
+  .getElementById("pPublic")
+  .value=p.public||"yes";
 
-  document.getElementById("pVillage").value=p.village||"";
-
-  document.getElementById("pAddress").value=p.address||"";
-
-  document.getElementById("pNote").value=p.note||"";
-
-  document.getElementById("pPublic").value=p.public||"yes";
-
-  document.getElementById("pCancel")
+  document
+  .getElementById("pCancel")
   .classList.remove("hidden");
 
 };
 
 
+/* =====================================================
+   ADMIN PLACES
+===================================================== */
+
 function renderAdminPlaces(){
 
-  const box =
-  document.getElementById("adminPlaceList");
+  const box=
+  document.getElementById(
+    "adminPlaceList"
+  );
+
+  if(!box)return;
 
   box.innerHTML="";
+
 
   Object.entries(places)
   .forEach(([id,p])=>{
 
-    const div=document.createElement("div");
+    const div=
+    document.createElement("div");
 
     div.className="item";
 
+
     div.innerHTML=`
 
-      <b>${esc(p.name||"")}</b>
+      <b>
+        ${getPlaceIcon(p.type)}
+        ${esc(p.name||"")}
+      </b>
+
+      <br>
+
+      <span class="badge">
+        ${esc(p.type||"ধরন নেই")}
+      </span>
 
       <br>
 
       <button
-      class="edit"
-      onclick="editPlace('${id}')">
-      ✏️ Edit
+        class="edit"
+        onclick="editPlace('${id}')">
+
+        ✏️ Edit
+
       </button>
 
       <button
-      class="danger"
-      onclick="deleteData('places','${id}')">
-      🗑️ Delete
+        class="danger"
+        onclick="deleteData('places','${id}')">
+
+        🗑️ Delete
+
       </button>
 
     `;
@@ -1934,56 +3217,87 @@ function renderAdminPlaces(){
 
 window.editPlace=function(id){
 
-  const p=places[id];
+  const p=
+  places[id];
 
-  document.getElementById("placeId").value=id;
+  document
+  .getElementById("placeId")
+  .value=id;
 
-  document.getElementById("plName").value=p.name||"";
+  document
+  .getElementById("plName")
+  .value=p.name||"";
 
-  document.getElementById("plType").value=p.type||"";
+  document
+  .getElementById("plType")
+  .value=p.type||"";
 
-  document.getElementById("plLocation").value=p.location||"";
+  document
+  .getElementById("plLocation")
+  .value=p.location||"";
 
-  document.getElementById("plPhone").value=p.phone||"";
+  document
+  .getElementById("plPhone")
+  .value=p.phone||"";
 
-  document.getElementById("plDescription").value=p.description||"";
+  document
+  .getElementById("plDescription")
+  .value=p.description||"";
 
-  document.getElementById("plCancel")
+  document
+  .getElementById("plCancel")
   .classList.remove("hidden");
 
 };
 
 
+/* =====================================================
+   ADMIN CONTACTS
+===================================================== */
+
 function renderAdminContacts(){
 
-  const box =
-  document.getElementById("adminContactList");
+  const box=
+  document.getElementById(
+    "adminContactList"
+  );
+
+  if(!box)return;
 
   box.innerHTML="";
+
 
   Object.entries(contacts)
   .forEach(([id,p])=>{
 
-    const div=document.createElement("div");
+    const div=
+    document.createElement("div");
 
     div.className="item";
 
+
     div.innerHTML=`
 
-      <b>${esc(p.name||"")}</b>
+      <b>
+        ${esc(p.name||"")}
+      </b>
 
       <br>
 
       <button
-      class="edit"
-      onclick="editContact('${id}')">
-      ✏️ Edit
+        class="edit"
+        onclick="editContact('${id}')">
+
+        ✏️ Edit
+
       </button>
 
       <button
-      class="danger"
-      onclick="deleteData('contacts','${id}')">
-      🗑️ Delete
+        class="danger"
+        onclick="deleteData('contacts','${id}')">
+
+        🗑️ Delete
+
       </button>
 
     `;
@@ -1997,33 +3311,130 @@ function renderAdminContacts(){
 
 window.editContact=function(id){
 
-  const p=contacts[id];
+  const p=
+  contacts[id];
 
-  document.getElementById("contactId").value=id;
+  document
+  .getElementById("contactId")
+  .value=id;
 
-  document.getElementById("cName").value=p.name||"";
+  document
+  .getElementById("cName")
+  .value=p.name||"";
 
-  document.getElementById("cType").value=p.type||"";
+  document
+  .getElementById("cType")
+  .value=p.type||"";
 
-  document.getElementById("cPhone").value=p.phone||"";
+  document
+  .getElementById("cPhone")
+  .value=p.phone||"";
 
-  document.getElementById("cDescription").value=p.description||"";
+  document
+  .getElementById("cDescription")
+  .value=p.description||"";
 
-  document.getElementById("cCancel")
+  document
+  .getElementById("cCancel")
   .classList.remove("hidden");
 
 };
 
 
-/* =========================
+/* =====================================================
+   CLEAR CONTACT
+===================================================== */
+
+function clearContactForm(){
+
+  document
+  .getElementById("contactId")
+  .value="";
+
+  document
+  .getElementById("cName")
+  .value="";
+
+  document
+  .getElementById("cType")
+  .value="";
+
+  document
+  .getElementById("cPhone")
+  .value="";
+
+  document
+  .getElementById("cDescription")
+  .value="";
+
+  document
+  .getElementById("cCancel")
+  .classList.add("hidden");
+
+}
+
+window.clearContactForm=
+clearContactForm;
+
+
+/* =====================================================
+   CLEAR PERSON
+===================================================== */
+
+window.clearPersonForm=function(){
+
+  document
+  .getElementById("personId")
+  .value="";
+
+  document
+  .getElementById("pName")
+  .value="";
+
+  document
+  .getElementById("pFather")
+  .value="";
+
+  document
+  .getElementById("pVillage")
+  .value="";
+
+  document
+  .getElementById("pEducation")
+  .value="";
+
+  document
+  .getElementById("pProfession")
+  .value="";
+
+  document
+  .getElementById("pPublic")
+  .value="yes";
+
+  document
+  .getElementById("pCancel")
+  .classList.add("hidden");
+
+};
+
+
+/* =====================================================
    DELETE
-========================= */
+===================================================== */
 
-window.deleteData=async function(path,id){
+window.deleteData=
+async function(path,id){
 
-  if(!confirm("আপনি কি এই তথ্য মুছে ফেলতে চান?")){
+  if(
+    !confirm(
+      "আপনি কি এই তথ্য মুছে ফেলতে চান?"
+    )
+  ){
+
     return;
+
   }
+
 
   try{
 
@@ -2042,67 +3453,354 @@ window.deleteData=async function(path,id){
 };
 
 
-/* =========================
-   CLEAR PERSON
-========================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-window.clearPersonForm=function(){
+window.goHome=function(){
 
-  document.getElementById("personId").value="";
+  document
+  .querySelectorAll(
+    ".container > section"
+  )
+  .forEach(el=>{
 
-  document.getElementById("pName").value="";
+    el.classList.add("hidden");
 
-  document.getElementById("pFather").value="";
+  });
 
-  document.getElementById("pMother").value="";
-
-  document.getElementById("pGender").value="";
-
-  document.getElementById("pDob").value="";
-
-  document.getElementById("pPhone").value="";
-
-  document.getElementById("pVillage").value="হিজলী";
-
-  document.getElementById("pAddress").value="";
-
-  document.getElementById("pNote").value="";
-
-  document.getElementById("pPublic").value="yes";
-
-  document.getElementById("pCancel")
-  .classList.add("hidden");
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 };
 
 
-/* =========================
-   NAVIGATION
-========================= */
+window.openPage=function(id){
 
-window.goTo=function(id){
+  const sections=[
+    "villageInfo",
+    "people",
+    "places",
+    "notices",
+    "contacts"
+  ];
 
-  const element =
-  document.getElementById(id);
+  if(sections.includes(id)){
 
-  if(element){
+    document
+    .querySelectorAll(
+      ".container > section"
+    )
+    .forEach(el=>{
 
-    element.scrollIntoView({
-      behavior:"smooth"
+      el.classList.add("hidden");
+
     });
+
+    const target=
+    document.getElementById(id);
+
+    if(target){
+
+      target.classList.remove("hidden");
+
+      setTimeout(()=>{
+
+        target.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      },50);
+
+    }
+
+    return;
 
   }
 
+
+  let title="আমার গ্রাম হিজলী";
+  let icon="🏡";
+  let text="এই বিভাগটি পরবর্তী ধাপে তৈরি করা হবে।";
+
+
+  if(id==="family"){
+
+    icon="🌳";
+    title="পরিবার ও বংশ";
+    text="পরিবার ও বংশের তথ্য এখানে ধাপে ধাপে যোগ করা হবে।";
+
+  }
+
+  if(id==="education"){
+
+    icon="🎓";
+    title="শিক্ষা";
+    text="গ্রামের শিক্ষার তথ্য এখানে দেখানো হবে।";
+
+  }
+
+  if(id==="profession"){
+
+    icon="💼";
+    title="পেশা";
+    text="গ্রামের মানুষের পেশার তথ্য এখানে দেখানো হবে।";
+
+  }
+
+  if(id==="statistics"){
+
+    icon="📊";
+    title="পরিসংখ্যান";
+    text=
+      "বর্তমানে নিবন্ধিত Public মানুষের সংখ্যা: "+
+      Object.values(people)
+      .filter(p=>p.public!=="no").length+
+      "\nপ্রতিষ্ঠানের সংখ্যা: "+
+      Object.keys(places).length;
+
+  }
+
+  if(id==="gallery"){
+
+    icon="🖼️";
+    title="ছবি গ্যালারি";
+    text="ছবি গ্যালারি পরবর্তী ধাপে যোগ করা হবে।";
+
+  }
+
+  if(id==="history"){
+
+    icon="🕰️";
+    title="পুরোনো স্মৃতি";
+    text="পুরোনো ছবি ও স্মৃতির তথ্য এখানে যোগ করা হবে।";
+
+  }
+
+  if(id==="mosque"){
+
+    icon="🕌";
+    title="মসজিদ ও ঈদগাহ";
+    text="মসজিদ ও ঈদগাহের তথ্য প্রতিষ্ঠান বিভাগে রাখা হচ্ছে।";
+
+  }
+
+  if(id==="more"){
+
+    icon="➕";
+    title="আরও তথ্য";
+    text="অন্যান্য গ্রামের তথ্য ভবিষ্যতে এখানে যোগ করা হবে।";
+
+  }
+
+
+  document
+  .getElementById("pageIcon")
+  .textContent=icon;
+
+  document
+  .getElementById("pageTitle")
+  .textContent=title;
+
+  document
+  .getElementById("pageText")
+  .textContent=text;
+
+  document
+  .getElementById("pageBox")
+  .style.display="flex";
+
 };
 
 
-/* =========================
+window.closePage=function(){
+
+  document
+  .getElementById("pageBox")
+  .style.display="none";
+
+};
+
+
+window.openSearch=function(){
+
+  document
+  .getElementById("searchBox")
+  .style.display="flex";
+
+  setTimeout(()=>{
+
+    document
+    .getElementById("searchInput")
+    .focus();
+
+  },100);
+
+};
+
+
+window.closeSearch=function(){
+
+  document
+  .getElementById("searchBox")
+  .style.display="none";
+
+};
+
+
+window.searchPerson=function(){
+
+  const search=
+  document
+  .getElementById("searchInput")
+  .value
+  .trim()
+  .toLowerCase();
+
+  const result=
+  document
+  .getElementById("searchResult");
+
+
+  if(!search){
+
+    result.innerHTML=
+    "<p>কিছু লিখে খুঁজুন।</p>";
+
+    return;
+
+  }
+
+
+  const found=
+  Object.values(people)
+  .filter(p=>{
+
+    if(p.public==="no")
+      return false;
+
+    const text=
+
+      (p.name||"")+" "+
+      (p.father||"")+" "+
+      (p.village||"")+" "+
+      (p.education||"")+" "+
+      (p.profession||"");
+
+    return text
+    .toLowerCase()
+    .includes(search);
+
+  });
+
+
+  if(!found.length){
+
+    result.innerHTML=
+    "<p>কোনো ব্যক্তির তথ্য পাওয়া যায়নি।</p>";
+
+    return;
+
+  }
+
+
+  result.innerHTML="";
+
+
+  found.forEach(p=>{
+
+    const div=
+    document.createElement("div");
+
+    div.className="item";
+
+
+    let html=`
+
+      <h3>
+        👤 ${esc(p.name||"")}
+      </h3>
+
+    `;
+
+
+    if(p.father){
+
+      html+=`
+        <p>
+          <b>পিতা:</b>
+          ${esc(p.father)}
+        </p>
+      `;
+
+    }
+
+
+    if(p.village){
+
+      html+=`
+        <p>
+          <b>পাড়া:</b>
+          ${esc(p.village)}
+        </p>
+      `;
+
+    }
+
+
+    if(p.education){
+
+      html+=`
+        <p>
+          <b>🎓 শিক্ষা:</b>
+          ${esc(p.education)}
+        </p>
+      `;
+
+    }
+
+
+    if(p.profession){
+
+      html+=`
+        <p>
+          <b>💼 পেশা:</b>
+          ${esc(p.profession)}
+        </p>
+      `;
+
+    }
+
+
+    div.innerHTML=html;
+
+    result.appendChild(div);
+
+  });
+
+};
+
+
+window.scrollToCategories=function(){
+
+  window.scrollTo({
+    top:300,
+    behavior:"smooth"
+  });
+
+};
+
+
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 function msg(id,text,type){
 
-  const box =
+  const box=
   document.getElementById(id);
 
   box.textContent=text;
@@ -2111,6 +3809,7 @@ function msg(id,text,type){
   "message "+type;
 
   box.style.display="block";
+
 
   setTimeout(()=>{
 
@@ -2121,9 +3820,9 @@ function msg(id,text,type){
 }
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
 
 function esc(value){
 
@@ -2142,12 +3841,37 @@ function esc(value){
 }
 
 
-/* =========================
-   INITIAL ADMIN RENDER
-========================= */
+/* =====================================================
+   BANGLA NUMBER
+===================================================== */
+
+function toBanglaNumber(num){
+
+  const en="0123456789";
+  const bn="০১২৩৪৫৬৭৮৯";
+
+  return String(num)
+  .split("")
+  .map(x=>{
+
+    const i=en.indexOf(x);
+
+    return i>=0 ? bn[i] : x;
+
+  })
+  .join("");
+
+}
+
+
+/* =====================================================
+   INITIAL
+===================================================== */
 
 setTimeout(()=>{
+
   renderAdmin();
+
 },1000);
 
 </script>
