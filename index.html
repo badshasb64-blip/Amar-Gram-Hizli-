@@ -1,1 +1,671 @@
-# Amar-Gram-Hizli-
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>আমার গ্রাম হিজলী</title>
+
+    <meta name="description"
+          content="আমার গ্রাম হিজলী - গ্রামের মানুষ, পরিবার, প্রতিষ্ঠান, শিক্ষা, পেশা, ছবি ও ইতিহাস">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, "Noto Sans Bengali", sans-serif;
+            background: #f4f7f6;
+            color: #222;
+            padding-bottom: 75px;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #087f5b, #0ca678);
+            color: white;
+            padding: 18px 18px 22px;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            margin-top: 4px;
+            opacity: .9;
+        }
+
+        .profile-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,.2);
+            color: white;
+            font-size: 21px;
+        }
+
+        /* SEARCH */
+        .search {
+            margin-top: 18px;
+            display: flex;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 13px;
+            font-size: 15px;
+        }
+
+        .search button {
+            width: 52px;
+            border: none;
+            background: white;
+            font-size: 20px;
+        }
+
+        /* WELCOME */
+        .welcome {
+            margin: 18px;
+            padding: 20px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #ffffff, #e8fff5);
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+        }
+
+        .welcome h2 {
+            color: #087f5b;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 18px;
+        }
+
+        .stat {
+            background: white;
+            padding: 15px 5px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+        }
+
+        .stat .icon {
+            font-size: 23px;
+        }
+
+        .stat strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 18px;
+            color: #087f5b;
+        }
+
+        .stat span {
+            font-size: 11px;
+            color: #777;
+        }
+
+        /* SECTION */
+        .section-title {
+            margin: 25px 18px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title h3 {
+            color: #333;
+        }
+
+        .section-title a {
+            color: #087f5b;
+            font-size: 13px;
+        }
+
+        /* MENU GRID */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 11px;
+            padding: 0 18px;
+        }
+
+        .menu {
+            background: white;
+            border-radius: 16px;
+            padding: 17px 5px;
+            text-align: center;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .menu:active {
+            transform: scale(.94);
+        }
+
+        .menu .emoji {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .menu span {
+            display: block;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        /* NOTICE */
+        .notice {
+            margin: 0 18px;
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.07);
+        }
+
+        .notice-item {
+            padding: 11px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+
+        .notice-date {
+            color: #087f5b;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 68px;
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            box-shadow: 0 -3px 15px rgba(0,0,0,.12);
+            z-index: 100;
+        }
+
+        .nav-btn {
+            border: none;
+            background: white;
+            color: #777;
+            font-size: 11px;
+        }
+
+        .nav-btn div {
+            font-size: 22px;
+            margin-bottom: 3px;
+        }
+
+        .nav-btn.active {
+            color: #087f5b;
+            font-weight: bold;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 200;
+            align-items: flex-end;
+        }
+
+        .modal-box {
+            width: 100%;
+            background: white;
+            border-radius: 25px 25px 0 0;
+            padding: 22px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-box h2 {
+            color: #087f5b;
+            margin-bottom: 12px;
+        }
+
+        .close {
+            float: right;
+            border: none;
+            background: #eee;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        @media (min-width: 700px) {
+            body {
+                max-width: 700px;
+                margin: auto;
+            }
+
+            .bottom-nav {
+                max-width: 700px;
+                margin: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+
+    <div class="top">
+
+        <div>
+            <div class="logo">🏡 আমার গ্রাম হিজলী</div>
+            <div class="subtitle">আমাদের গ্রামের তথ্য ও ইতিহাস</div>
+        </div>
+
+        <button class="profile-btn" onclick="showProfile()">👤</button>
+
+    </div>
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="গ্রামের মানুষ, স্থান বা তথ্য খুঁজুন..."
+        >
+
+        <button onclick="searchVillage()">🔍</button>
+
+    </div>
+
+</header>
+
+
+<!-- WELCOME -->
+<section class="welcome">
+
+    <h2>স্বাগতম ❤️</h2>
+
+    <p>
+        এটি আমাদের প্রিয় গ্রাম <b>হিজলী</b>-এর
+        তথ্য, মানুষ, পরিবার, প্রতিষ্ঠান, ইতিহাস ও
+        স্মৃতি সংরক্ষণের একটি ডিজিটাল উদ্যোগ।
+    </p>
+
+</section>
+
+
+<!-- STATISTICS -->
+<section class="stats">
+
+    <div class="stat">
+        <div class="icon">👨‍👩‍👧‍👦</div>
+        <strong id="familyCount">০</strong>
+        <span>পরিবার</span>
+    </div>
+
+    <div class="stat">
+        <div class="icon">👥</div>
+        <strong id="peopleCount">০</strong>
+        <span>মানুষ</span>
+    </div>
+
+    <div class="stat">
+        <div class="icon">🏠</div>
+        <strong id="institutionCount">০</strong>
+        <span>প্রতিষ্ঠান</span>
+    </div>
+
+</section>
+
+
+<!-- MAIN MENU -->
+<div class="section-title">
+    <h3>গ্রামের তথ্য</h3>
+    <a href="#" onclick="showAll()">সব দেখুন</a>
+</div>
+
+
+<section class="menu-grid">
+
+    <button class="menu" onclick="openPage('people')">
+        <div class="emoji">👨‍👩‍👧‍👦</div>
+        <span>গ্রামের মানুষ</span>
+    </button>
+
+    <button class="menu" onclick="openPage('family')">
+        <div class="emoji">🌳</div>
+        <span>পরিবার ও বংশ</span>
+    </button>
+
+    <button class="menu" onclick="openPage('institution')">
+        <div class="emoji">🏫</div>
+        <span>প্রতিষ্ঠান</span>
+    </button>
+
+    <button class="menu" onclick="openPage('education')">
+        <div class="emoji">📚</div>
+        <span>শিক্ষা</span>
+    </button>
+
+    <button class="menu" onclick="openPage('profession')">
+        <div class="emoji">💼</div>
+        <span>পেশা</span>
+    </button>
+
+    <button class="menu" onclick="openPage('statistics')">
+        <div class="emoji">📊</div>
+        <span>পরিসংখ্যান</span>
+    </button>
+
+    <button class="menu" onclick="openPage('gallery')">
+        <div class="emoji">📸</div>
+        <span>ছবি ও স্মৃতি</span>
+    </button>
+
+    <button class="menu" onclick="openPage('old')">
+        <div class="emoji">🕰️</div>
+        <span>পুরোনো স্মৃতি</span>
+    </button>
+
+    <button class="menu" onclick="openPage('notice')">
+        <div class="emoji">📢</div>
+        <span>নোটিশ</span>
+    </button>
+
+    <button class="menu" onclick="openPage('mosque')">
+        <div class="emoji">🕌</div>
+        <span>মসজিদ ও ঈদগাহ</span>
+    </button>
+
+    <button class="menu" onclick="openPage('places')">
+        <div class="emoji">📍</div>
+        <span>গ্রামের স্থান</span>
+    </button>
+
+    <button class="menu" onclick="openPage('more')">
+        <div class="emoji">➕</div>
+        <span>আরও তথ্য</span>
+    </button>
+
+</section>
+
+
+<!-- NOTICE -->
+<div class="section-title">
+
+    <h3>📢 সাম্প্রতিক নোটিশ</h3>
+
+    <a href="#" onclick="openPage('notice')">
+        সব দেখুন
+    </a>
+
+</div>
+
+
+<section class="notice">
+
+    <div class="notice-item">
+
+        📌 গ্রামের গুরুত্বপূর্ণ ঘোষণা এখানে দেখা যাবে।
+
+        <div class="notice-date">
+            এখনো কোনো নোটিশ যোগ করা হয়নি
+        </div>
+
+    </div>
+
+    <div class="notice-item">
+
+        📸 গ্রামের পুরোনো ছবি ও ইতিহাস সংরক্ষণ করা হবে।
+
+        <div class="notice-date">
+            আমার গ্রাম হিজলী
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <p>🏡 আমার গ্রাম হিজলী</p>
+
+    <p style="margin-top:6px;">
+        গ্রামের তথ্য • ইতিহাস • মানুষ • স্মৃতি
+    </p>
+
+    <p style="margin-top:10px;">
+        © 2026 Amar Gram Hijli
+    </p>
+
+</footer>
+
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">✕</button>
+
+        <h2 id="modalTitle">তথ্য</h2>
+
+        <p id="modalText">
+            এখানে গ্রামের তথ্য দেখা যাবে।
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+    <button class="nav-btn active" onclick="goHome()">
+        <div>🏠</div>
+        হোম
+    </button>
+
+    <button class="nav-btn" onclick="showAll()">
+        <div>📂</div>
+        ক্যাটাগরি
+    </button>
+
+    <button class="nav-btn" onclick="openPage('notice')">
+        <div>📢</div>
+        নোটিশ
+    </button>
+
+    <button class="nav-btn" onclick="showProfile()">
+        <div>👤</div>
+        প্রোফাইল
+    </button>
+
+</nav>
+
+
+<script>
+
+    function openPage(page) {
+
+        const names = {
+
+            people: "গ্রামের মানুষ",
+            family: "পরিবার ও বংশ",
+            institution: "প্রতিষ্ঠান",
+            education: "শিক্ষা",
+            profession: "পেশা",
+            statistics: "গ্রামের পরিসংখ্যান",
+            gallery: "ছবি ও স্মৃতি",
+            old: "পুরোনো স্মৃতি",
+            notice: "নোটিশ",
+            mosque: "মসজিদ ও ঈদগাহ",
+            places: "গ্রামের স্থান",
+            more: "আরও তথ্য"
+
+        };
+
+        document.getElementById("modalTitle").innerText =
+            names[page] || "তথ্য";
+
+        document.getElementById("modalText").innerHTML =
+            "এই বিভাগটি আমরা পরবর্তী ধাপে তৈরি করব।<br><br>" +
+            "Firebase যুক্ত হলে এখানকার তথ্য অনলাইন ডাটাবেস থেকে আসবে।";
+
+        document.getElementById("modal").style.display = "flex";
+    }
+
+
+    function showProfile() {
+
+        document.getElementById("modalTitle").innerText =
+            "👤 প্রোফাইল";
+
+        document.getElementById("modalText").innerHTML =
+            "এখানে Login / Register ব্যবস্থা থাকবে।<br><br>" +
+            "প্রতিটি ব্যবহারকারী নিজের প্রোফাইল তৈরি করতে পারবে।";
+
+        document.getElementById("modal").style.display = "flex";
+    }
+
+
+    function showAll() {
+
+        document.getElementById("modalTitle").innerText =
+            "📂 সব বিভাগ";
+
+        document.getElementById("modalText").innerHTML =
+            "গ্রামের মানুষ<br>" +
+            "পরিবার ও বংশ<br>" +
+            "প্রতিষ্ঠান<br>" +
+            "শিক্ষা<br>" +
+            "পেশা<br>" +
+            "পরিসংখ্যান<br>" +
+            "ছবি ও স্মৃতি<br>" +
+            "পুরোনো স্মৃতি<br>" +
+            "নোটিশ<br>" +
+            "মসজিদ ও ঈদগাহ<br>" +
+            "গ্রামের স্থান";
+
+        document.getElementById("modal").style.display = "flex";
+    }
+
+
+    function closeModal() {
+
+        document.getElementById("modal").style.display = "none";
+
+    }
+
+
+    function goHome() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function searchVillage() {
+
+        const value =
+            document.getElementById("searchInput").value.trim();
+
+        if (!value) {
+
+            alert("অনুগ্রহ করে কিছু লিখে Search করুন।");
+            return;
+
+        }
+
+        document.getElementById("modalTitle").innerText =
+            "🔍 Search";
+
+        document.getElementById("modalText").innerHTML =
+            "আপনি খুঁজেছেন: <b>" + value + "</b><br><br>" +
+            "Firebase যুক্ত করার পর এখানে গ্রামের মানুষ, " +
+            "পরিবার, প্রতিষ্ঠান ও অন্যান্য তথ্য Search করা যাবে।";
+
+        document.getElementById("modal").style.display = "flex";
+
+    }
+
+
+    // এখন ডেমো সংখ্যা
+    // Firebase যুক্ত হলে এগুলো Database থেকে আসবে।
+
+    document.getElementById("familyCount").innerText = "০";
+    document.getElementById("peopleCount").innerText = "০";
+    document.getElementById("institutionCount").innerText = "০";
+
+
+    // বাইরে চাপলে Modal বন্ধ
+    document.getElementById("modal").addEventListener(
+        "click",
+        function(e) {
+
+            if (e.target === this) {
+                closeModal();
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+  </html>
