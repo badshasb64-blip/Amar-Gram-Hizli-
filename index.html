@@ -1,671 +1,1005 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আমার গ্রাম হিজলী</title>
 
-    <title>আমার গ্রাম হিজলী</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+    }
 
-    <meta name="description"
-          content="আমার গ্রাম হিজলী - গ্রামের মানুষ, পরিবার, প্রতিষ্ঠান, শিক্ষা, পেশা, ছবি ও ইতিহাস">
+    body {
+      margin: 0;
+      background: #f2f5f7;
+      color: #222;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    header {
+      background: #087f5b;
+      color: white;
+      padding: 18px 15px;
+      text-align: center;
+    }
 
-        body {
-            font-family: Arial, "Noto Sans Bengali", sans-serif;
-            background: #f4f7f6;
-            color: #222;
-            padding-bottom: 75px;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 25px;
+    }
 
-        /* HEADER */
-        .header {
-            background: linear-gradient(135deg, #087f5b, #0ca678);
-            color: white;
-            padding: 18px 18px 22px;
-            border-radius: 0 0 25px 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,.15);
-        }
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
 
-        .top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 20px auto;
+    }
 
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-        }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      margin-bottom: 20px;
+    }
 
-        .subtitle {
-            font-size: 13px;
-            margin-top: 4px;
-            opacity: .9;
-        }
+    h2 {
+      margin-top: 0;
+      color: #087f5b;
+    }
 
-        .profile-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255,255,255,.2);
-            color: white;
-            font-size: 21px;
-        }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
 
-        /* SEARCH */
-        .search {
-            margin-top: 18px;
-            display: flex;
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-        }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
 
-        .search input {
-            flex: 1;
-            border: none;
-            outline: none;
-            padding: 13px;
-            font-size: 15px;
-        }
+    button {
+      border: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      margin: 5px 3px;
+    }
 
-        .search button {
-            width: 52px;
-            border: none;
-            background: white;
-            font-size: 20px;
-        }
+    .primary {
+      background: #087f5b;
+      color: white;
+    }
 
-        /* WELCOME */
-        .welcome {
-            margin: 18px;
-            padding: 20px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, #ffffff, #e8fff5);
-            box-shadow: 0 3px 12px rgba(0,0,0,.08);
-        }
+    .danger {
+      background: #d90429;
+      color: white;
+    }
 
-        .welcome h2 {
-            color: #087f5b;
-            margin-bottom: 8px;
-        }
+    .secondary {
+      background: #495057;
+      color: white;
+    }
 
-        .welcome p {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #555;
-        }
+    .edit {
+      background: #f08c00;
+      color: white;
+    }
 
-        /* STATS */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 18px;
-        }
+    .hidden {
+      display: none;
+    }
 
-        .stat {
-            background: white;
-            padding: 15px 5px;
-            text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.07);
-        }
+    .person {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      background: #fafafa;
+    }
 
-        .stat .icon {
-            font-size: 23px;
-        }
+    .person h3 {
+      margin: 0 0 8px;
+      color: #087f5b;
+    }
 
-        .stat strong {
-            display: block;
-            margin-top: 5px;
-            font-size: 18px;
-            color: #087f5b;
-        }
+    .person p {
+      margin: 5px 0;
+    }
 
-        .stat span {
-            font-size: 11px;
-            color: #777;
-        }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-        /* SECTION */
-        .section-title {
-            margin: 25px 18px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .message {
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
+      display: none;
+    }
 
-        .section-title h3 {
-            color: #333;
-        }
+    .success {
+      background: #d3f9d8;
+      color: #2b8a3e;
+    }
 
-        .section-title a {
-            color: #087f5b;
-            font-size: 13px;
-        }
+    .error {
+      background: #ffe3e3;
+      color: #c92a2a;
+    }
 
-        /* MENU GRID */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 11px;
-            padding: 0 18px;
-        }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-        .menu {
-            background: white;
-            border-radius: 16px;
-            padding: 17px 5px;
-            text-align: center;
-            border: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,.07);
-            cursor: pointer;
-            transition: .2s;
-        }
+    .stat {
+      background: #e6fcf5;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
 
-        .menu:active {
-            transform: scale(.94);
-        }
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      color: #087f5b;
+    }
 
-        .menu .emoji {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
+    @media(max-width:600px) {
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
 
-        .menu span {
-            display: block;
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        /* NOTICE */
-        .notice {
-            margin: 0 18px;
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.07);
-        }
-
-        .notice-item {
-            padding: 11px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 13px;
-        }
-
-        .notice-item:last-child {
-            border-bottom: none;
-        }
-
-        .notice-date {
-            color: #087f5b;
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 25px 15px;
-            color: #777;
-            font-size: 12px;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 68px;
-            background: white;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            box-shadow: 0 -3px 15px rgba(0,0,0,.12);
-            z-index: 100;
-        }
-
-        .nav-btn {
-            border: none;
-            background: white;
-            color: #777;
-            font-size: 11px;
-        }
-
-        .nav-btn div {
-            font-size: 22px;
-            margin-bottom: 3px;
-        }
-
-        .nav-btn.active {
-            color: #087f5b;
-            font-weight: bold;
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,.55);
-            z-index: 200;
-            align-items: flex-end;
-        }
-
-        .modal-box {
-            width: 100%;
-            background: white;
-            border-radius: 25px 25px 0 0;
-            padding: 22px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-box h2 {
-            color: #087f5b;
-            margin-bottom: 12px;
-        }
-
-        .close {
-            float: right;
-            border: none;
-            background: #eee;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            font-size: 18px;
-        }
-
-        @media (min-width: 700px) {
-            body {
-                max-width: 700px;
-                margin: auto;
-            }
-
-            .bottom-nav {
-                max-width: 700px;
-                margin: auto;
-            }
-        }
-    </style>
+      button {
+        width: auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="header">
-
-    <div class="top">
-
-        <div>
-            <div class="logo">🏡 আমার গ্রাম হিজলী</div>
-            <div class="subtitle">আমাদের গ্রামের তথ্য ও ইতিহাস</div>
-        </div>
-
-        <button class="profile-btn" onclick="showProfile()">👤</button>
-
-    </div>
-
-    <div class="search">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="গ্রামের মানুষ, স্থান বা তথ্য খুঁজুন..."
-        >
-
-        <button onclick="searchVillage()">🔍</button>
-
-    </div>
-
+<header>
+  <h1>🏡 আমার গ্রাম হিজলী</h1>
+  <p>গ্রামের তথ্য ব্যবস্থাপনা</p>
 </header>
 
+<div class="container">
 
-<!-- WELCOME -->
-<section class="welcome">
+  <!-- LOGIN -->
+  <div id="loginSection" class="card">
+    <h2>🔐 Admin Login</h2>
 
-    <h2>স্বাগতম ❤️</h2>
+    <input
+      type="email"
+      id="loginEmail"
+      placeholder="Admin Email">
 
-    <p>
-        এটি আমাদের প্রিয় গ্রাম <b>হিজলী</b>-এর
-        তথ্য, মানুষ, পরিবার, প্রতিষ্ঠান, ইতিহাস ও
-        স্মৃতি সংরক্ষণের একটি ডিজিটাল উদ্যোগ।
-    </p>
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="Password">
 
-</section>
+    <button class="primary" onclick="login()">
+      Login
+    </button>
+
+    <div id="loginMessage" class="message"></div>
+  </div>
 
 
-<!-- STATISTICS -->
-<section class="stats">
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
 
-    <div class="stat">
-        <div class="icon">👨‍👩‍👧‍👦</div>
-        <strong id="familyCount">০</strong>
-        <span>পরিবার</span>
+    <div class="card">
+      <div class="topbar">
+        <div>
+          <h2>📊 Admin Dashboard</h2>
+          <div id="adminEmail"></div>
+        </div>
+
+        <button class="danger" onclick="logout()">
+          Logout
+        </button>
+      </div>
     </div>
 
-    <div class="stat">
-        <div class="icon">👥</div>
-        <strong id="peopleCount">০</strong>
-        <span>মানুষ</span>
+
+    <!-- STATISTICS -->
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="totalPeople">0</strong>
+        মোট ব্যক্তি
+      </div>
+
+      <div class="stat">
+        <strong id="maleCount">0</strong>
+        পুরুষ
+      </div>
+
     </div>
 
-    <div class="stat">
-        <div class="icon">🏠</div>
-        <strong id="institutionCount">০</strong>
-        <span>প্রতিষ্ঠান</span>
+
+    <!-- ADD PERSON -->
+    <div class="card">
+
+      <h2 id="formTitle">➕ নতুন ব্যক্তির তথ্য</h2>
+
+      <input
+        type="hidden"
+        id="editId">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="নাম">
+
+      <input
+        type="text"
+        id="father"
+        placeholder="পিতার নাম">
+
+      <input
+        type="text"
+        id="mother"
+        placeholder="মাতার নাম">
+
+      <select id="gender">
+        <option value="">লিঙ্গ নির্বাচন করুন</option>
+        <option value="পুরুষ">পুরুষ</option>
+        <option value="নারী">নারী</option>
+      </select>
+
+      <input
+        type="date"
+        id="dob">
+
+      <input
+        type="text"
+        id="phone"
+        placeholder="মোবাইল নম্বর">
+
+      <input
+        type="text"
+        id="village"
+        value="হিজলী"
+        placeholder="গ্রাম">
+
+      <input
+        type="text"
+        id="address"
+        placeholder="ঠিকানা">
+
+      <textarea
+        id="note"
+        placeholder="অতিরিক্ত তথ্য"></textarea>
+
+      <button
+        class="primary"
+        onclick="savePerson()">
+        💾 তথ্য সংরক্ষণ
+      </button>
+
+      <button
+        class="secondary hidden"
+        id="cancelEdit"
+        onclick="cancelEdit()">
+        বাতিল
+      </button>
+
+      <div id="saveMessage" class="message"></div>
+
     </div>
 
-</section>
+
+    <!-- SEARCH -->
+    <div class="card">
+
+      <h2>🔎 তথ্য খুঁজুন</h2>
+
+      <input
+        type="text"
+        id="search"
+        placeholder="নাম / মোবাইল / পিতার নাম লিখুন..."
+        oninput="showPeople()">
+
+    </div>
 
 
-<!-- MAIN MENU -->
-<div class="section-title">
-    <h3>গ্রামের তথ্য</h3>
-    <a href="#" onclick="showAll()">সব দেখুন</a>
+    <!-- PEOPLE -->
+    <div class="card">
+
+      <h2>👥 গ্রামের মানুষের তালিকা</h2>
+
+      <div id="peopleList">
+        তথ্য লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 
-<section class="menu-grid">
+<!-- FIREBASE -->
 
-    <button class="menu" onclick="openPage('people')">
-        <div class="emoji">👨‍👩‍👧‍👦</div>
-        <span>গ্রামের মানুষ</span>
-    </button>
+<script type="module">
 
-    <button class="menu" onclick="openPage('family')">
-        <div class="emoji">🌳</div>
-        <span>পরিবার ও বংশ</span>
-    </button>
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-    <button class="menu" onclick="openPage('institution')">
-        <div class="emoji">🏫</div>
-        <span>প্রতিষ্ঠান</span>
-    </button>
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-    <button class="menu" onclick="openPage('education')">
-        <div class="emoji">📚</div>
-        <span>শিক্ষা</span>
-    </button>
-
-    <button class="menu" onclick="openPage('profession')">
-        <div class="emoji">💼</div>
-        <span>পেশা</span>
-    </button>
-
-    <button class="menu" onclick="openPage('statistics')">
-        <div class="emoji">📊</div>
-        <span>পরিসংখ্যান</span>
-    </button>
-
-    <button class="menu" onclick="openPage('gallery')">
-        <div class="emoji">📸</div>
-        <span>ছবি ও স্মৃতি</span>
-    </button>
-
-    <button class="menu" onclick="openPage('old')">
-        <div class="emoji">🕰️</div>
-        <span>পুরোনো স্মৃতি</span>
-    </button>
-
-    <button class="menu" onclick="openPage('notice')">
-        <div class="emoji">📢</div>
-        <span>নোটিশ</span>
-    </button>
-
-    <button class="menu" onclick="openPage('mosque')">
-        <div class="emoji">🕌</div>
-        <span>মসজিদ ও ঈদগাহ</span>
-    </button>
-
-    <button class="menu" onclick="openPage('places')">
-        <div class="emoji">📍</div>
-        <span>গ্রামের স্থান</span>
-    </button>
-
-    <button class="menu" onclick="openPage('more')">
-        <div class="emoji">➕</div>
-        <span>আরও তথ্য</span>
-    </button>
-
-</section>
+  import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    update,
+    remove,
+    onValue
+  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
-<!-- NOTICE -->
-<div class="section-title">
+  // =========================
+  // FIREBASE CONFIG
+  // =========================
 
-    <h3>📢 সাম্প্রতিক নোটিশ</h3>
+  const firebaseConfig = {
 
-    <a href="#" onclick="openPage('notice')">
-        সব দেখুন
-    </a>
+    apiKey:
+      "AIzaSyAyR6lBD-mCUSxLtbAQoObJsVcHHd44lyk",
 
-</div>
+    authDomain:
+      "amar-gram-hijli.firebaseapp.com",
 
+    databaseURL:
+      "https://amar-gram-hijli-default-rtdb.firebaseio.com",
 
-<section class="notice">
+    projectId:
+      "amar-gram-hijli",
 
-    <div class="notice-item">
+    storageBucket:
+      "amar-gram-hijli.firebasestorage.app",
 
-        📌 গ্রামের গুরুত্বপূর্ণ ঘোষণা এখানে দেখা যাবে।
+    messagingSenderId:
+      "426703886497",
 
-        <div class="notice-date">
-            এখনো কোনো নোটিশ যোগ করা হয়নি
-        </div>
+    appId:
+      "1:426703886497:web:2fe094342c5200d4f878e0",
 
-    </div>
-
-    <div class="notice-item">
-
-        📸 গ্রামের পুরোনো ছবি ও ইতিহাস সংরক্ষণ করা হবে।
-
-        <div class="notice-date">
-            আমার গ্রাম হিজলী
-        </div>
-
-    </div>
-
-</section>
+    measurementId:
+      "G-S7STZ1RZJ9"
+  };
 
 
-<!-- FOOTER -->
-<footer class="footer">
+  // =========================
+  // INITIALIZE
+  // =========================
 
-    <p>🏡 আমার গ্রাম হিজলী</p>
+  const app = initializeApp(firebaseConfig);
 
-    <p style="margin-top:6px;">
-        গ্রামের তথ্য • ইতিহাস • মানুষ • স্মৃতি
-    </p>
+  const auth = getAuth(app);
 
-    <p style="margin-top:10px;">
-        © 2026 Amar Gram Hijli
-    </p>
-
-</footer>
+  const db = getDatabase(app);
 
 
-<!-- MODAL -->
-<div class="modal" id="modal">
+  let people = {};
 
-    <div class="modal-box">
 
-        <button class="close" onclick="closeModal()">✕</button>
+  // =========================
+  // LOGIN
+  // =========================
 
-        <h2 id="modalTitle">তথ্য</h2>
+  window.login = async function() {
 
-        <p id="modalText">
-            এখানে গ্রামের তথ্য দেখা যাবে।
+    const email =
+      document.getElementById("loginEmail").value.trim();
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+
+    if (!email || !password) {
+
+      showMessage(
+        "loginMessage",
+        "Email এবং Password দিন।",
+        "error"
+      );
+
+      return;
+    }
+
+
+    try {
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    } catch(error) {
+
+      showMessage(
+        "loginMessage",
+        "Login হয়নি: " + error.message,
+        "error"
+      );
+
+    }
+
+  };
+
+
+  // =========================
+  // AUTH STATE
+  // =========================
+
+  onAuthStateChanged(auth, user => {
+
+    if(user) {
+
+      document
+        .getElementById("loginSection")
+        .classList.add("hidden");
+
+      document
+        .getElementById("dashboard")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("adminEmail")
+        .textContent =
+        "Logged in: " + user.email;
+
+      loadPeople();
+
+    } else {
+
+      document
+        .getElementById("loginSection")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("dashboard")
+        .classList.add("hidden");
+
+    }
+
+  });
+
+
+  // =========================
+  // LOGOUT
+  // =========================
+
+  window.logout = async function() {
+
+    await signOut(auth);
+
+  };
+
+
+  // =========================
+  // SAVE PERSON
+  // =========================
+
+  window.savePerson = async function() {
+
+    const name =
+      document.getElementById("name").value.trim();
+
+    const father =
+      document.getElementById("father").value.trim();
+
+    const mother =
+      document.getElementById("mother").value.trim();
+
+    const gender =
+      document.getElementById("gender").value;
+
+    const dob =
+      document.getElementById("dob").value;
+
+    const phone =
+      document.getElementById("phone").value.trim();
+
+    const village =
+      document.getElementById("village").value.trim();
+
+    const address =
+      document.getElementById("address").value.trim();
+
+    const note =
+      document.getElementById("note").value.trim();
+
+    const editId =
+      document.getElementById("editId").value;
+
+
+    if(!name) {
+
+      showMessage(
+        "saveMessage",
+        "নাম অবশ্যই দিতে হবে।",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const data = {
+
+      name,
+      father,
+      mother,
+      gender,
+      dob,
+      phone,
+      village,
+      address,
+      note,
+
+      updatedAt: Date.now()
+
+    };
+
+
+    try {
+
+      if(editId) {
+
+        await update(
+          ref(db, "people/" + editId),
+          data
+        );
+
+        showMessage(
+          "saveMessage",
+          "তথ্য সফলভাবে আপডেট হয়েছে।",
+          "success"
+        );
+
+      } else {
+
+        data.createdAt = Date.now();
+
+        const newRef =
+          push(ref(db, "people"));
+
+        await set(
+          newRef,
+          data
+        );
+
+        showMessage(
+          "saveMessage",
+          "তথ্য সফলভাবে সংরক্ষণ হয়েছে।",
+          "success"
+        );
+
+      }
+
+
+      clearForm();
+
+    } catch(error) {
+
+      showMessage(
+        "saveMessage",
+        "তথ্য সংরক্ষণ হয়নি: " +
+        error.message,
+        "error"
+      );
+
+    }
+
+  };
+
+
+  // =========================
+  // LOAD PEOPLE
+  // =========================
+
+  function loadPeople() {
+
+    const peopleRef =
+      ref(db, "people");
+
+
+    onValue(
+      peopleRef,
+      snapshot => {
+
+        people =
+          snapshot.val() || {};
+
+        showPeople();
+
+      },
+      error => {
+
+        document
+          .getElementById("peopleList")
+          .innerHTML =
+          "<p>তথ্য লোড হয়নি: " +
+          error.message +
+          "</p>";
+
+      }
+    );
+
+  }
+
+
+  // =========================
+  // SHOW PEOPLE
+  // =========================
+
+  window.showPeople = function() {
+
+    const list =
+      document.getElementById("peopleList");
+
+    const search =
+      document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    list.innerHTML = "";
+
+
+    const entries =
+      Object.entries(people);
+
+
+    let filtered =
+      entries.filter(([id, person]) => {
+
+        const text =
+          (
+            person.name || "" +
+            " " +
+            (person.father || "") +
+            " " +
+            (person.phone || "") +
+            " " +
+            (person.village || "")
+          ).toLowerCase();
+
+        return text.includes(search);
+
+      });
+
+
+    document
+      .getElementById("totalPeople")
+      .textContent =
+      entries.length;
+
+
+    document
+      .getElementById("maleCount")
+      .textContent =
+      entries.filter(
+        ([id,p]) => p.gender === "পুরুষ"
+      ).length;
+
+
+    if(filtered.length === 0) {
+
+      list.innerHTML =
+        "<p>কোনো তথ্য পাওয়া যায়নি।</p>";
+
+      return;
+
+    }
+
+
+    filtered.forEach(([id, person]) => {
+
+      const div =
+        document.createElement("div");
+
+      div.className = "person";
+
+
+      div.innerHTML = `
+
+        <h3>👤 ${escapeHtml(person.name || "")}</h3>
+
+        <p>
+          <b>পিতা:</b>
+          ${escapeHtml(person.father || "-")}
         </p>
 
-    </div>
+        <p>
+          <b>মাতা:</b>
+          ${escapeHtml(person.mother || "-")}
+        </p>
 
-</div>
+        <p>
+          <b>লিঙ্গ:</b>
+          ${escapeHtml(person.gender || "-")}
+        </p>
+
+        <p>
+          <b>জন্মতারিখ:</b>
+          ${escapeHtml(person.dob || "-")}
+        </p>
+
+        <p>
+          <b>মোবাইল:</b>
+          ${escapeHtml(person.phone || "-")}
+        </p>
+
+        <p>
+          <b>গ্রাম:</b>
+          ${escapeHtml(person.village || "-")}
+        </p>
+
+        <p>
+          <b>ঠিকানা:</b>
+          ${escapeHtml(person.address || "-")}
+        </p>
+
+        <p>
+          <b>নোট:</b>
+          ${escapeHtml(person.note || "-")}
+        </p>
+
+        <button
+          class="edit"
+          onclick="editPerson('${id}')">
+          ✏️ Edit
+        </button>
+
+        <button
+          class="danger"
+          onclick="deletePerson('${id}')">
+          🗑️ Delete
+        </button>
+
+      `;
 
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
+      list.appendChild(div);
 
-    <button class="nav-btn active" onclick="goHome()">
-        <div>🏠</div>
-        হোম
-    </button>
+    });
 
-    <button class="nav-btn" onclick="showAll()">
-        <div>📂</div>
-        ক্যাটাগরি
-    </button>
-
-    <button class="nav-btn" onclick="openPage('notice')">
-        <div>📢</div>
-        নোটিশ
-    </button>
-
-    <button class="nav-btn" onclick="showProfile()">
-        <div>👤</div>
-        প্রোফাইল
-    </button>
-
-</nav>
+  };
 
 
-<script>
+  // =========================
+  // EDIT
+  // =========================
 
-    function openPage(page) {
+  window.editPerson = function(id) {
 
-        const names = {
+    const person = people[id];
 
-            people: "গ্রামের মানুষ",
-            family: "পরিবার ও বংশ",
-            institution: "প্রতিষ্ঠান",
-            education: "শিক্ষা",
-            profession: "পেশা",
-            statistics: "গ্রামের পরিসংখ্যান",
-            gallery: "ছবি ও স্মৃতি",
-            old: "পুরোনো স্মৃতি",
-            notice: "নোটিশ",
-            mosque: "মসজিদ ও ঈদগাহ",
-            places: "গ্রামের স্থান",
-            more: "আরও তথ্য"
+    if(!person) return;
 
-        };
 
-        document.getElementById("modalTitle").innerText =
-            names[page] || "তথ্য";
+    document.getElementById("editId").value = id;
 
-        document.getElementById("modalText").innerHTML =
-            "এই বিভাগটি আমরা পরবর্তী ধাপে তৈরি করব।<br><br>" +
-            "Firebase যুক্ত হলে এখানকার তথ্য অনলাইন ডাটাবেস থেকে আসবে।";
+    document.getElementById("name").value =
+      person.name || "";
 
-        document.getElementById("modal").style.display = "flex";
+    document.getElementById("father").value =
+      person.father || "";
+
+    document.getElementById("mother").value =
+      person.mother || "";
+
+    document.getElementById("gender").value =
+      person.gender || "";
+
+    document.getElementById("dob").value =
+      person.dob || "";
+
+    document.getElementById("phone").value =
+      person.phone || "";
+
+    document.getElementById("village").value =
+      person.village || "";
+
+    document.getElementById("address").value =
+      person.address || "";
+
+    document.getElementById("note").value =
+      person.note || "";
+
+
+    document.getElementById("formTitle")
+      .textContent =
+      "✏️ তথ্য পরিবর্তন করুন";
+
+
+    document.getElementById("cancelEdit")
+      .classList.remove("hidden");
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  };
+
+
+  // =========================
+  // DELETE
+  // =========================
+
+  window.deletePerson = async function(id) {
+
+    const person = people[id];
+
+    if(!person) return;
+
+
+    const ok =
+      confirm(
+        "আপনি কি " +
+        person.name +
+        " এর তথ্য মুছে ফেলতে চান?"
+      );
+
+
+    if(!ok) return;
+
+
+    try {
+
+      await remove(
+        ref(db, "people/" + id)
+      );
+
+    } catch(error) {
+
+      alert(
+        "Delete হয়নি: " +
+        error.message
+      );
+
     }
 
-
-    function showProfile() {
-
-        document.getElementById("modalTitle").innerText =
-            "👤 প্রোফাইল";
-
-        document.getElementById("modalText").innerHTML =
-            "এখানে Login / Register ব্যবস্থা থাকবে।<br><br>" +
-            "প্রতিটি ব্যবহারকারী নিজের প্রোফাইল তৈরি করতে পারবে।";
-
-        document.getElementById("modal").style.display = "flex";
-    }
+  };
 
 
-    function showAll() {
+  // =========================
+  // CANCEL EDIT
+  // =========================
 
-        document.getElementById("modalTitle").innerText =
-            "📂 সব বিভাগ";
+  window.cancelEdit = function() {
 
-        document.getElementById("modalText").innerHTML =
-            "গ্রামের মানুষ<br>" +
-            "পরিবার ও বংশ<br>" +
-            "প্রতিষ্ঠান<br>" +
-            "শিক্ষা<br>" +
-            "পেশা<br>" +
-            "পরিসংখ্যান<br>" +
-            "ছবি ও স্মৃতি<br>" +
-            "পুরোনো স্মৃতি<br>" +
-            "নোটিশ<br>" +
-            "মসজিদ ও ঈদগাহ<br>" +
-            "গ্রামের স্থান";
+    clearForm();
 
-        document.getElementById("modal").style.display = "flex";
-    }
+  };
 
 
-    function closeModal() {
+  // =========================
+  // CLEAR FORM
+  // =========================
 
-        document.getElementById("modal").style.display = "none";
+  function clearForm() {
 
-    }
+    document.getElementById("editId").value = "";
 
+    document.getElementById("name").value = "";
 
-    function goHome() {
+    document.getElementById("father").value = "";
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    document.getElementById("mother").value = "";
 
-    }
+    document.getElementById("gender").value = "";
 
+    document.getElementById("dob").value = "";
 
-    function searchVillage() {
+    document.getElementById("phone").value = "";
 
-        const value =
-            document.getElementById("searchInput").value.trim();
+    document.getElementById("village").value = "হিজলী";
 
-        if (!value) {
+    document.getElementById("address").value = "";
 
-            alert("অনুগ্রহ করে কিছু লিখে Search করুন।");
-            return;
-
-        }
-
-        document.getElementById("modalTitle").innerText =
-            "🔍 Search";
-
-        document.getElementById("modalText").innerHTML =
-            "আপনি খুঁজেছেন: <b>" + value + "</b><br><br>" +
-            "Firebase যুক্ত করার পর এখানে গ্রামের মানুষ, " +
-            "পরিবার, প্রতিষ্ঠান ও অন্যান্য তথ্য Search করা যাবে।";
-
-        document.getElementById("modal").style.display = "flex";
-
-    }
+    document.getElementById("note").value = "";
 
 
-    // এখন ডেমো সংখ্যা
-    // Firebase যুক্ত হলে এগুলো Database থেকে আসবে।
-
-    document.getElementById("familyCount").innerText = "০";
-    document.getElementById("peopleCount").innerText = "০";
-    document.getElementById("institutionCount").innerText = "০";
+    document.getElementById("formTitle")
+      .textContent =
+      "➕ নতুন ব্যক্তির তথ্য";
 
 
-    // বাইরে চাপলে Modal বন্ধ
-    document.getElementById("modal").addEventListener(
-        "click",
-        function(e) {
+    document.getElementById("cancelEdit")
+      .classList.add("hidden");
 
-            if (e.target === this) {
-                closeModal();
-            }
+  }
 
-        }
-    );
+
+  // =========================
+  // MESSAGE
+  // =========================
+
+  function showMessage(
+    id,
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(id);
+
+    box.textContent = text;
+
+    box.className =
+      "message " + type;
+
+    box.style.display =
+      "block";
+
+
+    setTimeout(() => {
+
+      box.style.display =
+        "none";
+
+    }, 4000);
+
+  }
+
+
+  // =========================
+  // SECURITY
+  // =========================
+
+  function escapeHtml(value) {
+
+    return String(value)
+
+      .replaceAll("&", "&amp;")
+
+      .replaceAll("<", "&lt;")
+
+      .replaceAll(">", "&gt;")
+
+      .replaceAll('"', "&quot;")
+
+      .replaceAll("'", "&#039;");
+
+  }
 
 </script>
 
 </body>
-  </html>
+</html>
