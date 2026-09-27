@@ -1,1524 +1,874 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>আমার গ্রাম হিজলী</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
 
-*{
-  box-sizing:border-box;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
-  background:#f3f7f5;
-  color:#222;
-  padding-bottom:75px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  background:#f3f8f5;
+  color:#173b2b;
 }
-
-/* ================= HEADER ================= */
+button,input,textarea,select{font-family:inherit}
+button{cursor:pointer}
 
 .top-header{
-  background:linear-gradient(135deg,#087f5b,#099268);
+  background:linear-gradient(135deg,#087443,#0da568);
   color:white;
   padding:18px 15px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  box-shadow:0 3px 12px #0002;
+}
+.header-row{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
 }
-
-.brand{
+.logo-title{
   display:flex;
   align-items:center;
-  gap:12px;
-}
-
-.logo{
-  width:50px;
-  height:50px;
-  background:white;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:29px;
-}
-
-.brand h1{
-  margin:0;
-  font-size:23px;
-}
-
-.brand p{
-  margin:5px 0 0;
-  font-size:13px;
-}
-
-.search-button{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  background:#ffffff22;
-  color:white;
-  font-size:21px;
-  padding:0;
-}
-
-/* ================= WELCOME ================= */
-
-.welcome{
-  padding:15px;
-}
-
-.welcome-image{
-  min-height:210px;
-  border-radius:20px;
-  background:
-    linear-gradient(#0006,#0006),
-    linear-gradient(135deg,#74c69d,#40916c);
-  display:flex;
-  align-items:flex-end;
-  overflow:hidden;
-}
-
-.welcome-overlay{
-  color:white;
-  padding:25px;
-}
-
-.welcome-overlay h2{
-  color:white;
-  margin:0 0 8px;
-  font-size:25px;
-}
-
-.welcome-overlay p{
-  margin:0;
-  line-height:1.6;
-}
-
-/* ================= QUICK STATS ================= */
-
-.quick-stats{
-  width:94%;
-  max-width:1000px;
-  margin:0 auto 20px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
   gap:10px;
 }
+.logo{
+  font-size:38px;
+}
+.title{
+  font-size:23px;
+  font-weight:800;
+}
+.subtitle{
+  font-size:12px;
+  opacity:.9;
+}
+.search-btn{
+  border:0;
+  background:#ffffff22;
+  color:white;
+  border-radius:50%;
+  width:43px;
+  height:43px;
+  font-size:21px;
+}
 
-.quick-stat{
+.nav{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
   background:white;
-  border-radius:13px;
-  padding:14px 5px;
-  text-align:center;
+  padding:8px;
+  position:sticky;
+  top:81px;
+  z-index:40;
   box-shadow:0 2px 8px #0001;
 }
-
-.quick-stat strong{
-  display:block;
-  font-size:23px;
-  color:#087f5b;
+.nav button{
+  flex:none;
+  border:0;
+  background:#eef7f2;
+  color:#17633f;
+  padding:9px 13px;
+  border-radius:20px;
+  font-weight:600;
 }
-
-.quick-stat span{
-  font-size:13px;
-  color:#666;
+.nav button.active{
+  background:#0b8b55;
+  color:white;
 }
-
-/* ================= CONTAINER ================= */
 
 .container{
-  width:94%;
-  max-width:1000px;
-  margin:18px auto;
-}
-
-.section-title{
-  color:#087f5b;
-  margin:20px 0 12px;
-}
-
-/* ================= MENU ================= */
-
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.menu-card{
-  border:0;
-  border-radius:17px;
-  padding:18px 10px;
-  text-align:left;
-  background:white;
-  box-shadow:0 2px 9px #0001;
-  cursor:pointer;
-  transition:.2s;
-  margin:0;
-}
-
-.menu-card:active{
-  transform:scale(.97);
-}
-
-.menu-icon{
-  width:45px;
-  height:45px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  margin-bottom:10px;
-  background:#e6fcf5;
-}
-
-.menu-card h3{
-  margin:0 0 5px;
-  color:#087f5b;
-  font-size:16px;
-}
-
-.menu-card p{
-  margin:0;
-  color:#777;
-  font-size:12px;
-  line-height:1.4;
-}
-
-/* ================= CARD ================= */
-
-.card{
-  background:white;
-  border-radius:15px;
-  padding:18px;
-  margin-bottom:18px;
-  box-shadow:0 2px 10px #0001;
-}
-
-h2{
-  color:#087f5b;
-  margin-top:0;
-}
-
-input,
-textarea,
-select{
-  width:100%;
-  padding:12px;
-  margin:6px 0;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:15px;
-  background:white;
-}
-
-textarea{
-  min-height:100px;
-}
-
-button{
-  border:0;
-  padding:10px 15px;
-  border-radius:8px;
-  cursor:pointer;
-  margin:4px;
-  font-size:14px;
-}
-
-.primary{
-  background:#087f5b;
-  color:white;
-}
-
-.danger{
-  background:#d90429;
-  color:white;
-}
-
-.edit{
-  background:#f08c00;
-  color:white;
-}
-
-.gray{
-  background:#495057;
-  color:white;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* ================= ITEMS ================= */
-
-.item{
-  border:1px solid #e0e0e0;
+  max-width:1100px;
+  margin:auto;
   padding:15px;
-  border-radius:12px;
-  margin:10px 0;
-  background:#fff;
 }
 
-.item h3{
-  margin:0 0 9px;
-  color:#087f5b;
-}
-
-.item p{
-  margin:7px 0;
-  line-height:1.6;
-}
-
-.badge{
-  display:inline-block;
-  background:#e6fcf5;
-  color:#087f5b;
-  padding:5px 9px;
+.hero{
+  background:linear-gradient(135deg,#dff7e9,#effcf5);
   border-radius:20px;
-  font-size:12px;
+  padding:25px 18px;
+  margin-bottom:15px;
+  border:1px solid #c8ead7;
 }
-
-/* ================= PERSON ================= */
-
-.person-card{
-  display:flex;
-  gap:13px;
-  align-items:flex-start;
+.hero h1{
+  margin:0 0 5px;
+  color:#087443;
 }
-
-.person-icon{
-  min-width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#e6fcf5;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-}
-
-.person-info{
-  flex:1;
-}
-
-.person-info h3{
-  margin:0 0 7px;
-}
-
-/* ================= PLACE ICON ================= */
-
-.place-icon{
-  width:55px;
-  height:55px;
-  border-radius:15px;
-  background:#e7f5ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-/* ================= STATS ================= */
+.hero p{margin:0;color:#47705d}
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
+  margin:15px 0;
 }
-
 .stat{
-  background:#e6fcf5;
-  padding:15px 5px;
-  border-radius:10px;
+  background:white;
+  border-radius:15px;
+  padding:15px 8px;
   text-align:center;
+  box-shadow:0 2px 8px #0000000c;
 }
-
-.stat strong{
+.stat b{
   display:block;
-  font-size:24px;
-  color:#087f5b;
+  font-size:25px;
+  color:#07804c;
 }
+.stat span{font-size:12px}
 
-/* ================= MESSAGE ================= */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.menu-card{
+  background:white;
+  border:0;
+  border-radius:17px;
+  padding:17px 10px;
+  text-align:center;
+  box-shadow:0 2px 9px #0001;
+  color:#174b34;
+}
+.menu-card .icon{
+  font-size:31px;
+  display:block;
+  margin-bottom:7px;
+}
+.menu-card b{display:block}
+.menu-card small{color:#6c8176}
 
-.message{
-  padding:10px;
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0 13px;
+}
+.section-title h2{
+  margin:0;
+  color:#086c40;
+  font-size:21px;
+}
+.add-btn,.primary{
+  background:#07824e;
+  color:white;
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+}
+.secondary{
+  background:#e9f4ee;
+  color:#086c40;
+  border:0;
+  border-radius:9px;
+  padding:9px 12px;
+}
+.danger{
+  background:#ffe9e9;
+  color:#b82020;
+  border:0;
   border-radius:8px;
-  margin:10px 0;
-  display:none;
+  padding:8px 10px;
+}
+.edit{
+  background:#fff3d8;
+  color:#8a5b00;
+  border:0;
+  border-radius:8px;
+  padding:8px 10px;
 }
 
-.success{
-  background:#d3f9d8;
-  color:#2b8a3e;
+.card{
+  background:white;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:11px;
+  box-shadow:0 2px 9px #0000000c;
 }
-
-.error{
-  background:#ffe3e3;
-  color:#c92a2a;
+.card-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
 }
-
-.public-info{
-  line-height:1.8;
+.card-icon{
+  width:48px;
+  height:48px;
+  background:#e6f6ed;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  flex:none;
+}
+.card h3{
+  margin:0 0 4px;
+  color:#086c40;
+}
+.meta{
+  font-size:13px;
+  color:#657b70;
+  margin:4px 0;
+}
+.description{
   white-space:pre-wrap;
+  line-height:1.7;
+  margin-top:10px;
+}
+.tag{
+  display:inline-block;
+  background:#e7f6ee;
+  color:#087443;
+  padding:4px 8px;
+  border-radius:15px;
+  font-size:11px;
+  margin:2px;
 }
 
-/* ================= MODAL ================= */
+.person{
+  display:flex;
+  gap:13px;
+}
+.person-icon{
+  width:52px;
+  height:52px;
+  background:#dff5e9;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  flex:none;
+}
+.person h3{margin:0}
+.field-line{
+  font-size:13px;
+  margin:5px 0;
+  color:#506b5d;
+}
 
-.modal{
+.form-box{
+  background:#fff;
+  border-radius:17px;
+  padding:17px;
+  margin-bottom:15px;
+  box-shadow:0 2px 10px #0001;
+}
+.form-box h3{
+  margin-top:0;
+  color:#087443;
+}
+label{
+  display:block;
+  margin-top:10px;
+  margin-bottom:4px;
+  font-weight:600;
+  font-size:13px;
+}
+input,textarea,select{
+  width:100%;
+  border:1px solid #cfe0d7;
+  border-radius:10px;
+  padding:11px;
+  outline:none;
+  background:#fbfdfc;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:#0a9659;
+}
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+.form-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:13px;
+}
+.hidden{display:none!important}
+
+.notice{
+  border-left:5px solid #0b9559;
+}
+.notice-date{
+  font-size:12px;
+  color:#70857a;
+}
+
+.admin-box{
+  background:#e8f7ef;
+  border:1px solid #bce4cd;
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:15px;
+}
+.admin-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.admin-title h2{margin:0;color:#086c40}
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.admin-stat{
+  background:white;
+  padding:14px;
+  border-radius:13px;
+}
+.admin-stat b{
+  font-size:22px;
+  color:#087443;
+}
+
+.search-modal,.modal{
   position:fixed;
   inset:0;
   background:#0008;
   z-index:100;
-  display:none;
-  align-items:center;
+  display:flex;
   justify-content:center;
-  padding:15px;
+  align-items:flex-start;
+  padding:30px 12px;
+  overflow:auto;
 }
-
-.modal-content{
+.modal-box{
   background:white;
   width:100%;
-  max-width:500px;
-  border-radius:18px;
-  padding:20px;
-  max-height:90vh;
-  overflow:auto;
-  position:relative;
+  max-width:650px;
+  border-radius:20px;
+  padding:18px;
+  margin:auto;
 }
-
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 .close{
-  position:absolute;
-  right:10px;
-  top:10px;
-  font-size:24px;
+  border:0;
   background:#eee;
-  width:38px;
-  height:38px;
-  padding:0;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  font-size:18px;
 }
-
-.large-icon{
-  font-size:45px;
-  text-align:center;
-}
-
-/* ================= BOTTOM NAV ================= */
+.search-results{margin-top:15px}
 
 .bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  height:65px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  box-shadow:0 -2px 10px #0002;
-  z-index:50;
+  display:none;
 }
-
-.bottom-nav button{
-  margin:0;
-  padding:5px;
-  border-radius:0;
-  background:white;
-  color:#555;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-
-.bottom-nav span{
-  font-size:21px;
-}
-
-.bottom-nav small{
-  font-size:11px;
-}
-
-/* ================= FOOTER ================= */
 
 footer{
   text-align:center;
-  padding:30px;
-  color:#666;
-  line-height:1.8;
+  padding:30px 10px 90px;
+  color:#718178;
+  font-size:12px;
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:600px){
-
-  .brand h1{
-    font-size:20px;
+  .nav{top:81px}
+  .title{font-size:20px}
+  .stats{gap:7px}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .admin-grid{grid-template-columns:1fr}
+  .bottom-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:62px;
+    background:white;
+    z-index:60;
+    box-shadow:0 -3px 12px #0002;
+    justify-content:space-around;
   }
-
-  .brand p{
+  .bottom-nav button{
+    border:0;
+    background:white;
+    color:#648073;
     font-size:11px;
   }
-
-  .menu-grid{
-    grid-template-columns:repeat(2,1fr);
+  .bottom-nav button b{
+    display:block;
+    font-size:21px;
   }
-
-  .stats{
-    grid-template-columns:1fr 1fr 1fr;
-  }
-
 }
 
+.empty{
+  text-align:center;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  color:#718178;
+}
+
+.login-note{
+  background:#fff8df;
+  border:1px solid #f0df9a;
+  padding:10px;
+  border-radius:10px;
+  font-size:12px;
+  margin-bottom:10px;
+}
 </style>
 </head>
 
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="top-header">
-
-  <div class="brand">
-
-    <div class="logo">
-      🏡
+  <div class="header-row">
+    <div class="logo-title">
+      <div class="logo">🏡</div>
+      <div>
+        <div class="title">আমার গ্রাম হিজলী</div>
+        <div class="subtitle">আমাদের গ্রাম, আমাদের পরিচয়</div>
+      </div>
     </div>
 
-    <div>
-      <h1>আমার গ্রাম হিজলী</h1>
-      <p>আমাদের গ্রাম, আমাদের পরিচয়</p>
-    </div>
-
+    <button class="search-btn" onclick="openSearch()">🔍</button>
   </div>
-
-  <button
-    class="search-button"
-    onclick="openSearch()">
-
-    🔍
-
-  </button>
-
 </header>
 
-
-<!-- =====================================================
-     WELCOME
-===================================================== -->
-
-<section class="welcome">
-
-  <div class="welcome-image">
-
-    <div class="welcome-overlay">
-
-      <h2>
-        আমাদের হিজলীতে স্বাগতম
-      </h2>
-
-      <p>
-        হিজলীর মানুষ, ইতিহাস ও স্মৃতি
-        এক জায়গায়
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     QUICK STATS
-===================================================== -->
-
-<section class="quick-stats">
-
-  <div class="quick-stat">
-
-    <strong id="peopleCount">
-      ০
-    </strong>
-
-    <span>
-      মানুষ
-    </span>
-
-  </div>
-
-  <div class="quick-stat">
-
-    <strong id="institutionCount">
-      ০
-    </strong>
-
-    <span>
-      প্রতিষ্ঠান
-    </span>
-
-  </div>
-
-  <div class="quick-stat">
-
-    <strong id="photoCount">
-      ০
-    </strong>
-
-    <span>
-      ছবি
-    </span>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     HOME / CATEGORY
-===================================================== -->
+<nav class="nav">
+  <button id="nav-home" onclick="showPage('home')">🏠 হোম</button>
+  <button id="nav-village" onclick="showPage('village')">🌳 গ্রাম</button>
+  <button id="nav-people" onclick="showPage('people')">👥 মানুষ</button>
+  <button id="nav-family" onclick="showPage('family')">🌳 পরিবার</button>
+  <button id="nav-institution" onclick="showPage('institution')">🏫 প্রতিষ্ঠান</button>
+  <button id="nav-education" onclick="showPage('education')">🎓 শিক্ষা</button>
+  <button id="nav-profession" onclick="showPage('profession')">💼 পেশা</button>
+  <button id="nav-gallery" onclick="showPage('gallery')">🖼️ ছবি</button>
+  <button id="nav-memory" onclick="showPage('memory')">🕰️ স্মৃতি</button>
+  <button id="nav-notice" onclick="showPage('notice')">📢 নোটিশ</button>
+  <button id="nav-place" onclick="showPage('place')">🗺️ স্থান</button>
+  <button id="nav-mosque" onclick="showPage('mosque')">🕌 মসজিদ</button>
+  <button id="nav-contact" onclick="showPage('contact')">📞 যোগাযোগ</button>
+  <button id="nav-more" onclick="showPage('more')">➕ আরও</button>
+  <button id="nav-admin" onclick="showPage('admin')">🔐 Admin</button>
+</nav>
 
 <main class="container">
 
-  <h2 class="section-title">
-    গ্রামের তথ্য
-  </h2>
+<!-- HOME -->
+<section id="page-home">
+
+  <div class="hero">
+    <h1>আমাদের হিজলীতে স্বাগতম 🌿</h1>
+    <p>হিজলীর মানুষ, ইতিহাস, শিক্ষা, প্রতিষ্ঠান ও স্মৃতি এক জায়গায়।</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <b id="homePeople">0</b>
+      <span>👥 মানুষ</span>
+    </div>
+    <div class="stat">
+      <b id="homeInstitution">0</b>
+      <span>🏫 প্রতিষ্ঠান</span>
+    </div>
+    <div class="stat">
+      <b id="homePhoto">0</b>
+      <span>🖼️ ছবি</span>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>গ্রামের বিভাগসমূহ</h2>
+  </div>
 
   <div class="menu-grid">
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('people')">
-
-      <div class="menu-icon">
-        👥
-      </div>
-
-      <h3>
-        গ্রামের মানুষ
-      </h3>
-
-      <p>
-        মানুষের নাম, পিতা, পাড়া,
-        শিক্ষা ও পেশা
-      </p>
-
+    <button class="menu-card" onclick="showPage('people')">
+      <span class="icon">👥</span>
+      <b>গ্রামের মানুষ</b>
+      <small>মানুষের পরিচয়</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('family')">
-
-      <div class="menu-icon">
-        🌳
-      </div>
-
-      <h3>
-        পরিবার ও বংশ
-      </h3>
-
-      <p>
-        পরিবার ও পারিবারিক সম্পর্ক
-      </p>
-
+    <button class="menu-card" onclick="showPage('family')">
+      <span class="icon">🌳</span>
+      <b>পরিবার ও বংশ</b>
+      <small>পরিবারের তথ্য</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('places')">
-
-      <div class="menu-icon">
-        🏫
-      </div>
-
-      <h3>
-        প্রতিষ্ঠান
-      </h3>
-
-      <p>
-        স্কুল, মাদ্রাসা ও অন্যান্য
-      </p>
-
+    <button class="menu-card" onclick="showPage('institution')">
+      <span class="icon">🏫</span>
+      <b>প্রতিষ্ঠান</b>
+      <small>স্কুল, মাদ্রাসা ও অন্যান্য</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('education')">
-
-      <div class="menu-icon">
-        🎓
-      </div>
-
-      <h3>
-        শিক্ষা
-      </h3>
-
-      <p>
-        গ্রামের শিক্ষার তথ্য
-      </p>
-
+    <button class="menu-card" onclick="showPage('education')">
+      <span class="icon">🎓</span>
+      <b>শিক্ষা</b>
+      <small>শিক্ষার তথ্য</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('profession')">
-
-      <div class="menu-icon">
-        💼
-      </div>
-
-      <h3>
-        পেশা
-      </h3>
-
-      <p>
-        কে কোন পেশায়
-      </p>
-
+    <button class="menu-card" onclick="showPage('profession')">
+      <span class="icon">💼</span>
+      <b>পেশা</b>
+      <small>পেশার তথ্য</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('statistics')">
-
-      <div class="menu-icon">
-        📊
-      </div>
-
-      <h3>
-        পরিসংখ্যান
-      </h3>
-
-      <p>
-        গ্রামের মোট তথ্য
-      </p>
-
+    <button class="menu-card" onclick="showPage('gallery')">
+      <span class="icon">🖼️</span>
+      <b>ছবি গ্যালারি</b>
+      <small>গ্রামের ছবি</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('gallery')">
-
-      <div class="menu-icon">
-        🖼️
-      </div>
-
-      <h3>
-        ছবি গ্যালারি
-      </h3>
-
-      <p>
-        গ্রামের ছবি
-      </p>
-
+    <button class="menu-card" onclick="showPage('memory')">
+      <span class="icon">🕰️</span>
+      <b>পুরোনো স্মৃতি</b>
+      <small>পুরোনো ছবি ও ইতিহাস</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('history')">
-
-      <div class="menu-icon">
-        🕰️
-      </div>
-
-      <h3>
-        পুরোনো স্মৃতি
-      </h3>
-
-      <p>
-        পুরোনো ছবি ও ইতিহাস
-      </p>
-
+    <button class="menu-card" onclick="showPage('notice')">
+      <span class="icon">📢</span>
+      <b>নোটিশ</b>
+      <small>গ্রামের ঘোষণা</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('notices')">
-
-      <div class="menu-icon">
-        📢
-      </div>
-
-      <h3>
-        নোটিশ
-      </h3>
-
-      <p>
-        গ্রামের ঘোষণা
-      </p>
-
+    <button class="menu-card" onclick="showPage('place')">
+      <span class="icon">🗺️</span>
+      <b>গুরুত্বপূর্ণ স্থান</b>
+      <small>গ্রামের স্থানসমূহ</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('places')">
-
-      <div class="menu-icon">
-        🗺️
-      </div>
-
-      <h3>
-        গ্রামের স্থান
-      </h3>
-
-      <p>
-        গুরুত্বপূর্ণ স্থানসমূহ
-      </p>
-
+    <button class="menu-card" onclick="showPage('mosque')">
+      <span class="icon">🕌</span>
+      <b>মসজিদ ও ঈদগাহ</b>
+      <small>ধর্মীয় স্থান</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('mosque')">
-
-      <div class="menu-icon">
-        🕌
-      </div>
-
-      <h3>
-        মসজিদ ও ঈদগাহ
-      </h3>
-
-      <p>
-        ধর্মীয় প্রতিষ্ঠান
-      </p>
-
+    <button class="menu-card" onclick="showPage('contact')">
+      <span class="icon">📞</span>
+      <b>যোগাযোগ</b>
+      <small>প্রয়োজনীয় যোগাযোগ</small>
     </button>
 
-
-    <button
-      class="menu-card"
-      onclick="openPage('more')">
-
-      <div class="menu-icon">
-        ➕
-      </div>
-
-      <h3>
-        আরও তথ্য
-      </h3>
-
-      <p>
-        অন্যান্য তথ্য
-      </p>
-
+    <button class="menu-card" onclick="showPage('more')">
+      <span class="icon">➕</span>
+      <b>আরও তথ্য</b>
+      <small>অন্যান্য তথ্য</small>
     </button>
-
 
   </div>
-
-
-<!-- =====================================================
-     PUBLIC VILLAGE
-===================================================== -->
-
-<section id="villageInfo" class="card hidden">
-
-  <h2>
-    📜 গ্রামের পরিচিতি ও ইতিহাস
-  </h2>
-
-  <div id="villageList">
-    তথ্য লোড হচ্ছে...
-  </div>
-
 </section>
 
 
-<!-- =====================================================
-     PUBLIC PEOPLE
-===================================================== -->
+<!-- VILLAGE -->
+<section id="page-village" class="hidden">
 
-<section id="people" class="card hidden">
-
-  <h2>
-    👥 গ্রামের মানুষের পরিচয়
-  </h2>
-
-  <input
-    id="peopleSearch"
-    placeholder="নাম / বাবার নাম / পাড়া / শিক্ষা / পেশা খুঁজুন..."
-    oninput="showPeople()">
-
-  <div id="peopleList">
-    তথ্য লোড হচ্ছে...
+  <div class="section-title">
+    <h2>🌳 গ্রামের তথ্য ও ইতিহাস</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('village')">＋ Add</button>
   </div>
 
+  <div id="villageList"></div>
 </section>
 
 
-<!-- =====================================================
-     PUBLIC PLACES
-===================================================== -->
+<!-- PEOPLE -->
+<section id="page-people" class="hidden">
 
-<section id="places" class="card hidden">
-
-  <h2>
-    🏫 প্রতিষ্ঠান ও গুরুত্বপূর্ণ স্থান
-  </h2>
-
-  <input
-    id="placeSearch"
-    placeholder="প্রতিষ্ঠান / ধরন / স্থান খুঁজুন..."
-    oninput="showPlaces()">
-
-  <div id="placeList">
-    তথ্য লোড হচ্ছে...
+  <div class="section-title">
+    <h2>👥 গ্রামের মানুষ</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('people')">＋ Add</button>
   </div>
 
+  <div id="peopleList"></div>
 </section>
 
 
-<!-- =====================================================
-     PUBLIC NOTICES
-===================================================== -->
+<!-- FAMILY -->
+<section id="page-family" class="hidden">
 
-<section id="notices" class="card hidden">
-
-  <h2>
-    📢 নোটিশ / ঘোষণা
-  </h2>
-
-  <input
-    id="noticeSearch"
-    placeholder="নোটিশ খুঁজুন..."
-    oninput="showNotices()">
-
-  <div id="noticeList">
-    তথ্য লোড হচ্ছে...
+  <div class="section-title">
+    <h2>🌳 পরিবার ও বংশ</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('family')">＋ Add</button>
   </div>
 
+  <div id="familyList"></div>
 </section>
 
 
-<!-- =====================================================
-     CONTACTS
-===================================================== -->
+<!-- INSTITUTION -->
+<section id="page-institution" class="hidden">
 
-<section id="contacts" class="card hidden">
-
-  <h2>
-    📞 প্রয়োজনীয় যোগাযোগ
-  </h2>
-
-  <div id="contactList">
-    তথ্য লোড হচ্ছে...
+  <div class="section-title">
+    <h2>🏫 প্রতিষ্ঠান</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('institution')">＋ Add</button>
   </div>
 
+  <div id="institutionList"></div>
 </section>
 
+
+<!-- EDUCATION -->
+<section id="page-education" class="hidden">
+
+  <div class="section-title">
+    <h2>🎓 শিক্ষা</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('education')">＋ Add</button>
+  </div>
+
+  <div id="educationList"></div>
+</section>
+
+
+<!-- PROFESSION -->
+<section id="page-profession" class="hidden">
+
+  <div class="section-title">
+    <h2>💼 পেশা</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('profession')">＋ Add</button>
+  </div>
+
+  <div id="professionList"></div>
+</section>
+
+
+<!-- GALLERY -->
+<section id="page-gallery" class="hidden">
+
+  <div class="section-title">
+    <h2>🖼️ ছবি গ্যালারি</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('gallery')">＋ Add</button>
+  </div>
+
+  <div id="galleryList"></div>
+</section>
+
+
+<!-- MEMORY -->
+<section id="page-memory" class="hidden">
+
+  <div class="section-title">
+    <h2>🕰️ পুরোনো স্মৃতি ও ইতিহাস</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('memory')">＋ Add</button>
+  </div>
+
+  <div id="memoryList"></div>
+</section>
+
+
+<!-- NOTICE -->
+<section id="page-notice" class="hidden">
+
+  <div class="section-title">
+    <h2>📢 গ্রামের নোটিশ</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('notice')">＋ Add</button>
+  </div>
+
+  <div id="noticeList"></div>
+</section>
+
+
+<!-- PLACE -->
+<section id="page-place" class="hidden">
+
+  <div class="section-title">
+    <h2>🗺️ গুরুত্বপূর্ণ স্থান</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('place')">＋ Add</button>
+  </div>
+
+  <div id="placeList"></div>
+</section>
+
+
+<!-- MOSQUE -->
+<section id="page-mosque" class="hidden">
+
+  <div class="section-title">
+    <h2>🕌 মসজিদ ও ঈদগাহ</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('mosque')">＋ Add</button>
+  </div>
+
+  <div id="mosqueList"></div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="page-contact" class="hidden">
+
+  <div class="section-title">
+    <h2>📞 যোগাযোগ</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('contact')">＋ Add</button>
+  </div>
+
+  <div id="contactList"></div>
+</section>
+
+
+<!-- MORE -->
+<section id="page-more" class="hidden">
+
+  <div class="section-title">
+    <h2>➕ অন্যান্য তথ্য</h2>
+    <button class="add-btn admin-only hidden" onclick="openForm('more')">＋ Add</button>
+  </div>
+
+  <div id="moreList"></div>
+</section>
+
+
+<!-- ADMIN -->
+<section id="page-admin" class="hidden">
+
+  <div id="loginBox" class="form-box">
+
+    <h2>🔐 Admin Login</h2>
+
+    <div class="login-note">
+      শুধু অনুমোদিত Admin অ্যাকাউন্ট থেকে তথ্য Add / Edit / Delete করা যাবে।
+    </div>
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Admin Email">
+
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Password">
+
+    <button class="primary" style="margin-top:13px" onclick="login()">
+      Login
+    </button>
+
+    <p id="loginMsg"></p>
+  </div>
+
+
+  <div id="adminPanel" class="hidden">
+
+    <div class="admin-box">
+      <div class="admin-title">
+        <h2>⚙️ Admin Dashboard</h2>
+        <button class="danger" onclick="logout()">Logout</button>
+      </div>
+
+      <p id="adminEmail" class="meta"></p>
+    </div>
+
+    <div class="admin-grid">
+
+      <div class="admin-stat">
+        👥 মানুষ
+        <b id="adminPeople">0</b>
+      </div>
+
+      <div class="admin-stat">
+        🏫 প্রতিষ্ঠান
+        <b id="adminInstitution">0</b>
+      </div>
+
+      <div class="admin-stat">
+        📢 নোটিশ
+        <b id="adminNotice">0</b>
+      </div>
+
+      <div class="admin-stat">
+        🖼️ ছবি
+        <b id="adminGallery">0</b>
+      </div>
+
+    </div>
+
+    <div class="form-box" style="margin-top:15px">
+      <h3>📋 সব বিভাগ পরিচালনা</h3>
+
+      <div class="menu-grid">
+
+        <button class="menu-card" onclick="openForm('village')">🌳<b>গ্রামের তথ্য Add</b></button>
+
+        <button class="menu-card" onclick="openForm('people')">👥<b>মানুষ Add</b></button>
+
+        <button class="menu-card" onclick="openForm('family')">🌳<b>পরিবার Add</b></button>
+
+        <button class="menu-card" onclick="openForm('institution')">🏫<b>প্রতিষ্ঠান Add</b></button>
+
+        <button class="menu-card" onclick="openForm('education')">🎓<b>শিক্ষা Add</b></button>
+
+        <button class="menu-card" onclick="openForm('profession')">💼<b>পেশা Add</b></button>
+
+        <button class="menu-card" onclick="openForm('gallery')">🖼️<b>ছবি Add</b></button>
+
+        <button class="menu-card" onclick="openForm('memory')">🕰️ স্মৃতি Add</button>
+
+        <button class="menu-card" onclick="openForm('notice')">📢<b>নোটিশ Add</b></button>
+
+        <button class="menu-card" onclick="openForm('place')">🗺️<b>স্থান Add</b></button>
+
+        <button class="menu-card" onclick="openForm('mosque')">🕌<b>মসজিদ Add</b></button>
+
+        <button class="menu-card" onclick="openForm('contact')">📞<b>যোগাযোগ Add</b></button>
+
+        <button class="menu-card" onclick="openForm('more')">➕<b>অন্যান্য Add</b></button>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
 </main>
 
 
-<!-- =====================================================
-     SEARCH MODAL
-===================================================== -->
-
-<div id="searchBox" class="modal">
-
-  <div class="modal-content">
-
-    <button
-      class="close"
-      onclick="closeSearch()">
-
-      ×
-
-    </button>
-
-    <h2>
-      🔍 হিজলী খুঁজুন
-    </h2>
-
-    <input
-      id="searchInput"
-      placeholder="নাম লিখুন...">
-
-    <button
-      class="primary"
-      onclick="searchPerson()">
-
-      খুঁজুন
-
-    </button>
-
-    <div id="searchResult"></div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     PAGE MESSAGE MODAL
-===================================================== -->
-
-<div id="pageBox" class="modal">
-
-  <div class="modal-content">
-
-    <button
-      class="close"
-      onclick="closePage()">
-
-      ×
-
-    </button>
-
-    <div
-      id="pageIcon"
-      class="large-icon">
-
-      🏡
-
-    </div>
-
-    <h2 id="pageTitle">
-      আমার গ্রাম হিজলী
-    </h2>
-
-    <p id="pageText">
-      এই বিভাগটি পরবর্তী ধাপে তৈরি করা হবে।
-    </p>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     ADMIN LOGIN
-===================================================== -->
-
-<section
-  id="adminLogin"
-  class="card hidden"
-  style="width:94%;max-width:1000px;margin:20px auto;">
-
-  <h2>
-    🔐 Admin Login
-  </h2>
-
-  <input
-    type="email"
-    id="email"
-    placeholder="Admin Email">
-
-  <input
-    type="password"
-    id="password"
-    placeholder="Password">
-
-  <button
-    class="primary"
-    onclick="login()">
-
-    Login
-
-  </button>
-
-  <button
-    class="gray"
-    onclick="hideAdminLogin()">
-
-    Cancel
-
-  </button>
-
-  <div
-    id="loginMsg"
-    class="message">
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     ADMIN PANEL
-===================================================== -->
-
-<section
-  id="adminPanel"
-  class="hidden"
-  style="width:94%;max-width:1000px;margin:20px auto;">
-
-
-  <div class="card">
-
-    <div class="section-title">
-
-      <div>
-
-        <h2>
-          🔐 Admin Dashboard
-        </h2>
-
-        <div id="adminEmail"></div>
-
-      </div>
-
-      <button
-        class="danger"
-        onclick="logout()">
-
-        Logout
-
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- STATS -->
-
-  <div class="card">
-
-    <div class="stats">
-
-      <div class="stat">
-
-        <strong id="statPeople">
-          0
-        </strong>
-
-        মানুষ
-
-      </div>
-
-      <div class="stat">
-
-        <strong id="statNotice">
-          0
-        </strong>
-
-        নোটিশ
-
-      </div>
-
-      <div class="stat">
-
-        <strong id="statPlaces">
-          0
-        </strong>
-
-        প্রতিষ্ঠান
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- VILLAGE -->
-
-  <div class="card">
-
-    <h2>
-      🏡 গ্রামের তথ্য যোগ / পরিবর্তন
-    </h2>
-
-    <input
-      type="hidden"
-      id="villageId">
-
-    <input
-      id="vTitle"
-      placeholder="শিরোনাম">
-
-    <textarea
-      id="vDescription"
-      placeholder="গ্রামের পরিচিতি / ইতিহাস / অন্যান্য তথ্য">
-    </textarea>
-
-    <button
-      class="primary"
-      onclick="saveVillage()">
-
-      💾 সংরক্ষণ
-
-    </button>
-
-    <button
-      id="vCancel"
-      class="gray hidden"
-      onclick="clearVillageForm()">
-
-      বাতিল
-
-    </button>
-
-    <div
-      id="vMsg"
-      class="message">
-    </div>
-
-    <div id="adminVillageList"></div>
-
-  </div>
-
-
-  <!-- NOTICE -->
-
-  <div class="card">
-
-    <h2>
-      📢 নোটিশ যোগ / পরিবর্তন
-    </h2>
-
-    <input
-      type="hidden"
-      id="noticeId">
-
-    <input
-      id="nTitle"
-      placeholder="নোটিশের শিরোনাম">
-
-    <textarea
-      id="nDescription"
-      placeholder="নোটিশের বিস্তারিত">
-    </textarea>
-
-    <button
-      class="primary"
-      onclick="saveNotice()">
-
-      💾 নোটিশ সংরক্ষণ
-
-    </button>
-
-    <button
-      id="nCancel"
-      class="gray hidden"
-      onclick="clearNoticeForm()">
-
-      বাতিল
-
-    </button>
-
-    <div
-      id="nMsg"
-      class="message">
-    </div>
-
-    <div id="adminNoticeList"></div>
-
-  </div>
-
-
-  <!-- PEOPLE -->
-
-  <div class="card">
-
-    <h2>
-      👤 মানুষের তথ্য যোগ / পরিবর্তন
-    </h2>
-
-    <input
-      type="hidden"
-      id="personId">
-
-
-    <input
-      id="pName"
-      placeholder="নিজের নাম">
-
-
-    <input
-      id="pFather"
-      placeholder="বাবার নাম">
-
-
-    <input
-      id="pVillage"
-      placeholder="পাড়া">
-
-
-    <input
-      id="pEducation"
-      placeholder="শিক্ষাগত যোগ্যতা (না দিলে খালি রাখুন)">
-
-
-    <input
-      id="pProfession"
-      placeholder="পেশা (না দিলে খালি রাখুন)">
-
-
-    <select id="pPublic">
-
-      <option value="yes">
-        Public — সবাই দেখতে পারবে
-      </option>
-
-      <option value="no">
-        Private — শুধু Admin দেখতে পারবে
-      </option>
-
-    </select>
-
-
-    <button
-      class="primary"
-      onclick="savePerson()">
-
-      💾 ব্যক্তির তথ্য সংরক্ষণ
-
-    </button>
-
-    <button
-      id="pCancel"
-      class="gray hidden"
-      onclick="clearPersonForm()">
-
-      বাতিল
-
-    </button>
-
-    <div
-      id="pMsg"
-      class="message">
-    </div>
-
-    <div id="adminPeopleList"></div>
-
-  </div>
-
-
-  <!-- PLACES -->
-
-  <div class="card">
-
-    <h2>
-      🏫 প্রতিষ্ঠান / গুরুত্বপূর্ণ স্থান যোগ
-    </h2>
-
-    <input
-      type="hidden"
-      id="placeId">
-
-
-    <input
-      id="plName"
-      placeholder="প্রতিষ্ঠানের নাম">
-
-
-    <select id="plType">
-
-      <option value="">
-        ধরন নির্বাচন করুন
-      </option>
-
-      <option value="স্কুল">
-        🏫 স্কুল
-      </option>
-
-      <option value="মাদ্রাসা">
-        🕌 মাদ্রাসা
-      </option>
-
-      <option value="মসজিদ">
-        🕌 মসজিদ
-      </option>
-
-      <option value="ঈদগাহ">
-        🕋 ঈদগাহ
-      </option>
-
-      <option value="হাসপাতাল">
-        🏥 হাসপাতাল / ক্লিনিক
-      </option>
-
-      <option value="বাজার">
-        🛒 বাজার
-      </option>
-
-      <option value="অন্যান্য">
-        🏢 অন্যান্য
-      </option>
-
-    </select>
-
-
-    <input
-      id="plLocation"
-      placeholder="ঠিকানা / অবস্থান">
-
-
-    <input
-      id="plPhone"
-      placeholder="মোবাইল / ফোন">
-
-
-    <textarea
-      id="plDescription"
-      placeholder="বিস্তারিত তথ্য">
-    </textarea>
-
-
-    <button
-      class="primary"
-      onclick="savePlace()">
-
-      💾 সংরক্ষণ
-
-    </button>
-
-
-    <button
-      id="plCancel"
-      class="gray hidden"
-      onclick="clearPlaceForm()">
-
-      বাতিল
-
-    </button>
-
-
-    <div
-      id="plMsg"
-      class="message">
-    </div>
-
-
-    <div id="adminPlaceList"></div>
-
-  </div>
-
-
-  <!-- CONTACT -->
-
-  <div class="card">
-
-    <h2>
-      📞 প্রয়োজনীয় যোগাযোগ যোগ
-    </h2>
-
-    <input
-      type="hidden"
-      id="contactId">
-
-    <input
-      id="cName"
-      placeholder="ব্যক্তি / প্রতিষ্ঠানের নাম">
-
-    <input
-      id="cType"
-      placeholder="ধরন">
-
-    <input
-      id="cPhone"
-      placeholder="মোবাইল নম্বর">
-
-    <textarea
-      id="cDescription"
-      placeholder="বিস্তারিত">
-    </textarea>
-
-    <button
-      class="primary"
-      onclick="saveContact()">
-
-      💾 সংরক্ষণ
-
-    </button>
-
-    <button
-      id="cCancel"
-      class="gray hidden"
-      onclick="clearContactForm()">
-
-      বাতিল
-
-    </button>
-
-    <div
-      id="cMsg"
-      class="message">
-    </div>
-
-    <div id="adminContactList"></div>
-
-  </div>
-
-
-</section>
-
-
-<!-- =====================================================
-     BOTTOM NAV
-===================================================== -->
-
-<nav class="bottom-nav">
-
-  <button onclick="goHome()">
-
-    <span>🏠</span>
-    <small>হোম</small>
-
-  </button>
-
-  <button onclick="scrollToCategories()">
-
-    <span>▦</span>
-    <small>ক্যাটাগরি</small>
-
-  </button>
-
-  <button onclick="openPage('notices')">
-
-    <span>🔔</span>
-    <small>নোটিশ</small>
-
-  </button>
-
-  <button onclick="showAdminLogin()">
-
-    <span>👤</span>
-    <small>Admin</small>
-
-  </button>
-
-</nav>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
 <footer>
-
-  🏡 আমার গ্রাম হিজলী
-
-  <br>
-
-  আমাদের গ্রাম • আমাদের ইতিহাস • আমাদের স্মৃতি
-
+  🏡 আমার গ্রাম হিজলী<br>
+  আমাদের গ্রাম, আমাদের পরিচয়
 </footer>
+
+
+<div class="bottom-nav">
+  <button onclick="showPage('home')"><b>🏠</b>হোম</button>
+  <button onclick="openSearch()"><b>🔍</b>খুঁজুন</button>
+  <button onclick="showPage('notice')"><b>📢</b>নোটিশ</button>
+  <button onclick="showPage('admin')"><b>🔐</b>Admin</button>
+</div>
+
+
+<!-- SEARCH MODAL -->
+<div id="searchModal" class="search-modal hidden">
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>🔍 তথ্য খুঁজুন</h2>
+      <button class="close" onclick="closeSearch()">×</button>
+    </div>
+
+    <input id="searchInput"
+           placeholder="নাম, বাবার নাম, পেশা, প্রতিষ্ঠান..."
+           oninput="doSearch()">
+
+    <div id="searchResults" class="search-results"></div>
+
+  </div>
+</div>
+
+
+<!-- FORM MODAL -->
+<div id="formModal" class="modal hidden">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2 id="formTitle">Add</h2>
+      <button class="close" onclick="closeForm()">×</button>
+    </div>
+
+    <div id="formArea"></div>
+
+  </div>
+</div>
 
 
 <script type="module">
@@ -1529,8 +879,8 @@ from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
@@ -1546,52 +896,44 @@ import {
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
-/* =====================================================
+/* =========================
    FIREBASE
-===================================================== */
+========================= */
 
 const firebaseConfig = {
 
-  apiKey:
-  "AIzaSyAyR6lBD-mCUSxLtbAQoObJsVcHHd44lyk",
+  apiKey: "YOUR_API_KEY",
 
-  authDomain:
-  "amar-gram-hijli.firebaseapp.com",
+  authDomain: "amar-gram-hijli.firebaseapp.com",
 
   databaseURL:
   "https://amar-gram-hijli-default-rtdb.firebaseio.com",
 
-  projectId:
-  "amar-gram-hijli",
+  projectId: "amar-gram-hijli",
 
   storageBucket:
   "amar-gram-hijli.firebasestorage.app",
 
-  messagingSenderId:
-  "426703886497",
+  messagingSenderId: "426703886497",
 
   appId:
   "1:426703886497:web:2fe094342c5200d4f878e0",
 
-  measurementId:
-  "G-S7STZ1RZJ9"
+  measurementId: "G-S7STZ1RZJ9"
 
 };
 
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const auth =
-getAuth(app);
+const auth = getAuth(app);
 
-const db =
-getDatabase(app);
+const db = getDatabase(app);
 
 
-/* =====================================================
+/* =========================
    ADMIN UID
-===================================================== */
+========================= */
 
 const ADMIN_UIDS = [
 
@@ -1602,940 +944,1582 @@ const ADMIN_UIDS = [
 ];
 
 
-/* =====================================================
+/* =========================
    DATA
-===================================================== */
+========================= */
 
-let villageData = {};
-let notices = {};
-let people = {};
-let places = {};
-let contacts = {};
+const data = {
+
+  village:{},
+
+  people:{},
+
+  family:{},
+
+  institution:{},
+
+  education:{},
+
+  profession:{},
+
+  gallery:{},
+
+  memory:{},
+
+  notice:{},
+
+  place:{},
+
+  mosque:{},
+
+  contact:{},
+
+  more:{}
+
+};
 
 
-/* =====================================================
+let currentUser = null;
+
+let editId = null;
+
+let editType = null;
+
+
+/* =========================
+   DATABASE PATH
+========================= */
+
+const paths = {
+
+  village:"village",
+
+  people:"people",
+
+  family:"families",
+
+  institution:"places",
+
+  education:"education",
+
+  profession:"professions",
+
+  gallery:"gallery",
+
+  memory:"memories",
+
+  notice:"notices",
+
+  place:"places",
+
+  mosque:"places",
+
+  contact:"contacts",
+
+  more:"moreInfo"
+
+};
+
+
+/* =========================
+   SAFE TEXT
+========================= */
+
+function esc(value){
+
+  if(value === undefined || value === null)
+    return "";
+
+  return String(value)
+
+    .replaceAll("&","&amp;")
+
+    .replaceAll("<","&lt;")
+
+    .replaceAll(">","&gt;")
+
+    .replaceAll('"',"&quot;")
+
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+function getIcon(type){
+
+  const icons = {
+
+    "স্কুল":"🏫",
+
+    "মাদ্রাসা":"🕌",
+
+    "কলেজ":"🎓",
+
+    "বিশ্ববিদ্যালয়":"🏛️",
+
+    "কিন্ডারগার্টেন":"🏫",
+
+    "হাসপাতাল":"🏥",
+
+    "ক্লিনিক":"⚕️",
+
+    "দোকান":"🏪",
+
+    "মসজিদ":"🕌",
+
+    "ঈদগাহ":"🌙",
+
+    "কবরস্থান":"⚰️",
+
+    "বাজার":"🛒",
+
+    "রাস্তা":"🛣️",
+
+    "ব্রিজ":"🌉",
+
+    "মাঠ":"⚽",
+
+    "পুকুর":"💧",
+
+    "অন্যান্য":"📍"
+
+  };
+
+  return icons[type] || "📍";
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+window.showPage = function(page){
+
+  document
+  .querySelectorAll("main section")
+  .forEach(x=>x.classList.add("hidden"));
+
+  const section =
+  document.getElementById("page-"+page);
+
+  if(section)
+    section.classList.remove("hidden");
+
+  document
+  .querySelectorAll(".nav button")
+  .forEach(x=>x.classList.remove("active"));
+
+  const nav =
+  document.getElementById("nav-"+page);
+
+  if(nav)
+    nav.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+};
+
+
+/* =========================
    AUTH
-===================================================== */
+========================= */
 
-onAuthStateChanged(auth,user=>{
+window.login = async function(){
 
-  if(
-    user &&
-    ADMIN_UIDS.includes(user.uid)
-  ){
+  const email =
+  document.getElementById("email").value.trim();
 
-    document
-    .getElementById("adminLogin")
-    .classList.add("hidden");
+  const password =
+  document.getElementById("password").value;
 
-    document
-    .getElementById("adminPanel")
-    .classList.remove("hidden");
-
-    document
-    .getElementById("adminEmail")
-    .textContent =
-    "Admin: "+user.email;
-
-    renderAdmin();
-
-  }else{
-
-    document
-    .getElementById("adminPanel")
-    .classList.add("hidden");
-
-  }
-
-});
-
-
-window.login=async function(){
-
-  const email=
-  document.getElementById("email")
-  .value.trim();
-
-  const password=
-  document.getElementById("password")
-  .value;
+  const msg =
+  document.getElementById("loginMsg");
 
   if(!email || !password){
 
-    msg(
-      "loginMsg",
-      "Email এবং Password দিন।",
-      "error"
-    );
+    msg.innerText =
+    "Email এবং Password দিন।";
 
     return;
-
   }
 
   try{
 
-    const result=
     await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    if(
-      !ADMIN_UIDS.includes(
-        result.user.uid
-      )
-    ){
-
-      await signOut(auth);
-
-      msg(
-        "loginMsg",
-        "এই Account-এর Admin permission নেই।",
-        "error"
-      );
-
-    }
+    msg.innerText="";
 
   }catch(error){
 
-    msg(
-      "loginMsg",
-      "Login হয়নি: "+error.message,
-      "error"
-    );
+    msg.innerText =
+    "Login হয়নি: "+error.message;
 
   }
 
 };
 
 
-window.logout=async function(){
+window.logout = async function(){
 
   await signOut(auth);
 
-  hideAdminLogin();
-
 };
 
 
-/* =====================================================
-   ADMIN UI
-===================================================== */
+/* =========================
+   AUTH STATE
+========================= */
 
-window.showAdminLogin=function(){
+onAuthStateChanged(auth,user=>{
+
+  currentUser=user;
+
+  const isAdmin =
+  user &&
+  ADMIN_UIDS.includes(user.uid);
 
   document
-  .getElementById("adminLogin")
-  .classList.remove("hidden");
+  .querySelectorAll(".admin-only")
+  .forEach(x=>{
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+    if(isAdmin)
+      x.classList.remove("hidden");
+
+    else
+      x.classList.add("hidden");
+
   });
 
-};
-
-
-window.hideAdminLogin=function(){
 
   document
-  .getElementById("adminLogin")
-  .classList.add("hidden");
+  .querySelectorAll("#loginBox")
+  .forEach(x=>{
 
-};
+    if(isAdmin)
+      x.classList.add("hidden");
+
+    else
+      x.classList.remove("hidden");
+
+  });
 
 
-/* =====================================================
+  const panel =
+  document.getElementById("adminPanel");
+
+  if(isAdmin){
+
+    panel.classList.remove("hidden");
+
+    document.getElementById("adminEmail")
+      .innerText =
+      "Logged in: "+user.email;
+
+  }else{
+
+    panel.classList.add("hidden");
+
+  }
+
+});
+
+
+/* =========================
    LOAD DATA
-===================================================== */
+========================= */
 
-onValue(
-  ref(db,"village"),
-  snap=>{
+function loadData(type){
 
-    villageData=
-    snap.val()||{};
+  const path = paths[type];
 
-    showVillage();
+  if(!path) return;
 
-    renderAdminVillage();
+  onValue(ref(db,path),snapshot=>{
 
-  }
-);
+    data[type] =
+    snapshot.val() || {};
 
+    render(type);
 
-onValue(
-  ref(db,"notices"),
-  snap=>{
+    updateStats();
 
-    notices=
-    snap.val()||{};
+  });
 
-    showNotices();
-
-    document
-    .getElementById("statNotice")
-    .textContent=
-    Object.keys(notices).length;
-
-    renderAdminNotices();
-
-  }
-);
+}
 
 
-onValue(
-  ref(db,"people"),
-  snap=>{
+/* =========================
+   LOAD ALL
+========================= */
 
-    people=
-    snap.val()||{};
+Object.keys(paths).forEach(type=>{
 
-    showPeople();
+  loadData(type);
 
-    const publicPeople=
-    Object.values(people)
-    .filter(p=>p.public!=="no");
-
-    document
-    .getElementById("statPeople")
-    .textContent=
-    publicPeople.length;
-
-    document
-    .getElementById("peopleCount")
-    .textContent=
-    toBanglaNumber(publicPeople.length);
-
-    renderAdminPeople();
-
-  }
-);
+});
 
 
-onValue(
-  ref(db,"places"),
-  snap=>{
+/* =========================
+   RENDER
+========================= */
 
-    places=
-    snap.val()||{};
+function render(type){
 
-    showPlaces();
+  const targetMap = {
 
-    document
-    .getElementById("statPlaces")
-    .textContent=
-    Object.keys(places).length;
+    village:"villageList",
 
-    document
-    .getElementById("institutionCount")
-    .textContent=
-    toBanglaNumber(Object.keys(places).length);
+    people:"peopleList",
 
-    renderAdminPlaces();
+    family:"familyList",
 
-  }
-);
+    institution:"institutionList",
 
+    education:"educationList",
 
-onValue(
-  ref(db,"contacts"),
-  snap=>{
+    profession:"professionList",
 
-    contacts=
-    snap.val()||{};
+    gallery:"galleryList",
 
-    showContacts();
+    memory:"memoryList",
 
-    renderAdminContacts();
+    notice:"noticeList",
 
-  }
-);
+    place:"placeList",
 
+    mosque:"mosqueList",
 
-/* =====================================================
-   VILLAGE
-===================================================== */
+    contact:"contactList",
 
-window.saveVillage=async function(){
-
-  const id=
-  document.getElementById("villageId")
-  .value;
-
-  const title=
-  document.getElementById("vTitle")
-  .value.trim();
-
-  const description=
-  document.getElementById("vDescription")
-  .value.trim();
-
-  if(!title){
-
-    msg(
-      "vMsg",
-      "শিরোনাম দিন।",
-      "error"
-    );
-
-    return;
-
-  }
-
-  const data={
-
-    title,
-    description,
-    updatedAt:Date.now()
+    more:"moreList"
 
   };
 
-  try{
+  const el =
+  document.getElementById(targetMap[type]);
 
-    if(id){
+  if(!el) return;
 
-      await update(
-        ref(db,"village/"+id),
-        data
-      );
 
-    }else{
+  let items =
+  Object.entries(data[type] || {});
 
-      const newRef=
-      push(ref(db,"village"));
 
-      await set(
-        newRef,
-        {
-          ...data,
-          createdAt:Date.now()
-        }
-      );
+  /* institution */
 
-    }
+  if(type==="institution"){
 
-    clearVillageForm();
+    items =
+    items.filter(([id,x])=>{
 
-    msg(
-      "vMsg",
-      "গ্রামের তথ্য সংরক্ষণ হয়েছে।",
-      "success"
-    );
+      return !x.category ||
+             x.category==="institution";
 
-  }catch(error){
-
-    msg(
-      "vMsg",
-      error.message,
-      "error"
-    );
+    });
 
   }
 
-};
+
+  /* place */
+
+  if(type==="place"){
+
+    items =
+    items.filter(([id,x])=>{
+
+      return x.category==="place";
+
+    });
+
+  }
 
 
-function showVillage(){
+  /* mosque */
 
-  const list=
-  document.getElementById("villageList");
+  if(type==="mosque"){
 
-  const entries=
-  Object.entries(villageData);
+    items =
+    items.filter(([id,x])=>{
 
-  if(!entries.length){
+      return x.category==="mosque";
 
-    list.innerHTML=
-    "<p>এখনো গ্রামের কোনো তথ্য যোগ করা হয়নি।</p>";
+    });
+
+  }
+
+
+  if(!items.length){
+
+    el.innerHTML =
+    `<div class="empty">
+      এই বিভাগে এখনো কোনো তথ্য যোগ করা হয়নি।
+    </div>`;
 
     return;
 
   }
 
-  list.innerHTML="";
 
-  entries.forEach(([id,item])=>{
+  el.innerHTML =
+  items.map(([id,item])=>{
 
-    const div=
-    document.createElement("div");
+    return makeCard(type,id,item);
 
-    div.className="item";
+  }).join("");
 
-    div.innerHTML=`
+}
 
-      <h3>
-        📜 ${esc(item.title||"")}
-      </h3>
 
-      <div class="public-info">
-        ${esc(item.description||"")}
+/* =========================
+   CARD
+========================= */
+
+function makeCard(type,id,x){
+
+  const admin =
+  currentUser &&
+  ADMIN_UIDS.includes(currentUser.uid);
+
+
+  let icon="📌";
+
+
+  if(type==="people")
+    icon="👤";
+
+
+  if(type==="family")
+    icon="🌳";
+
+
+  if(type==="institution" ||
+     type==="place" ||
+     type==="mosque"){
+
+    icon=getIcon(x.type);
+
+  }
+
+
+  if(type==="education")
+    icon="🎓";
+
+
+  if(type==="profession")
+    icon="💼";
+
+
+  if(type==="gallery")
+    icon="🖼️";
+
+
+  if(type==="memory")
+    icon="🕰️";
+
+
+  if(type==="notice")
+    icon="📢";
+
+
+  if(type==="contact")
+    icon="📞";
+
+
+  if(type==="more")
+    icon="➕";
+
+
+  let title =
+  x.title ||
+  x.name ||
+  x.familyName ||
+  x.profession ||
+  "তথ্য";
+
+
+  let html = `
+
+  <div class="card">
+
+    <div class="card-head">
+
+      <div class="card-icon">
+        ${icon}
+      </div>
+
+      <div style="flex:1">
+
+        <h3>${esc(title)}</h3>
+
+  `;
+
+
+  /* PEOPLE */
+
+  if(type==="people"){
+
+    html += field(x.father,"👨 বাবা");
+
+    html += field(x.address,"📍 ঠিকানা");
+
+    html += field(x.education,"🎓 শিক্ষাগত যোগ্যতা");
+
+    html += field(x.profession,"💼 পেশা");
+
+  }
+
+
+  /* FAMILY */
+
+  if(type==="family"){
+
+    html += field(x.headName,"👤 পরিবারের প্রধান");
+
+    html += field(x.address,"📍 ঠিকানা");
+
+  }
+
+
+  /* INSTITUTION */
+
+  if(type==="institution"){
+
+    html += field(x.type,"🏷️ ধরন");
+
+    html += field(x.location,"📍 ঠিকানা");
+
+    html += field(x.phone,"📞 ফোন");
+
+  }
+
+
+  /* EDUCATION */
+
+  if(type==="education"){
+
+    html += field(x.type,"🎓 শিক্ষার ধরন");
+
+    html += field(x.person,"👤 ব্যক্তি");
+
+    html += field(x.institution,"🏫 প্রতিষ্ঠান");
+
+  }
+
+
+  /* PROFESSION */
+
+  if(type==="profession"){
+
+    html += field(x.person,"👤 ব্যক্তি");
+
+    html += field(x.profession,"💼 পেশা");
+
+  }
+
+
+  /* PLACE */
+
+  if(type==="place"){
+
+    html += field(x.type,"🏷️ ধরন");
+
+    html += field(x.location,"📍 অবস্থান");
+
+  }
+
+
+  /* MOSQUE */
+
+  if(type==="mosque"){
+
+    html += field(x.type,"🕌 ধরন");
+
+    html += field(x.location,"📍 অবস্থান");
+
+    html += field(x.imam,"👤 ইমাম");
+
+  }
+
+
+  /* CONTACT */
+
+  if(type==="contact"){
+
+    html += field(x.person,"👤 ব্যক্তি/দায়িত্ব");
+
+    html += field(x.phone,"📞 ফোন");
+
+    html += field(x.address,"📍 ঠিকানা");
+
+  }
+
+
+  /* NOTICE */
+
+  if(type==="notice"){
+
+    html += field(x.date,"📅 তারিখ");
+
+  }
+
+
+  /* MEMORY */
+
+  if(type==="memory"){
+
+    html += field(x.year,"📅 সময়/সাল");
+
+  }
+
+
+  html += `
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  /* IMAGE */
+
+  if(x.image){
+
+    html += `
+
+      <img src="${esc(x.image)}"
+           style="
+           width:100%;
+           max-height:300px;
+           object-fit:cover;
+           border-radius:12px;
+           margin-top:12px"
+           onerror="this.style.display='none'">
+
+    `;
+
+  }
+
+
+  /* DESCRIPTION */
+
+  if(x.description){
+
+    html += `
+
+      <div class="description">
+        ${esc(x.description)}
       </div>
 
     `;
 
-    list.appendChild(div);
-
-  });
-
-}
-
-
-function clearVillageForm(){
-
-  document
-  .getElementById("villageId")
-  .value="";
-
-  document
-  .getElementById("vTitle")
-  .value="";
-
-  document
-  .getElementById("vDescription")
-  .value="";
-
-  document
-  .getElementById("vCancel")
-  .classList.add("hidden");
-
-}
-
-
-window.clearVillageForm=
-clearVillageForm;
-
-
-/* =====================================================
-   NOTICE
-===================================================== */
-
-window.saveNotice=async function(){
-
-  const id=
-  document.getElementById("noticeId")
-  .value;
-
-  const title=
-  document.getElementById("nTitle")
-  .value.trim();
-
-  const description=
-  document.getElementById("nDescription")
-  .value.trim();
-
-  if(!title){
-
-    msg(
-      "nMsg",
-      "নোটিশের শিরোনাম দিন।",
-      "error"
-    );
-
-    return;
-
   }
 
-  const data={
-    title,
-    description,
-    updatedAt:Date.now()
-  };
 
-  try{
+  /* FAMILY MEMBERS */
 
-    if(id){
+  if(x.members){
 
-      await update(
-        ref(db,"notices/"+id),
-        data
-      );
+    html += `
 
-    }else{
-
-      const newRef=
-      push(ref(db,"notices"));
-
-      await set(
-        newRef,
-        {
-          ...data,
-          createdAt:Date.now()
-        }
-      );
-
-    }
-
-    clearNoticeForm();
-
-    msg(
-      "nMsg",
-      "নোটিশ সংরক্ষণ হয়েছে।",
-      "success"
-    );
-
-  }catch(error){
-
-    msg(
-      "nMsg",
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-window.showNotices=function(){
-
-  const list=
-  document.getElementById("noticeList");
-
-  const input=
-  document.getElementById("noticeSearch");
-
-  const search=
-  input ? input.value.toLowerCase() : "";
-
-  const entries=
-  Object.entries(notices)
-  .filter(([id,item])=>
-
-    (
-      (item.title||"")+" "+
-      (item.description||"")
-    )
-    .toLowerCase()
-    .includes(search)
-
-  );
-
-  if(!entries.length){
-
-    list.innerHTML=
-    "<p>কোনো নোটিশ পাওয়া যায়নি।</p>";
-
-    return;
-
-  }
-
-  list.innerHTML="";
-
-  entries.forEach(([id,item])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-    div.innerHTML=`
-
-      <h3>
-        📢 ${esc(item.title||"")}
-      </h3>
-
-      <p>
-        ${esc(item.description||"")}
-      </p>
+      <div class="description">
+        <b>👨‍👩‍👧‍👦 সদস্য:</b><br>
+        ${esc(x.members)}
+      </div>
 
     `;
 
-    list.appendChild(div);
-
-  });
-
-};
-
-
-function clearNoticeForm(){
-
-  document
-  .getElementById("noticeId")
-  .value="";
-
-  document
-  .getElementById("nTitle")
-  .value="";
-
-  document
-  .getElementById("nDescription")
-  .value="";
-
-  document
-  .getElementById("nCancel")
-  .classList.add("hidden");
-
-}
-
-
-window.clearNoticeForm=
-clearNoticeForm;
-
-
-/* =====================================================
-   PEOPLE
-===================================================== */
-
-window.savePerson=async function(){
-
-  const id=
-  document.getElementById("personId")
-  .value;
-
-  const name=
-  document.getElementById("pName")
-  .value.trim();
-
-  if(!name){
-
-    msg(
-      "pMsg",
-      "নিজের নাম দিন।",
-      "error"
-    );
-
-    return;
-
-  }
-
-  const data={
-
-    name,
-
-    father:
-    document.getElementById("pFather")
-    .value.trim(),
-
-    village:
-    document.getElementById("pVillage")
-    .value.trim(),
-
-    education:
-    document.getElementById("pEducation")
-    .value.trim(),
-
-    profession:
-    document.getElementById("pProfession")
-    .value.trim(),
-
-    public:
-    document.getElementById("pPublic")
-    .value,
-
-    updatedAt:
-    Date.now()
-
-  };
-
-  try{
-
-    if(id){
-
-      await update(
-        ref(db,"people/"+id),
-        data
-      );
-
-    }else{
-
-      const newRef=
-      push(ref(db,"people"));
-
-      await set(
-        newRef,
-        {
-          ...data,
-          createdAt:Date.now()
-        }
-      );
-
-    }
-
-    clearPersonForm();
-
-    msg(
-      "pMsg",
-      "ব্যক্তির তথ্য সংরক্ষণ হয়েছে।",
-      "success"
-    );
-
-  }catch(error){
-
-    msg(
-      "pMsg",
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-window.showPeople=function(){
-
-  const list=
-  document.getElementById("peopleList");
-
-  const input=
-  document.getElementById("peopleSearch");
-
-  const search=
-  input ? input.value.toLowerCase() : "";
-
-  const entries=
-  Object.entries(people)
-  .filter(([id,p])=>{
-
-    if(p.public==="no")
-      return false;
-
-    const text=
-
-      (p.name||"")+" "+
-      (p.father||"")+" "+
-      (p.village||"")+" "+
-      (p.education||"")+" "+
-      (p.profession||"");
-
-    return text
-    .toLowerCase()
-    .includes(search);
-
-  });
-
-
-  if(!entries.length){
-
-    list.innerHTML=
-    "<p>কোনো তথ্য পাওয়া যায়নি।</p>";
-
-    return;
-
   }
 
 
-  list.innerHTML="";
+  /* ADMIN BUTTON */
 
+  if(admin){
 
-  entries.forEach(([id,p])=>{
+    html += `
 
-    const div=
-    document.createElement("div");
+      <div class="form-buttons">
 
-    div.className="item";
+        <button class="edit"
+          onclick="editItem('${type}','${id}')">
+          ✏️ Edit
+        </button>
 
-
-    let html=`
-
-      <div class="person-card">
-
-        <div class="person-icon">
-          👤
-        </div>
-
-        <div class="person-info">
-
-          <h3>
-            ${esc(p.name||"")}
-          </h3>
-
-    `;
-
-
-    if(p.father){
-
-      html+=`
-        <p>
-          <b>পিতা:</b>
-          ${esc(p.father)}
-        </p>
-      `;
-
-    }
-
-
-    if(p.village){
-
-      html+=`
-        <p>
-          <b>পাড়া:</b>
-          ${esc(p.village)}
-        </p>
-      `;
-
-    }
-
-
-    if(p.education){
-
-      html+=`
-        <p>
-          <b>🎓 শিক্ষাগত যোগ্যতা:</b>
-          ${esc(p.education)}
-        </p>
-      `;
-
-    }
-
-
-    if(p.profession){
-
-      html+=`
-        <p>
-          <b>💼 পেশা:</b>
-          ${esc(p.profession)}
-        </p>
-      `;
-
-    }
-
-
-    html+=`
-
-        </div>
+        <button class="danger"
+          onclick="deleteItem('${type}','${id}')">
+          🗑️ Delete
+        </button>
 
       </div>
 
     `;
 
-
-    div.innerHTML=html;
-
-    list.appendChild(div);
-
-  });
-
-};
+  }
 
 
-/* =====================================================
-   PLACE ICON
-===================================================== */
+  html += `</div>`;
 
-function getPlaceIcon(type){
 
-  const t=
-  String(type||"")
-  .toLowerCase();
-
-  if(t.includes("স্কুল"))
-    return "🏫";
-
-  if(t.includes("মাদ্রাসা") ||
-     t.includes("মাদরাসা"))
-    return "🕌";
-
-  if(t.includes("মসজিদ"))
-    return "🕌";
-
-  if(t.includes("ঈদগাহ"))
-    return "🕋";
-
-  if(t.includes("হাসপাতাল") ||
-     t.includes("ক্লিনিক"))
-    return "🏥";
-
-  if(t.includes("বাজার"))
-    return "🛒";
-
-  return "🏢";
+  return html;
 
 }
 
 
-/* =====================================================
-   PLACE
-===================================================== */
+function field(value,label){
 
-window.savePlace=async function(){
+  if(!value) return "";
 
-  const id=
-  document.getElementById("placeId")
-  .value;
+  return `
 
-  const name=
-  document.getElementById("plName")
-  .value.trim();
+    <div class="field-line">
+      ${label}: ${esc(value)}
+    </div>
 
-  if(!name){
+  `;
 
-    msg(
-      "plMsg",
-      "প্রতিষ্ঠানের নাম দিন।",
-      "error"
-    );
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+window.openForm = function(type,id=null){
+
+  if(!currentUser ||
+     !ADMIN_UIDS.includes(currentUser.uid)){
+
+    alert("শুধু Admin এই তথ্য যোগ করতে পারবেন।");
 
     return;
 
   }
 
-  const data={
+  editId=id;
 
-    name,
+  editType=type;
 
-    type:
-    document.getElementById("plType")
-    .value.trim(),
+  const old =
+  id ? data[type][id] : {};
 
-    location:
-    document.getElementById("plLocation")
-    .value.trim(),
 
-    phone:
-    document.getElementById("plPhone")
-    .value.trim(),
+  document
+  .getElementById("formModal")
+  .classList.remove("hidden");
 
-    description:
-    document.getElementById("plDescription")
-    .value.trim(),
 
-    updatedAt:
-    Date.now()
+  const names = {
+
+    village:"🌳 গ্রামের তথ্য",
+
+    people:"👥 গ্রামের মানুষ",
+
+    family:"🌳 পরিবার ও বংশ",
+
+    institution:"🏫 প্রতিষ্ঠান",
+
+    education:"🎓 শিক্ষা",
+
+    profession:"💼 পেশা",
+
+    gallery:"🖼️ ছবি",
+
+    memory:"🕰️ পুরোনো স্মৃতি",
+
+    notice:"📢 নোটিশ",
+
+    place:"🗺️ গুরুত্বপূর্ণ স্থান",
+
+    mosque:"🕌 মসজিদ / ঈদগাহ",
+
+    contact:"📞 যোগাযোগ",
+
+    more:"➕ অন্যান্য তথ্য"
 
   };
 
 
+  document
+  .getElementById("formTitle")
+  .innerText =
+  (id ? "✏️ Edit " : "➕ Add ")
+  +names[type];
+
+
+  document
+  .getElementById("formArea")
+  .innerHTML =
+  buildForm(type,old);
+
+};
+
+
+window.closeForm=function(){
+
+  document
+  .getElementById("formModal")
+  .classList.add("hidden");
+
+  editId=null;
+  editType=null;
+
+};
+
+
+/* =========================
+   BUILD FORM
+========================= */
+
+function buildForm(type,x){
+
+  let html="";
+
+
+  if(type==="village"){
+
+    html += input("title","শিরোনাম",x.title);
+
+    html += textarea("description","বিস্তারিত তথ্য",x.description);
+
+    html += input("image","ছবির URL (ঐচ্ছিক)",x.image);
+
+  }
+
+
+  if(type==="people"){
+
+    html += input("name","নিজের নাম *",x.name);
+
+    html += input("father","বাবার নাম",x.father);
+
+    html += input(
+      "address",
+      "ঠিকানা — কোন পাড়া / বাড়ি",
+      x.address
+    );
+
+    html += input(
+      "education",
+      "শিক্ষাগত যোগ্যতা",
+      x.education
+    );
+
+    html += input(
+      "profession",
+      "পেশা",
+      x.profession
+    );
+
+    html += select(
+      "public",
+      "সবার জন্য দেখাবেন?",
+      x.public || "yes",
+      [
+        ["yes","হ্যাঁ"],
+        ["no","না — Private"]
+      ]
+    );
+
+  }
+
+
+  if(type==="family"){
+
+    html += input(
+      "familyName",
+      "পরিবার / বংশের নাম *",
+      x.familyName
+    );
+
+    html += input(
+      "headName",
+      "পরিবারের প্রধান",
+      x.headName
+    );
+
+    html += input(
+      "address",
+      "ঠিকানা — পাড়া / বাড়ি",
+      x.address
+    );
+
+    html += textarea(
+      "members",
+      "পরিবারের সদস্যদের তথ্য",
+      x.members
+    );
+
+    html += textarea(
+      "description",
+      "পরিবার / বংশের বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="institution"){
+
+    html += input(
+      "name",
+      "প্রতিষ্ঠানের নাম *",
+      x.name
+    );
+
+    html += select(
+      "type",
+      "প্রতিষ্ঠানের ধরন",
+      x.type || "স্কুল",
+      [
+        ["স্কুল","🏫 স্কুল"],
+        ["মাদ্রাসা","🕌 মাদ্রাসা"],
+        ["কলেজ","🎓 কলেজ"],
+        ["বিশ্ববিদ্যালয়","🏛️ বিশ্ববিদ্যালয়"],
+        ["কিন্ডারগার্টেন","🏫 কিন্ডারগার্টেন"],
+        ["হাসপাতাল","🏥 হাসপাতাল"],
+        ["ক্লিনিক","⚕️ ক্লিনিক"],
+        ["দোকান","🏪 দোকান"],
+        ["অন্যান্য","📍 অন্যান্য"]
+      ]
+    );
+
+    html += input(
+      "location",
+      "ঠিকানা / অবস্থান",
+      x.location
+    );
+
+    html += input(
+      "phone",
+      "ফোন",
+      x.phone
+    );
+
+    html += textarea(
+      "description",
+      "প্রতিষ্ঠান সম্পর্কে বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="education"){
+
+    html += input(
+      "title",
+      "শিরোনাম *",
+      x.title
+    );
+
+    html += input(
+      "type",
+      "শিক্ষার ধরন",
+      x.type
+    );
+
+    html += input(
+      "person",
+      "ব্যক্তির নাম (ঐচ্ছিক)",
+      x.person
+    );
+
+    html += input(
+      "institution",
+      "শিক্ষাপ্রতিষ্ঠানের নাম",
+      x.institution
+    );
+
+    html += textarea(
+      "description",
+      "শিক্ষা সম্পর্কিত বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="profession"){
+
+    html += input(
+      "title",
+      "শিরোনাম",
+      x.title
+    );
+
+    html += input(
+      "person",
+      "ব্যক্তির নাম",
+      x.person
+    );
+
+    html += input(
+      "profession",
+      "পেশা",
+      x.profession
+    );
+
+    html += textarea(
+      "description",
+      "বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="gallery"){
+
+    html += input(
+      "title",
+      "ছবির নাম / শিরোনাম *",
+      x.title
+    );
+
+    html += input(
+      "image",
+      "ছবির URL *",
+      x.image
+    );
+
+    html += textarea(
+      "description",
+      "ছবির বিবরণ",
+      x.description
+    );
+
+  }
+
+
+  if(type==="memory"){
+
+    html += input(
+      "title",
+      "স্মৃতির শিরোনাম *",
+      x.title
+    );
+
+    html += input(
+      "year",
+      "সাল / সময়",
+      x.year
+    );
+
+    html += input(
+      "image",
+      "পুরোনো ছবির URL",
+      x.image
+    );
+
+    html += textarea(
+      "description",
+      "পুরোনো স্মৃতি / ইতিহাস",
+      x.description
+    );
+
+  }
+
+
+  if(type==="notice"){
+
+    html += input(
+      "title",
+      "নোটিশের শিরোনাম *",
+      x.title
+    );
+
+    html += input(
+      "date",
+      "তারিখ",
+      x.date
+    );
+
+    html += textarea(
+      "description",
+      "নোটিশের বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="place"){
+
+    html += input(
+      "name",
+      "স্থানের নাম *",
+      x.name
+    );
+
+    html += select(
+      "type",
+      "স্থানের ধরন",
+      x.type || "অন্যান্য",
+      [
+        ["বাজার","🛒 বাজার"],
+        ["মাঠ","⚽ মাঠ"],
+        ["পুকুর","💧 পুকুর"],
+        ["ব্রিজ","🌉 ব্রিজ"],
+        ["রাস্তা","🛣️ রাস্তা"],
+        ["কবরস্থান","⚰️ কবরস্থান"],
+        ["অন্যান্য","📍 অন্যান্য"]
+      ]
+    );
+
+    html += input(
+      "location",
+      "অবস্থান",
+      x.location
+    );
+
+    html += textarea(
+      "description",
+      "স্থান সম্পর্কে বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="mosque"){
+
+    html += input(
+      "name",
+      "মসজিদ / ঈদগাহের নাম *",
+      x.name
+    );
+
+    html += select(
+      "type",
+      "ধরন",
+      x.type || "মসজিদ",
+      [
+        ["মসজিদ","🕌 মসজিদ"],
+        ["ঈদগাহ","🌙 ঈদগাহ"]
+      ]
+    );
+
+    html += input(
+      "location",
+      "অবস্থান",
+      x.location
+    );
+
+    html += input(
+      "imam",
+      "ইমাম / দায়িত্বশীল",
+      x.imam
+    );
+
+    html += input(
+      "phone",
+      "ফোন",
+      x.phone
+    );
+
+    html += textarea(
+      "description",
+      "বিস্তারিত",
+      x.description
+    );
+
+  }
+
+
+  if(type==="contact"){
+
+    html += input(
+      "title",
+      "শিরোনাম / প্রতিষ্ঠানের নাম *",
+      x.title
+    );
+
+    html += input(
+      "person",
+      "ব্যক্তি / দায়িত্ব",
+      x.person
+    );
+
+    html += input(
+      "phone",
+      "ফোন নম্বর",
+      x.phone
+    );
+
+    html += input(
+      "address",
+      "ঠিকানা",
+      x.address
+    );
+
+    html += textarea(
+      "description",
+      "অতিরিক্ত তথ্য",
+      x.description
+    );
+
+  }
+
+
+  if(type==="more"){
+
+    html += input(
+      "title",
+      "শিরোনাম *",
+      x.title
+    );
+
+    html += input(
+      "image",
+      "ছবির URL (ঐচ্ছিক)",
+      x.image
+    );
+
+    html += textarea(
+      "description",
+      "বিস্তারিত তথ্য",
+      x.description
+    );
+
+  }
+
+
+  html += `
+
+    <div class="form-buttons">
+
+      <button class="primary"
+        onclick="saveForm()">
+        💾 Save
+      </button>
+
+      <button class="secondary"
+        onclick="closeForm()">
+        Cancel
+      </button>
+
+    </div>
+
+  `;
+
+
+  return html;
+
+}
+
+
+/* =========================
+   FORM HELPERS
+========================= */
+
+function input(name,label,value=""){
+
+  return `
+
+    <label>${label}</label>
+
+    <input
+      id="f_${name}"
+      value="${esc(value)}">
+
+  `;
+
+}
+
+
+function textarea(name,label,value=""){
+
+  return `
+
+    <label>${label}</label>
+
+    <textarea
+      id="f_${name}">${esc(value)}</textarea>
+
+  `;
+
+}
+
+
+function select(name,label,value,options){
+
+  return `
+
+    <label>${label}</label>
+
+    <select id="f_${name}">
+
+      ${options.map(o=>`
+
+        <option
+          value="${esc(o[0])}"
+          ${o[0]===value?"selected":""}>
+
+          ${o[1]}
+
+        </option>
+
+      `).join("")}
+
+    </select>
+
+  `;
+
+}
+
+
+/* =========================
+   GET FORM VALUE
+========================= */
+
+function fv(name){
+
+  const el =
+  document.getElementById("f_"+name);
+
+  return el ? el.value.trim() : "";
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+window.saveForm = async function(){
+
+  if(!currentUser ||
+     !ADMIN_UIDS.includes(currentUser.uid)){
+
+    alert("Admin Login করুন।");
+
+    return;
+
+  }
+
+
+  const type=editType;
+
+  const path=paths[type];
+
+  if(!path) return;
+
+
+  let x={};
+
+
+  if(type==="village"){
+
+    x={
+      title:fv("title"),
+      description:fv("description"),
+      image:fv("image")
+    };
+
+  }
+
+
+  if(type==="people"){
+
+    x={
+      name:fv("name"),
+      father:fv("father"),
+      address:fv("address"),
+      education:fv("education"),
+      profession:fv("profession"),
+      public:fv("public")
+    };
+
+    if(!x.name){
+
+      alert("নিজের নাম দিন।");
+      return;
+
+    }
+
+  }
+
+
+  if(type==="family"){
+
+    x={
+      familyName:fv("familyName"),
+      headName:fv("headName"),
+      address:fv("address"),
+      members:fv("members"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="institution"){
+
+    x={
+      name:fv("name"),
+      type:fv("type"),
+      category:"institution",
+      location:fv("location"),
+      phone:fv("phone"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="education"){
+
+    x={
+      title:fv("title"),
+      type:fv("type"),
+      person:fv("person"),
+      institution:fv("institution"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="profession"){
+
+    x={
+      title:fv("title"),
+      person:fv("person"),
+      profession:fv("profession"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="gallery"){
+
+    x={
+      title:fv("title"),
+      image:fv("image"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="memory"){
+
+    x={
+      title:fv("title"),
+      year:fv("year"),
+      image:fv("image"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="notice"){
+
+    x={
+      title:fv("title"),
+      date:fv("date"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="place"){
+
+    x={
+      name:fv("name"),
+      type:fv("type"),
+      category:"place",
+      location:fv("location"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="mosque"){
+
+    x={
+      name:fv("name"),
+      type:fv("type"),
+      category:"mosque",
+      location:fv("location"),
+      imam:fv("imam"),
+      phone:fv("phone"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="contact"){
+
+    x={
+      title:fv("title"),
+      person:fv("person"),
+      phone:fv("phone"),
+      address:fv("address"),
+      description:fv("description")
+    };
+
+  }
+
+
+  if(type==="more"){
+
+    x={
+      title:fv("title"),
+      image:fv("image"),
+      description:fv("description")
+    };
+
+  }
+
+
   try{
 
-    if(id){
+    if(editId){
 
       await update(
-        ref(db,"places/"+id),
-        data
+        ref(db,path+"/"+editId),
+        x
       );
 
     }else{
 
-      const newRef=
-      push(ref(db,"places"));
+      const newRef =
+      push(ref(db,path));
 
       await set(
         newRef,
-        {
-          ...data,
-          createdAt:Date.now()
-        }
+        x
       );
 
     }
 
-    clearPlaceForm();
 
-    msg(
-      "plMsg",
-      "তথ্য সংরক্ষণ হয়েছে।",
-      "success"
-    );
+    closeForm();
+
+    alert("✅ তথ্য সফলভাবে সংরক্ষণ হয়েছে।");
+
 
   }catch(error){
 
-    msg(
-      "plMsg",
-      error.message,
-      "error"
+    alert(
+      "❌ Save করা যায়নি:\n"+
+      error.message
     );
 
   }
@@ -2543,909 +2527,52 @@ window.savePlace=async function(){
 };
 
 
-window.showPlaces=function(){
+/* =========================
+   EDIT
+========================= */
 
-  const list=
-  document.getElementById("placeList");
+window.editItem=function(type,id){
 
-  const input=
-  document.getElementById("placeSearch");
-
-  const search=
-  input ? input.value.toLowerCase() : "";
-
-  const entries=
-  Object.entries(places)
-  .filter(([id,p])=>{
-
-    const text=
-
-      (p.name||"")+" "+
-      (p.type||"")+" "+
-      (p.location||"");
-
-    return text
-    .toLowerCase()
-    .includes(search);
-
-  });
-
-
-  if(!entries.length){
-
-    list.innerHTML=
-    "<p>কোনো তথ্য পাওয়া যায়নি।</p>";
-
-    return;
-
-  }
-
-
-  list.innerHTML="";
-
-
-  entries.forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-
-    div.innerHTML=`
-
-      <div class="place-icon">
-        ${getPlaceIcon(p.type)}
-      </div>
-
-      <h3>
-        ${esc(p.name||"")}
-      </h3>
-
-      ${
-        p.type
-        ?
-        `<span class="badge">
-          ${esc(p.type)}
-        </span>`
-        :
-        ""
-      }
-
-      ${
-        p.location
-        ?
-        `<p>
-          <b>📍 অবস্থান:</b>
-          ${esc(p.location)}
-        </p>`
-        :
-        ""
-      }
-
-      ${
-        p.phone
-        ?
-        `<p>
-          <b>📞 ফোন:</b>
-          ${esc(p.phone)}
-        </p>`
-        :
-        ""
-      }
-
-      ${
-        p.description
-        ?
-        `<p>
-          ${esc(p.description)}
-        </p>`
-        :
-        ""
-      }
-
-    `;
-
-
-    list.appendChild(div);
-
-  });
+  openForm(type,id);
 
 };
 
 
-function clearPlaceForm(){
-
-  document
-  .getElementById("placeId")
-  .value="";
-
-  document
-  .getElementById("plName")
-  .value="";
-
-  document
-  .getElementById("plType")
-  .value="";
-
-  document
-  .getElementById("plLocation")
-  .value="";
-
-  document
-  .getElementById("plPhone")
-  .value="";
-
-  document
-  .getElementById("plDescription")
-  .value="";
-
-  document
-  .getElementById("plCancel")
-  .classList.add("hidden");
-
-}
-
-
-window.clearPlaceForm=
-clearPlaceForm;
-
-
-/* =====================================================
-   CONTACTS
-===================================================== */
-
-window.saveContact=async function(){
-
-  const id=
-  document.getElementById("contactId")
-  .value;
-
-  const name=
-  document.getElementById("cName")
-  .value.trim();
-
-  if(!name){
-
-    msg(
-      "cMsg",
-      "নাম দিন।",
-      "error"
-    );
-
-    return;
-
-  }
-
-  const data={
-
-    name,
-
-    type:
-    document.getElementById("cType")
-    .value.trim(),
-
-    phone:
-    document.getElementById("cPhone")
-    .value.trim(),
-
-    description:
-    document.getElementById("cDescription")
-    .value.trim(),
-
-    updatedAt:
-    Date.now()
-
-  };
-
-
-  try{
-
-    if(id){
-
-      await update(
-        ref(db,"contacts/"+id),
-        data
-      );
-
-    }else{
-
-      const newRef=
-      push(ref(db,"contacts"));
-
-      await set(
-        newRef,
-        {
-          ...data,
-          createdAt:Date.now()
-        }
-      );
-
-    }
-
-    clearContactForm();
-
-    msg(
-      "cMsg",
-      "যোগাযোগের তথ্য সংরক্ষণ হয়েছে।",
-      "success"
-    );
-
-  }catch(error){
-
-    msg(
-      "cMsg",
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-function showContacts(){
-
-  const list=
-  document.getElementById("contactList");
-
-  const entries=
-  Object.entries(contacts);
-
-
-  if(!entries.length){
-
-    list.innerHTML=
-    "<p>কোনো যোগাযোগের তথ্য নেই।</p>";
-
-    return;
-
-  }
-
-
-  list.innerHTML="";
-
-
-  entries.forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-
-    div.innerHTML=`
-
-      <h3>
-        📞 ${esc(p.name||"")}
-      </h3>
-
-      ${
-        p.type
-        ?
-        `<p>
-          <b>ধরন:</b>
-          ${esc(p.type)}
-        </p>`
-        :
-        ""
-      }
-
-      ${
-        p.phone
-        ?
-        `<p>
-          <b>ফোন:</b>
-          ${esc(p.phone)}
-        </p>`
-        :
-        ""
-      }
-
-      ${
-        p.description
-        ?
-        `<p>
-          ${esc(p.description)}
-        </p>`
-        :
-        ""
-      }
-
-    `;
-
-    list.appendChild(div);
-
-  });
-
-}
-
-
-/* =====================================================
-   ADMIN RENDER
-===================================================== */
-
-function renderAdmin(){
-
-  renderAdminVillage();
-  renderAdminNotices();
-  renderAdminPeople();
-  renderAdminPlaces();
-  renderAdminContacts();
-
-}
-
-
-/* =====================================================
-   ADMIN VILLAGE
-===================================================== */
-
-function renderAdminVillage(){
-
-  const box=
-  document.getElementById(
-    "adminVillageList"
-  );
-
-  if(!box)return;
-
-  box.innerHTML="";
-
-
-  Object.entries(villageData)
-  .forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-    div.innerHTML=`
-
-      <b>
-        ${esc(p.title||"")}
-      </b>
-
-      <br>
-
-      <button
-        class="edit"
-        onclick="editVillage('${id}')">
-
-        ✏️ Edit
-
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteData('village','${id}')">
-
-        🗑️ Delete
-
-      </button>
-
-    `;
-
-    box.appendChild(div);
-
-  });
-
-}
-
-
-window.editVillage=function(id){
-
-  const p=
-  villageData[id];
-
-  document
-  .getElementById("villageId")
-  .value=id;
-
-  document
-  .getElementById("vTitle")
-  .value=p.title||"";
-
-  document
-  .getElementById("vDescription")
-  .value=p.description||"";
-
-  document
-  .getElementById("vCancel")
-  .classList.remove("hidden");
-
-};
-
-
-/* =====================================================
-   ADMIN NOTICE
-===================================================== */
-
-function renderAdminNotices(){
-
-  const box=
-  document.getElementById(
-    "adminNoticeList"
-  );
-
-  if(!box)return;
-
-  box.innerHTML="";
-
-
-  Object.entries(notices)
-  .forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-    div.innerHTML=`
-
-      <b>
-        ${esc(p.title||"")}
-      </b>
-
-      <br>
-
-      <button
-        class="edit"
-        onclick="editNotice('${id}')">
-
-        ✏️ Edit
-
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteData('notices','${id}')">
-
-        🗑️ Delete
-
-      </button>
-
-    `;
-
-    box.appendChild(div);
-
-  });
-
-}
-
-
-window.editNotice=function(id){
-
-  const p=
-  notices[id];
-
-  document
-  .getElementById("noticeId")
-  .value=id;
-
-  document
-  .getElementById("nTitle")
-  .value=p.title||"";
-
-  document
-  .getElementById("nDescription")
-  .value=p.description||"";
-
-  document
-  .getElementById("nCancel")
-  .classList.remove("hidden");
-
-};
-
-
-/* =====================================================
-   ADMIN PEOPLE
-===================================================== */
-
-function renderAdminPeople(){
-
-  const box=
-  document.getElementById(
-    "adminPeopleList"
-  );
-
-  if(!box)return;
-
-  box.innerHTML="";
-
-
-  Object.entries(people)
-  .forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-
-    div.innerHTML=`
-
-      <b>
-        👤 ${esc(p.name||"")}
-      </b>
-
-      <br>
-
-      <span class="badge">
-
-        ${
-          p.public==="yes"
-          ?
-          "Public"
-          :
-          "Private"
-        }
-
-      </span>
-
-      <br>
-
-      <button
-        class="edit"
-        onclick="editPerson('${id}')">
-
-        ✏️ Edit
-
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteData('people','${id}')">
-
-        🗑️ Delete
-
-      </button>
-
-    `;
-
-    box.appendChild(div);
-
-  });
-
-}
-
-
-window.editPerson=function(id){
-
-  const p=
-  people[id];
-
-  document
-  .getElementById("personId")
-  .value=id;
-
-  document
-  .getElementById("pName")
-  .value=p.name||"";
-
-  document
-  .getElementById("pFather")
-  .value=p.father||"";
-
-  document
-  .getElementById("pVillage")
-  .value=p.village||"";
-
-  document
-  .getElementById("pEducation")
-  .value=p.education||"";
-
-  document
-  .getElementById("pProfession")
-  .value=p.profession||"";
-
-  document
-  .getElementById("pPublic")
-  .value=p.public||"yes";
-
-  document
-  .getElementById("pCancel")
-  .classList.remove("hidden");
-
-};
-
-
-/* =====================================================
-   ADMIN PLACES
-===================================================== */
-
-function renderAdminPlaces(){
-
-  const box=
-  document.getElementById(
-    "adminPlaceList"
-  );
-
-  if(!box)return;
-
-  box.innerHTML="";
-
-
-  Object.entries(places)
-  .forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-
-    div.innerHTML=`
-
-      <b>
-        ${getPlaceIcon(p.type)}
-        ${esc(p.name||"")}
-      </b>
-
-      <br>
-
-      <span class="badge">
-        ${esc(p.type||"ধরন নেই")}
-      </span>
-
-      <br>
-
-      <button
-        class="edit"
-        onclick="editPlace('${id}')">
-
-        ✏️ Edit
-
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteData('places','${id}')">
-
-        🗑️ Delete
-
-      </button>
-
-    `;
-
-    box.appendChild(div);
-
-  });
-
-}
-
-
-window.editPlace=function(id){
-
-  const p=
-  places[id];
-
-  document
-  .getElementById("placeId")
-  .value=id;
-
-  document
-  .getElementById("plName")
-  .value=p.name||"";
-
-  document
-  .getElementById("plType")
-  .value=p.type||"";
-
-  document
-  .getElementById("plLocation")
-  .value=p.location||"";
-
-  document
-  .getElementById("plPhone")
-  .value=p.phone||"";
-
-  document
-  .getElementById("plDescription")
-  .value=p.description||"";
-
-  document
-  .getElementById("plCancel")
-  .classList.remove("hidden");
-
-};
-
-
-/* =====================================================
-   ADMIN CONTACTS
-===================================================== */
-
-function renderAdminContacts(){
-
-  const box=
-  document.getElementById(
-    "adminContactList"
-  );
-
-  if(!box)return;
-
-  box.innerHTML="";
-
-
-  Object.entries(contacts)
-  .forEach(([id,p])=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-
-    div.innerHTML=`
-
-      <b>
-        ${esc(p.name||"")}
-      </b>
-
-      <br>
-
-      <button
-        class="edit"
-        onclick="editContact('${id}')">
-
-        ✏️ Edit
-
-      </button>
-
-      <button
-        class="danger"
-        onclick="deleteData('contacts','${id}')">
-
-        🗑️ Delete
-
-      </button>
-
-    `;
-
-    box.appendChild(div);
-
-  });
-
-}
-
-
-window.editContact=function(id){
-
-  const p=
-  contacts[id];
-
-  document
-  .getElementById("contactId")
-  .value=id;
-
-  document
-  .getElementById("cName")
-  .value=p.name||"";
-
-  document
-  .getElementById("cType")
-  .value=p.type||"";
-
-  document
-  .getElementById("cPhone")
-  .value=p.phone||"";
-
-  document
-  .getElementById("cDescription")
-  .value=p.description||"";
-
-  document
-  .getElementById("cCancel")
-  .classList.remove("hidden");
-
-};
-
-
-/* =====================================================
-   CLEAR CONTACT
-===================================================== */
-
-function clearContactForm(){
-
-  document
-  .getElementById("contactId")
-  .value="";
-
-  document
-  .getElementById("cName")
-  .value="";
-
-  document
-  .getElementById("cType")
-  .value="";
-
-  document
-  .getElementById("cPhone")
-  .value="";
-
-  document
-  .getElementById("cDescription")
-  .value="";
-
-  document
-  .getElementById("cCancel")
-  .classList.add("hidden");
-
-}
-
-window.clearContactForm=
-clearContactForm;
-
-
-/* =====================================================
-   CLEAR PERSON
-===================================================== */
-
-window.clearPersonForm=function(){
-
-  document
-  .getElementById("personId")
-  .value="";
-
-  document
-  .getElementById("pName")
-  .value="";
-
-  document
-  .getElementById("pFather")
-  .value="";
-
-  document
-  .getElementById("pVillage")
-  .value="";
-
-  document
-  .getElementById("pEducation")
-  .value="";
-
-  document
-  .getElementById("pProfession")
-  .value="";
-
-  document
-  .getElementById("pPublic")
-  .value="yes";
-
-  document
-  .getElementById("pCancel")
-  .classList.add("hidden");
-
-};
-
-
-/* =====================================================
+/* =========================
    DELETE
-===================================================== */
+========================= */
 
-window.deleteData=
-async function(path,id){
+window.deleteItem=async function(type,id){
 
-  if(
-    !confirm(
-      "আপনি কি এই তথ্য মুছে ফেলতে চান?"
-    )
-  ){
+  if(!currentUser ||
+     !ADMIN_UIDS.includes(currentUser.uid)){
+
+    alert("শুধু Admin Delete করতে পারবেন।");
 
     return;
 
   }
+
+
+  if(!confirm(
+    "এই তথ্যটি Delete করতে চান?"
+  )) return;
 
 
   try{
 
     await remove(
-      ref(db,path+"/"+id)
+      ref(
+        db,
+        paths[type]+"/"+id
+      )
     );
 
   }catch(error){
 
     alert(
-      "Delete হয়নি: "+error.message
+      "Delete করা যায়নি:\n"+
+      error.message
     );
 
   }
@@ -3453,191 +2580,71 @@ async function(path,id){
 };
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+/* =========================
+   STATS
+========================= */
 
-window.goHome=function(){
+function updateStats(){
 
-  document
-  .querySelectorAll(
-    ".container > section"
-  )
-  .forEach(el=>{
-
-    el.classList.add("hidden");
-
-  });
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-};
+  const people =
+  Object.keys(data.people||{})
+  .filter(id=>
+    data.people[id].public!=="no"
+  ).length;
 
 
-window.openPage=function(id){
-
-  const sections=[
-    "villageInfo",
-    "people",
-    "places",
-    "notices",
-    "contacts"
-  ];
-
-  if(sections.includes(id)){
-
-    document
-    .querySelectorAll(
-      ".container > section"
-    )
-    .forEach(el=>{
-
-      el.classList.add("hidden");
-
-    });
-
-    const target=
-    document.getElementById(id);
-
-    if(target){
-
-      target.classList.remove("hidden");
-
-      setTimeout(()=>{
-
-        target.scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-
-      },50);
-
-    }
-
-    return;
-
-  }
+  const institutions =
+  Object.values(data.institution||{})
+  .filter(x=>
+    !x.category ||
+    x.category==="institution"
+  ).length;
 
 
-  let title="আমার গ্রাম হিজলী";
-  let icon="🏡";
-  let text="এই বিভাগটি পরবর্তী ধাপে তৈরি করা হবে।";
+  const photos =
+  Object.keys(data.gallery||{}).length;
 
 
-  if(id==="family"){
+  document.getElementById("homePeople")
+    .innerText=people;
 
-    icon="🌳";
-    title="পরিবার ও বংশ";
-    text="পরিবার ও বংশের তথ্য এখানে ধাপে ধাপে যোগ করা হবে।";
+  document.getElementById("homeInstitution")
+    .innerText=institutions;
 
-  }
-
-  if(id==="education"){
-
-    icon="🎓";
-    title="শিক্ষা";
-    text="গ্রামের শিক্ষার তথ্য এখানে দেখানো হবে।";
-
-  }
-
-  if(id==="profession"){
-
-    icon="💼";
-    title="পেশা";
-    text="গ্রামের মানুষের পেশার তথ্য এখানে দেখানো হবে।";
-
-  }
-
-  if(id==="statistics"){
-
-    icon="📊";
-    title="পরিসংখ্যান";
-    text=
-      "বর্তমানে নিবন্ধিত Public মানুষের সংখ্যা: "+
-      Object.values(people)
-      .filter(p=>p.public!=="no").length+
-      "\nপ্রতিষ্ঠানের সংখ্যা: "+
-      Object.keys(places).length;
-
-  }
-
-  if(id==="gallery"){
-
-    icon="🖼️";
-    title="ছবি গ্যালারি";
-    text="ছবি গ্যালারি পরবর্তী ধাপে যোগ করা হবে।";
-
-  }
-
-  if(id==="history"){
-
-    icon="🕰️";
-    title="পুরোনো স্মৃতি";
-    text="পুরোনো ছবি ও স্মৃতির তথ্য এখানে যোগ করা হবে।";
-
-  }
-
-  if(id==="mosque"){
-
-    icon="🕌";
-    title="মসজিদ ও ঈদগাহ";
-    text="মসজিদ ও ঈদগাহের তথ্য প্রতিষ্ঠান বিভাগে রাখা হচ্ছে।";
-
-  }
-
-  if(id==="more"){
-
-    icon="➕";
-    title="আরও তথ্য";
-    text="অন্যান্য গ্রামের তথ্য ভবিষ্যতে এখানে যোগ করা হবে।";
-
-  }
+  document.getElementById("homePhoto")
+    .innerText=photos;
 
 
-  document
-  .getElementById("pageIcon")
-  .textContent=icon;
+  document.getElementById("adminPeople")
+    .innerText=
+    Object.keys(data.people||{}).length;
 
-  document
-  .getElementById("pageTitle")
-  .textContent=title;
+  document.getElementById("adminInstitution")
+    .innerText=institutions;
 
-  document
-  .getElementById("pageText")
-  .textContent=text;
+  document.getElementById("adminNotice")
+    .innerText=
+    Object.keys(data.notice||{}).length;
 
-  document
-  .getElementById("pageBox")
-  .style.display="flex";
+  document.getElementById("adminGallery")
+    .innerText=photos;
 
-};
+}
 
 
-window.closePage=function(){
-
-  document
-  .getElementById("pageBox")
-  .style.display="none";
-
-};
-
+/* =========================
+   SEARCH
+========================= */
 
 window.openSearch=function(){
 
   document
-  .getElementById("searchBox")
-  .style.display="flex";
+  .getElementById("searchModal")
+  .classList.remove("hidden");
 
-  setTimeout(()=>{
-
-    document
-    .getElementById("searchInput")
-    .focus();
-
-  },100);
+  document
+  .getElementById("searchInput")
+  .focus();
 
 };
 
@@ -3645,234 +2652,186 @@ window.openSearch=function(){
 window.closeSearch=function(){
 
   document
-  .getElementById("searchBox")
-  .style.display="none";
+  .getElementById("searchModal")
+  .classList.add("hidden");
 
 };
 
 
-window.searchPerson=function(){
+window.doSearch=function(){
 
-  const search=
+  const q =
   document
   .getElementById("searchInput")
   .value
   .trim()
   .toLowerCase();
 
-  const result=
-  document
-  .getElementById("searchResult");
+
+  const result =
+  document.getElementById("searchResults");
 
 
-  if(!search){
+  if(!q){
 
     result.innerHTML=
-    "<p>কিছু লিখে খুঁজুন।</p>";
+    `<div class="empty">
+      নাম বা তথ্য লিখে খুঁজুন।
+    </div>`;
 
     return;
 
   }
 
 
-  const found=
-  Object.values(people)
-  .filter(p=>{
+  let html="";
 
-    if(p.public==="no")
-      return false;
 
-    const text=
+  /* PEOPLE SEARCH */
 
-      (p.name||"")+" "+
-      (p.father||"")+" "+
-      (p.village||"")+" "+
-      (p.education||"")+" "+
-      (p.profession||"");
+  Object.entries(data.people||{})
+  .forEach(([id,x])=>{
 
-    return text
-    .toLowerCase()
-    .includes(search);
+    const text =
+    [
+      x.name,
+      x.father,
+      x.address,
+      x.education,
+      x.profession
+    ]
+    .join(" ")
+    .toLowerCase();
+
+
+    if(
+      text.includes(q) &&
+      (
+        x.public!=="no" ||
+        (
+          currentUser &&
+          ADMIN_UIDS.includes(currentUser.uid)
+        )
+      )
+    ){
+
+      html += `
+
+        <div class="card">
+
+          <div class="card-head">
+
+            <div class="card-icon">👤</div>
+
+            <div>
+
+              <h3>${esc(x.name)}</h3>
+
+              ${field(x.father,"👨 বাবা")}
+
+              ${field(x.address,"📍 ঠিকানা")}
+
+              ${field(x.education,"🎓 শিক্ষা")}
+
+              ${field(x.profession,"💼 পেশা")}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
 
   });
 
 
-  if(!found.length){
+  /* OTHER SEARCH */
 
-    result.innerHTML=
-    "<p>কোনো ব্যক্তির তথ্য পাওয়া যায়নি।</p>";
+  [
+    ["institution","প্রতিষ্ঠান","🏫"],
+    ["education","শিক্ষা","🎓"],
+    ["profession","পেশা","💼"],
+    ["notice","নোটিশ","📢"],
+    ["place","স্থান","📍"],
+    ["mosque","মসজিদ","🕌"],
+    ["contact","যোগাযোগ","📞"],
+    ["more","অন্যান্য","➕"]
+  ]
+  .forEach(([type,label,icon])=>{
 
-    return;
+    Object.values(data[type]||{})
+    .forEach(x=>{
+
+      const text =
+      JSON.stringify(x)
+      .toLowerCase();
+
+
+      if(text.includes(q)){
+
+        html += `
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div class="card-icon">
+                ${icon}
+              </div>
+
+              <div>
+
+                <h3>
+                  ${esc(
+                    x.title ||
+                    x.name ||
+                    x.profession ||
+                    label
+                  )}
+                </h3>
+
+                <div class="meta">
+                  ${label}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+    });
+
+  });
+
+
+  if(!html){
+
+    html=
+    `<div class="empty">
+      কোনো তথ্য পাওয়া যায়নি।
+    </div>`;
 
   }
 
 
-  result.innerHTML="";
-
-
-  found.forEach(p=>{
-
-    const div=
-    document.createElement("div");
-
-    div.className="item";
-
-
-    let html=`
-
-      <h3>
-        👤 ${esc(p.name||"")}
-      </h3>
-
-    `;
-
-
-    if(p.father){
-
-      html+=`
-        <p>
-          <b>পিতা:</b>
-          ${esc(p.father)}
-        </p>
-      `;
-
-    }
-
-
-    if(p.village){
-
-      html+=`
-        <p>
-          <b>পাড়া:</b>
-          ${esc(p.village)}
-        </p>
-      `;
-
-    }
-
-
-    if(p.education){
-
-      html+=`
-        <p>
-          <b>🎓 শিক্ষা:</b>
-          ${esc(p.education)}
-        </p>
-      `;
-
-    }
-
-
-    if(p.profession){
-
-      html+=`
-        <p>
-          <b>💼 পেশা:</b>
-          ${esc(p.profession)}
-        </p>
-      `;
-
-    }
-
-
-    div.innerHTML=html;
-
-    result.appendChild(div);
-
-  });
+  result.innerHTML=html;
 
 };
 
 
-window.scrollToCategories=function(){
+/* =========================
+   START
+========================= */
 
-  window.scrollTo({
-    top:300,
-    behavior:"smooth"
-  });
-
-};
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function msg(id,text,type){
-
-  const box=
-  document.getElementById(id);
-
-  box.textContent=text;
-
-  box.className=
-  "message "+type;
-
-  box.style.display="block";
-
-
-  setTimeout(()=>{
-
-    box.style.display="none";
-
-  },4000);
-
-}
-
-
-/* =====================================================
-   HTML ESCAPE
-===================================================== */
-
-function esc(value){
-
-  return String(value)
-
-  .replaceAll("&","&amp;")
-
-  .replaceAll("<","&lt;")
-
-  .replaceAll(">","&gt;")
-
-  .replaceAll('"',"&quot;")
-
-  .replaceAll("'","&#039;");
-
-}
-
-
-/* =====================================================
-   BANGLA NUMBER
-===================================================== */
-
-function toBanglaNumber(num){
-
-  const en="0123456789";
-  const bn="০১২৩৪৫৬৭৮৯";
-
-  return String(num)
-  .split("")
-  .map(x=>{
-
-    const i=en.indexOf(x);
-
-    return i>=0 ? bn[i] : x;
-
-  })
-  .join("");
-
-}
-
-
-/* =====================================================
-   INITIAL
-===================================================== */
-
-setTimeout(()=>{
-
-  renderAdmin();
-
-},1000);
+showPage("home");
 
 </script>
 
