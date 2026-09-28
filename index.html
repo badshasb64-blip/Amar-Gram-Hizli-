@@ -1516,15 +1516,21 @@ function makeCard(type,id,x){
   }
 
 
-  /* PROFESSION */
+/* PROFESSION */
 
-  if(type==="profession"){
+if(type==="profession"){
 
-    html += field(x.person,"👤 ব্যক্তি");
+  html += field(x.person,"👤 ব্যক্তি");
 
-    html += field(x.profession,"💼 পেশা");
+  html += field(x.father,"👨‍👦 বাবার নাম");
 
-  }
+  html += field(x.profession,"💼 পেশা");
+
+  html += field(x.department,"🏢 বিভাগ");
+
+  html += field(x.description,"📝 বিস্তারিত");
+
+}
 
 
   /* PLACE */
@@ -1951,31 +1957,43 @@ function buildForm(type,x){
 
   if(type==="profession"){
 
-    html += input(
-      "title",
-      "শিরোনাম",
-      x.title
-    );
+  html += input(
+    "title",
+    "শিরোনাম",
+    x.title
+  );
 
-    html += input(
-      "person",
-      "ব্যক্তির নাম",
-      x.person
-    );
+  html += input(
+    "person",
+    "ব্যক্তির নাম",
+    x.person
+  );
 
-    html += input(
-      "profession",
-      "পেশা",
-      x.profession
-    );
+  html += input(
+    "father",
+    "বাবার নাম",
+    x.father
+  );
 
-    html += textarea(
-      "description",
-      "বিস্তারিত",
-      x.description
-    );
+  html += input(
+    "profession",
+    "পেশা",
+    x.profession
+  );
 
-  }
+  html += input(
+    "department",
+    "বিভাগ (Optional)",
+    x.department
+  );
+
+  html += textarea(
+    "description",
+    "বিস্তারিত",
+    x.description
+  );
+
+}
 
 
   if(type==="gallery"){
@@ -2392,14 +2410,16 @@ window.saveForm = async function(){
 
   if(type==="profession"){
 
-    x={
-      title:fv("title"),
-      person:fv("person"),
-      profession:fv("profession"),
-      description:fv("description")
-    };
+  x={
+    title:fv("title"),
+    person:fv("person"),
+    father:fv("father"),
+    profession:fv("profession"),
+    department:fv("department"),
+    description:fv("description")
+  };
 
-  }
+}
 
 
   if(type==="gallery"){
