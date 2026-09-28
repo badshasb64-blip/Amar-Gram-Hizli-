@@ -2539,14 +2539,6 @@ function buildForm(type,x){
 
   }
 
-এখানে "members" আর থাকবে না।
-
-কিন্তু এখনই এটা বসাবেন না। কারণ পরের ধাপে আমাদের “সন্তান যোগ করুন” সিস্টেমটাও বসাতে হবে। না হলে শুধু সংখ্যা লেখা যাবে, কিন্তু আপনি যে দানেশ → আসলাম/আসাদুল → বাদশা/মিনহাজ → পরের প্রজন্ম কাঠামো চাচ্ছেন সেটা হবে না।
-
-এখন আপনার পরের কোডটা দরকার: এই "if(type==="family"){...}" অংশের পরে Save করার যে JavaScript function আছে, সেটা পাঠান। সাধারণত "save...", "saveData", "saveItem" বা "update..." ধরনের function থাকবে।
-
-ওটা দিলে আমি পরের ধাপে ডেটা সংরক্ষণ করার পুরো Family Tree ব্যবস্থা তৈরি করে দেব।
-
 
 
   if(type==="institution"){
@@ -3163,7 +3155,7 @@ window.saveForm = async function(){
 
   if(type==="family"){
 
-    x={
+    x = {
       familyName: fv("familyName"),
       headName: fv("headName"),
       headFatherName: fv("headFatherName"),
@@ -3173,12 +3165,11 @@ window.saveForm = async function(){
 
       description: fv("description"),
 
-      // ভবিষ্যতের Family Tree-এর জন্য
-      children: x.children || []
+      sons: [],
+      daughters: []
     };
 
-  }
-
+}
 
   if(type==="institution"){
 
