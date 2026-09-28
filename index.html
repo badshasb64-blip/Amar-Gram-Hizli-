@@ -1307,13 +1307,13 @@ function render(type){
 
 
   const el =
-  document.getElementById(targetMap[type]);
+    document.getElementById(targetMap[type]);
 
   if(!el) return;
 
 
   let items =
-  Object.entries(data[type] || {});
+    Object.entries(data[type] || {});
 
 
   /* =========================
@@ -1323,12 +1323,12 @@ function render(type){
   if(type==="institution"){
 
     items =
-    items.filter(([id,x])=>{
+      items.filter(([id,x])=>{
 
-      return !x.category ||
-             x.category==="institution";
+        return !x.category ||
+               x.category==="institution";
 
-    });
+      });
 
   }
 
@@ -1340,11 +1340,11 @@ function render(type){
   if(type==="place"){
 
     items =
-    items.filter(([id,x])=>{
+      items.filter(([id,x])=>{
 
-      return x.category==="place";
+        return x.category==="place";
 
-    });
+      });
 
   }
 
@@ -1356,11 +1356,11 @@ function render(type){
   if(type==="mosque"){
 
     items =
-    items.filter(([id,x])=>{
+      items.filter(([id,x])=>{
 
-      return x.category==="mosque";
+        return x.category==="mosque";
 
-    });
+      });
 
   }
 
@@ -1371,71 +1371,114 @@ function render(type){
 
   if(!items.length){
 
-    el.innerHTML =
-    `<div class="empty">
-      এই বিভাগে এখনো কোনো তথ্য যোগ করা হয়নি।
-    </div>`;
+    el.innerHTML = `
+      <div class="empty">
+        এই বিভাগে এখনো কোনো তথ্য যোগ করা হয়নি।
+      </div>
+    `;
 
     return;
 
   }
 
 
-  /* =========================
+  /* ==================================================
      PROFESSION
-     বিভাগ অনুযায়ী GROUP
-  ========================= */
+     বিভাগ → নির্দিষ্ট পেশা → ব্যক্তিদের তালিকা
+  ================================================== */
 
   if(type==="profession"){
 
     const groups = {
 
       "🎓 শিক্ষা":[
+
         "🏫 প্রাথমিক বিদ্যালয়",
+
         "🏫 মাধ্যমিক / হাই স্কুল",
+
         "🕌 মাদ্রাসা",
+
         "🔧 কারিগরি / ভোকেশনাল",
+
         "🎓 কলেজ",
+
         "🏛️ বিশ্ববিদ্যালয়"
+
       ],
+
 
       "🪖 প্রতিরক্ষা ও আইনশৃঙ্খলা":[
+
         "✈️ বিমান বাহিনী",
+
         "🪖 সেনাবাহিনী",
+
         "⚓ নৌবাহিনী",
+
         "👮 পুলিশ",
+
         "🛡️ বিজিবি",
+
         "🛡️ আনসার",
+
         "🚒 ফায়ার সার্ভিস",
+
         "অন্যান্য"
+
       ],
+
 
       "🏢 সরকারি চাকরি":[
+
         "🏛️ প্রশাসন",
+
         "🏥 স্বাস্থ্য / হাসপাতাল",
+
         "💰 কর / কাস্টমস",
+
         "⚡ বিদ্যুৎ / জ্বালানি",
+
         "🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান",
+
         "🏢 অন্যান্য সরকারি চাকরি"
+
       ],
+
 
       "💼 বেসরকারি চাকরি":[
+
         "🏢 কোম্পানি",
+
         "🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান",
+
         "🏥 বেসরকারি হাসপাতাল / ক্লিনিক",
+
         "💻 আইটি / সফটওয়্যার",
+
         "🏭 গার্মেন্টস / শিল্পকারখানা",
+
         "🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান",
+
         "👨‍🔧 ইঞ্জিনিয়ার",
+
         "📚 বেসরকারি শিক্ষা প্রতিষ্ঠান"
+
       ],
 
+
       "🌾 অন্যান্য":[
+
         "🌾 কৃষি",
+
         "🏪 ব্যবসা",
+
         "🛒 দোকান",
+
         "🌍 প্রবাসী",
+
         "💻 ফ্রিল্যান্সার"
+
       ]
 
     };
@@ -1444,49 +1487,59 @@ function render(type){
     let groupedHTML = "";
 
 
-    /* =========================
-       নির্দিষ্ট গ্রুপগুলো
-    ========================= */
+    /* ==================================================
+       প্রতিটি বড় বিভাগ একবার করে দেখাবে
+    ================================================== */
 
     Object.entries(groups).forEach(
       ([groupTitle, departments])=>{
 
+
+        let departmentHTML = "";
+
+
+        /* ==========================================
+           এই বড় বিভাগের ভিতরের নির্দিষ্ট পেশাগুলো
+        ========================================== */
+
         departments.forEach(
           department=>{
 
+
             const groupItems =
-            items.filter(
-              ([id,x]) =>
-                x.department === department
-            );
+              items.filter(
+                ([id,x]) =>
+                  x.department === department
+              );
 
 
             if(!groupItems.length) return;
 
 
-            groupedHTML += `
+            departmentHTML += `
 
-              <div class="profession-group">
-
-                <h3 class="profession-group-title">
-                  ${groupTitle}
-                </h3>
+              <div class="profession-department">
 
                 <h4 class="profession-department-title">
+
                   ${department}
+
                 </h4>
+
 
                 <div class="profession-group-list">
 
                   ${
-                    groupItems.map(
-                      ([id,item]) =>
-                      makeCard(
-                        type,
-                        id,
-                        item
+                    groupItems
+                      .map(
+                        ([id,item]) =>
+                          makeCard(
+                            type,
+                            id,
+                            item
+                          )
                       )
-                    ).join("")
+                      .join("")
                   }
 
                 </div>
@@ -1498,23 +1551,55 @@ function render(type){
           }
         );
 
+
+        /* ==========================================
+           বড় বিভাগে তথ্য থাকলেই শুধু দেখাবে
+        ========================================== */
+
+        if(departmentHTML){
+
+          groupedHTML += `
+
+            <div class="profession-group">
+
+              <h3 class="profession-group-title">
+
+                ${groupTitle}
+
+              </h3>
+
+
+              ${departmentHTML}
+
+            </div>
+
+          `;
+
+        }
+
       }
     );
 
 
-    /* =========================
-       কোনো তালিকার বাইরে থাকলে
-    ========================= */
+    /* ==================================================
+       তালিকার বাইরে থাকা পুরোনো/অন্য বিভাগ
+    ================================================== */
 
     const usedDepartments = [];
+
 
     Object.values(groups).forEach(
       departments=>{
 
         departments.forEach(
           department=>{
-            usedDepartments.push(department);
+
+            usedDepartments.push(
+              department
+            );
+
           }
+
         );
 
       }
@@ -1522,10 +1607,14 @@ function render(type){
 
 
     const otherItems =
-    items.filter(
-      ([id,x]) =>
-        !usedDepartments.includes(x.department)
-    );
+      items.filter(
+        ([id,x]) =>
+
+          !usedDepartments.includes(
+            x.department
+          )
+
+      );
 
 
     if(otherItems.length){
@@ -1535,20 +1624,25 @@ function render(type){
         <div class="profession-group">
 
           <h3 class="profession-group-title">
+
             📌 অন্যান্য বিভাগ
+
           </h3>
+
 
           <div class="profession-group-list">
 
             ${
-              otherItems.map(
-                ([id,item]) =>
-                makeCard(
-                  type,
-                  id,
-                  item
+              otherItems
+                .map(
+                  ([id,item]) =>
+                    makeCard(
+                      type,
+                      id,
+                      item
+                    )
                 )
-              ).join("")
+                .join("")
             }
 
           </div>
@@ -1560,34 +1654,36 @@ function render(type){
     }
 
 
-    el.innerHTML = groupedHTML;
+    el.innerHTML =
+      groupedHTML;
 
     return;
 
   }
 
 
-  /* =========================
+  /* ==================================================
      অন্যান্য সব SECTION
-     আগের মতোই
-  ========================= */
+     আগের মতোই থাকবে
+  ================================================== */
 
   el.innerHTML =
-  items.map(
-    ([id,item])=>{
 
-      return makeCard(
-        type,
-        id,
-        item
-      );
+    items
+      .map(
+        ([id,item]) => {
 
-    }
-  ).join("");
+          return makeCard(
+            type,
+            id,
+            item
+          );
+
+        }
+      )
+      .join("");
 
 }
-
-
 
 /* =========================
    CARD
