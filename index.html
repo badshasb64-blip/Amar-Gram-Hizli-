@@ -2111,15 +2111,40 @@ function makeCard(type,id,x){
   }
 
 
-  /* FAMILY */
+/* FAMILY */
 
-  if(type==="family"){
+if(type==="family"){
 
-    html += field(x.headName,"👤 পরিবারের প্রধান");
+  html += field(
+    x.headName,
+    "👤 বংশের প্রধান"
+  );
 
-    html += field(x.address,"📍 ঠিকানা");
+  html += field(
+    x.headFatherName,
+    "👨‍👦 বংশের প্রধানের বাবার নাম"
+  );
 
-  }
+  html += field(
+    x.maleCount || 0,
+    "👦 ছেলে সংখ্যা"
+  );
+
+  html += field(
+    x.femaleCount || 0,
+    "👧 মেয়ে সংখ্যা"
+  );
+
+  const totalChildren =
+    (Number(x.maleCount) || 0) +
+    (Number(x.femaleCount) || 0);
+
+  html += field(
+    totalChildren,
+    "👨‍👩‍👧‍👦 মোট সন্তান"
+  );
+
+}
 
 
   /* INSTITUTION */
@@ -2265,21 +2290,6 @@ if(type==="profession"){
 
   }
 
-
-  /* FAMILY MEMBERS */
-
-  if(x.members){
-
-    html += `
-
-      <div class="description">
-        <b>👨‍👩‍👧‍👦 সদস্য:</b><br>
-        ${esc(x.members)}
-      </div>
-
-    `;
-
-  }
 
 
   /* ADMIN BUTTON */
