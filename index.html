@@ -1661,333 +1661,441 @@ function render(type){
 
   }
 
-  /* ==================================================
-     FAMILY
-     Unlimited Family Tree
-  ================================================== */
+ /* ==================================================
+   FAMILY
+   Family Tree - Step 1
+================================================== */
 
-  if(type==="family"){
+if(type==="family"){
 
-    function familyPersonHTML(person, level=0){
+  /* =========================
+     FAMILY PERSON TREE
+  ========================= */
 
-      if(!person) return "";
+  function familyPersonHTML(person, level=0){
 
-      let html = "";
+    if(!person) return "";
 
-      const maleCount =
-        Number(person.maleCount) || 0;
+    let html = "";
 
-      const femaleCount =
-        Number(person.femaleCount) || 0;
+    const maleCount =
+      Number(person.maleCount) || 0;
 
-      const totalChildren =
-        maleCount + femaleCount;
+    const femaleCount =
+      Number(person.femaleCount) || 0;
+
+    const totalChildren =
+      maleCount + femaleCount;
 
 
-      html += `
-        <div class="family-person"
-             style="margin-left:${level * 18}px;">
+    html += `
+      <div class="family-person"
+           style="
+             margin-left:${level * 25}px;
+             border-left:${level > 0 ? "2px solid #ccc" : "none"};
+             padding-left:${level > 0 ? "12px" : "0"};
+             margin-top:12px;
+           ">
 
-          <div class="family-person-name">
+        <div class="family-person-name">
 
-            👤 ${
+          👤 <b>
+            ${
               person.name ||
               "নাম দেওয়া হয়নি"
             }
-
-          </div>
-
-
-          <div class="family-person-count">
-
-            👦 ছেলে: ${maleCount}
-            &nbsp; | &nbsp;
-
-            👧 মেয়ে: ${femaleCount}
-            &nbsp; | &nbsp;
-
-            👥 সন্তান: ${totalChildren}
-
-          </div>
-      `;
-
-
-      /* =========================
-         ছেলে
-      ========================= */
-
-      if(person.sons && person.sons.length){
-
-        html += `
-          <div class="family-children">
-        `;
-
-        person.sons.forEach(child=>{
-
-          html += familyPersonHTML(
-            child,
-            level + 1
-          );
-
-        });
-
-        html += `
-          </div>
-        `;
-
-      }
-
-
-      /* =========================
-         মেয়ে
-      ========================= */
-
-      if(person.daughters && person.daughters.length){
-
-        html += `
-          <div class="family-children">
-        `;
-
-        person.daughters.forEach(child=>{
-
-          html += familyPersonHTML(
-            child,
-            level + 1
-          );
-
-        });
-
-        html += `
-          </div>
-        `;
-
-      }
-
-
-      html += `
-        </div>
-      `;
-
-
-      return html;
-
-    }
-
-
-    /* =========================
-       FAMILY TOTAL
-    ========================= */
-
-    let totalMale = 0;
-    let totalFemale = 0;
-
-
-    function countFamily(person){
-
-      if(!person) return;
-
-
-      totalMale +=
-        Number(person.maleCount) || 0;
-
-      totalFemale +=
-        Number(person.femaleCount) || 0;
-
-
-      if(person.sons){
-
-        person.sons.forEach(
-          child =>
-            countFamily(child)
-        );
-
-      }
-
-
-      if(person.daughters){
-
-        person.daughters.forEach(
-          child =>
-            countFamily(child)
-        );
-
-      }
-
-    }
-
-
-    items.forEach(
-      ([id,item]) => {
-
-        totalMale +=
-          Number(item.maleCount) || 0;
-
-        totalFemale +=
-          Number(item.femaleCount) || 0;
-
-
-        if(item.children){
-
-          item.children.forEach(
-            child =>
-              countFamily(child)
-          );
-
-        }
-
-      }
-    );
-
-
-    const totalMembers =
-      totalMale + totalFemale;
-
-
-    /* =========================
-       FAMILY SUMMARY
-    ========================= */
-
-    let familyHTML = `
-
-      <div class="family-summary">
-
-        🌳 <b>বংশের মোট হিসাব</b>
-
-        <div>
-
-          👨 পুরুষ: ${totalMale}
-
-          &nbsp; | &nbsp;
-
-          👩 নারী: ${totalFemale}
-
-          &nbsp; | &nbsp;
-
-          👥 মোট: ${totalMembers}
+          </b>
 
         </div>
 
-      </div>
 
+        <div class="family-person-count">
+
+          👦 ছেলে: ${maleCount}
+
+          &nbsp; | &nbsp;
+
+          👧 মেয়ে: ${femaleCount}
+
+          &nbsp; | &nbsp;
+
+          👥 সন্তান: ${totalChildren}
+
+        </div>
+
+
+        <div style="margin-top:6px;">
+
+          ➕ সন্তান যোগ করুন
+
+        </div>
     `;
 
 
     /* =========================
-       FAMILY LIST
+       SONS
     ========================= */
 
-    items.forEach(
-      ([id,item]) => {
+    if(
+      Array.isArray(person.sons) &&
+      person.sons.length
+    ){
 
-        familyHTML += `
+      html += `
+        <div class="family-children">
 
-          <div class="family-tree-card">
-
-            <h3>
-              🌳 ${
-                item.familyName ||
-                "পরিবার / বংশ"
-              }
-            </h3>
-
-        `;
+          <div style="margin-top:8px;">
+            👦 <b>ছেলে</b>
+          </div>
+      `;
 
 
-        if(item.headName){
+      person.sons.forEach(child=>{
 
-          familyHTML += `
+        html += familyPersonHTML(
+          child,
+          level + 1
+        );
 
-            <div class="family-head">
-
-              👤 বংশের প্রধান:
-              <b>${item.headName}</b>
-
-            </div>
-
-          `;
-
-        }
+      });
 
 
-        if(item.headFatherName){
+      html += `
+        </div>
+      `;
 
-          familyHTML += `
-
-            <div class="family-father">
-
-              👴 বাবা:
-              ${item.headFatherName}
-
-            </div>
-
-          `;
-
-        }
+    }
 
 
-        familyHTML += `
+    /* =========================
+       DAUGHTERS
+    ========================= */
 
-            <div class="family-root">
+    if(
+      Array.isArray(person.daughters) &&
+      person.daughters.length
+    ){
 
-              <div class="family-person-name">
+      html += `
+        <div class="family-children">
 
-                👤 ${
+          <div style="margin-top:8px;">
+            👧 <b>মেয়ে</b>
+          </div>
+      `;
+
+
+      person.daughters.forEach(child=>{
+
+        html += familyPersonHTML(
+          child,
+          level + 1
+        );
+
+      });
+
+
+      html += `
+        </div>
+      `;
+
+    }
+
+
+    html += `
+      </div>
+    `;
+
+
+    return html;
+
+  }
+
+
+  /* =========================
+     FAMILY TOTAL
+  ========================= */
+
+  let totalMale = 0;
+  let totalFemale = 0;
+
+
+  function countFamily(person){
+
+    if(!person) return;
+
+
+    totalMale +=
+      Number(person.maleCount) || 0;
+
+    totalFemale +=
+      Number(person.femaleCount) || 0;
+
+
+    if(
+      Array.isArray(person.sons)
+    ){
+
+      person.sons.forEach(
+        child =>
+          countFamily(child)
+      );
+
+    }
+
+
+    if(
+      Array.isArray(person.daughters)
+    ){
+
+      person.daughters.forEach(
+        child =>
+          countFamily(child)
+      );
+
+    }
+
+  }
+
+
+  /* =========================
+     FAMILY LIST
+  ========================= */
+
+  let familyHTML = "";
+
+
+  items.forEach(
+    ([id,item]) => {
+
+
+      /* =========================
+         ROOT FAMILY COUNT
+      ========================= */
+
+      totalMale +=
+        Number(item.maleCount) || 0;
+
+      totalFemale +=
+        Number(item.femaleCount) || 0;
+
+
+      if(
+        Array.isArray(item.sons)
+      ){
+
+        item.sons.forEach(
+          child =>
+            countFamily(child)
+        );
+
+      }
+
+
+      if(
+        Array.isArray(item.daughters)
+      ){
+
+        item.daughters.forEach(
+          child =>
+            countFamily(child)
+        );
+
+      }
+
+
+      /* =========================
+         FAMILY CARD
+      ========================= */
+
+      familyHTML += `
+
+        <div class="family-tree-card">
+
+          <h3>
+
+            🌳 ${
+              item.familyName ||
+              "পরিবার / বংশ"
+            }
+
+          </h3>
+
+
+          ${
+            item.headName
+            ? `
+              <div class="family-head">
+
+                👤 بংশের প্রধান:
+                <b>${item.headName}</b>
+
+              </div>
+            `
+            : ""
+          }
+
+
+          ${
+            item.headFatherName
+            ? `
+              <div class="family-father">
+
+                👴 বাবা:
+                ${item.headFatherName}
+
+              </div>
+            `
+            : ""
+          }
+
+
+          <div class="family-root">
+
+            <div class="family-person-name">
+
+              👤 <b>
+                ${
                   item.headName ||
                   "বংশের প্রধানের নাম দেওয়া হয়নি"
                 }
-
-              </div>
-
-
-              <div class="family-person-count">
-
-                👦 ছেলে:
-                ${Number(item.maleCount) || 0}
-
-                &nbsp; | &nbsp;
-
-                👧 মেয়ে:
-                ${Number(item.femaleCount) || 0}
-
-                &nbsp; | &nbsp;
-
-                👥 সন্তান:
-                ${
-                  (Number(item.maleCount) || 0) +
-                  (Number(item.femaleCount) || 0)
-                }
-
-              </div>
+              </b>
 
             </div>
 
 
-            ${
-              item.description
-              ? `
-                <div class="family-description">
+            <div class="family-person-count">
 
-                  ${item.description}
+              👦 ছেলে:
+              ${Number(item.maleCount) || 0}
+
+              &nbsp; | &nbsp;
+
+              👧 মেয়ে:
+              ${Number(item.femaleCount) || 0}
+
+              &nbsp; | &nbsp;
+
+              👥 সন্তান:
+              ${
+                (Number(item.maleCount) || 0) +
+                (Number(item.femaleCount) || 0)
+              }
+
+            </div>
+
+
+            <!-- CHILD TREE -->
+
+            ${
+              (
+                (Array.isArray(item.sons) &&
+                 item.sons.length) ||
+
+                (Array.isArray(item.daughters) &&
+                 item.daughters.length)
+              )
+              ? `
+
+                <div class="family-tree">
+
+                  ${
+                    Array.isArray(item.sons)
+                    ? item.sons
+                        .map(child =>
+                          familyPersonHTML(
+                            child,
+                            1
+                          )
+                        )
+                        .join("")
+                    : ""
+                  }
+
+
+                  ${
+                    Array.isArray(item.daughters)
+                    ? item.daughters
+                        .map(child =>
+                          familyPersonHTML(
+                            child,
+                            1
+                          )
+                        )
+                        .join("")
+                    : ""
+                  }
 
                 </div>
+
               `
               : ""
             }
 
+
           </div>
 
-        `;
 
-      }
-    );
+          ${
+            item.description
+            ? `
+              <div class="family-description">
+
+                ${item.description}
+
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+
+      `;
+
+    }
+  );
 
 
-    el.innerHTML =
-      familyHTML;
+  /* =========================
+     TOTAL SUMMARY
+  ========================= */
 
-    return;
+  const totalMembers =
+    totalMale + totalFemale;
 
-  }
+
+  familyHTML = `
+
+    <div class="family-summary">
+
+      🌳 <b>বংশের মোট হিসাব</b>
+
+      <div>
+
+        👨 পুরুষ: ${totalMale}
+
+        &nbsp; | &nbsp;
+
+        👩 নারী: ${totalFemale}
+
+        &nbsp; | &nbsp;
+
+        👥 মোট: ${totalMembers}
+
+      </div>
+
+    </div>
+
+  ` + familyHTML;
+
+
+  el.innerHTML =
+    familyHTML;
+
+  return;
+
+}  
+
 
   /* ==================================================
      অন্যান্য সব SECTION
