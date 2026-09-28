@@ -1305,6 +1305,7 @@ function render(type){
 
   };
 
+
   const el =
   document.getElementById(targetMap[type]);
 
@@ -1315,7 +1316,9 @@ function render(type){
   Object.entries(data[type] || {});
 
 
-  /* institution */
+  /* =========================
+     INSTITUTION
+  ========================= */
 
   if(type==="institution"){
 
@@ -1330,7 +1333,9 @@ function render(type){
   }
 
 
-  /* place */
+  /* =========================
+     PLACE
+  ========================= */
 
   if(type==="place"){
 
@@ -1344,7 +1349,9 @@ function render(type){
   }
 
 
-  /* mosque */
+  /* =========================
+     MOSQUE
+  ========================= */
 
   if(type==="mosque"){
 
@@ -1358,6 +1365,10 @@ function render(type){
   }
 
 
+  /* =========================
+     EMPTY
+  ========================= */
+
   if(!items.length){
 
     el.innerHTML =
@@ -1370,14 +1381,212 @@ function render(type){
   }
 
 
+  /* =========================
+     PROFESSION
+     বিভাগ অনুযায়ী GROUP
+  ========================= */
+
+  if(type==="profession"){
+
+    const groups = {
+
+      "🎓 শিক্ষা":[
+        "🏫 প্রাথমিক বিদ্যালয়",
+        "🏫 মাধ্যমিক / হাই স্কুল",
+        "🕌 মাদ্রাসা",
+        "🔧 কারিগরি / ভোকেশনাল",
+        "🎓 কলেজ",
+        "🏛️ বিশ্ববিদ্যালয়"
+      ],
+
+      "🪖 প্রতিরক্ষা ও আইনশৃঙ্খলা":[
+        "✈️ বিমান বাহিনী",
+        "🪖 সেনাবাহিনী",
+        "⚓ নৌবাহিনী",
+        "👮 পুলিশ",
+        "🛡️ বিজিবি",
+        "🛡️ আনসার",
+        "🚒 ফায়ার সার্ভিস",
+        "অন্যান্য"
+      ],
+
+      "🏢 সরকারি চাকরি":[
+        "🏛️ প্রশাসন",
+        "🏥 স্বাস্থ্য / হাসপাতাল",
+        "💰 কর / কাস্টমস",
+        "⚡ বিদ্যুৎ / জ্বালানি",
+        "🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান",
+        "🏢 অন্যান্য সরকারি চাকরি"
+      ],
+
+      "💼 বেসরকারি চাকরি":[
+        "🏢 কোম্পানি",
+        "🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান",
+        "🏥 বেসরকারি হাসপাতাল / ক্লিনিক",
+        "💻 আইটি / সফটওয়্যার",
+        "🏭 গার্মেন্টস / শিল্পকারখানা",
+        "🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান",
+        "👨‍🔧 ইঞ্জিনিয়ার",
+        "📚 বেসরকারি শিক্ষা প্রতিষ্ঠান"
+      ],
+
+      "🌾 অন্যান্য":[
+        "🌾 কৃষি",
+        "🏪 ব্যবসা",
+        "🛒 দোকান",
+        "🌍 প্রবাসী",
+        "💻 ফ্রিল্যান্সার"
+      ]
+
+    };
+
+
+    let groupedHTML = "";
+
+
+    /* =========================
+       নির্দিষ্ট গ্রুপগুলো
+    ========================= */
+
+    Object.entries(groups).forEach(
+      ([groupTitle, departments])=>{
+
+        departments.forEach(
+          department=>{
+
+            const groupItems =
+            items.filter(
+              ([id,x]) =>
+                x.department === department
+            );
+
+
+            if(!groupItems.length) return;
+
+
+            groupedHTML += `
+
+              <div class="profession-group">
+
+                <h3 class="profession-group-title">
+                  ${groupTitle}
+                </h3>
+
+                <h4 class="profession-department-title">
+                  ${department}
+                </h4>
+
+                <div class="profession-group-list">
+
+                  ${
+                    groupItems.map(
+                      ([id,item]) =>
+                      makeCard(
+                        type,
+                        id,
+                        item
+                      )
+                    ).join("")
+                  }
+
+                </div>
+
+              </div>
+
+            `;
+
+          }
+        );
+
+      }
+    );
+
+
+    /* =========================
+       কোনো তালিকার বাইরে থাকলে
+    ========================= */
+
+    const usedDepartments = [];
+
+    Object.values(groups).forEach(
+      departments=>{
+
+        departments.forEach(
+          department=>{
+            usedDepartments.push(department);
+          }
+        );
+
+      }
+    );
+
+
+    const otherItems =
+    items.filter(
+      ([id,x]) =>
+        !usedDepartments.includes(x.department)
+    );
+
+
+    if(otherItems.length){
+
+      groupedHTML += `
+
+        <div class="profession-group">
+
+          <h3 class="profession-group-title">
+            📌 অন্যান্য বিভাগ
+          </h3>
+
+          <div class="profession-group-list">
+
+            ${
+              otherItems.map(
+                ([id,item]) =>
+                makeCard(
+                  type,
+                  id,
+                  item
+                )
+              ).join("")
+            }
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    el.innerHTML = groupedHTML;
+
+    return;
+
+  }
+
+
+  /* =========================
+     অন্যান্য সব SECTION
+     আগের মতোই
+  ========================= */
+
   el.innerHTML =
-  items.map(([id,item])=>{
+  items.map(
+    ([id,item])=>{
 
-    return makeCard(type,id,item);
+      return makeCard(
+        type,
+        id,
+        item
+      );
 
-  }).join("");
+    }
+  ).join("");
 
 }
+
 
 
 /* =========================
