@@ -1524,9 +1524,11 @@ if(type==="profession"){
 
   html += field(x.father,"👨‍👦 বাবার নাম");
 
+  html += field(x.area,"📍 পাড়া / বাড়ি");
+
   html += field(x.profession,"💼 পেশা");
 
-  html += field(x.department,"🏢 বিভাগ");
+  html += field(x.department,"🏷️ বিভাগ");
 
   html += field(x.description,"📝 বিস্তারিত");
 
@@ -1958,38 +1960,93 @@ function buildForm(type,x){
   if(type==="profession"){
 
   html += input(
-    "title",
-    "শিরোনাম",
-    x.title
-  );
-
-  html += input(
     "person",
-    "ব্যক্তির নাম",
+    "ব্যক্তির নাম *",
     x.person
   );
 
   html += input(
     "father",
-    "বাবার নাম",
+    "বাবার নাম *",
     x.father
   );
 
   html += input(
-    "profession",
-    "পেশা",
-    x.profession
+    "area",
+    "পাড়া / বাড়ি *",
+    x.area
   );
 
   html += input(
-    "department",
-    "বিভাগ (Optional)",
-    x.department
+    "profession",
+    "পেশা *",
+    x.profession
   );
+
+  html += `
+    <label>বিভাগ *</label>
+
+    <select id="department">
+
+      <option value="">বিভাগ নির্বাচন করুন</option>
+
+      <optgroup label="🎓 শিক্ষা">
+        <option value="🏫 প্রাথমিক বিদ্যালয়">🏫 প্রাথমিক বিদ্যালয়</option>
+        <option value="🏫 মাধ্যমিক / হাই স্কুল">🏫 মাধ্যমিক / হাই স্কুল</option>
+        <option value="🕌 মাদ্রাসা">🕌 মাদ্রাসা</option>
+        <option value="🔧 কারিগরি / ভোকেশনাল">🔧 কারিগরি / ভোকেশনাল</option>
+        <option value="🎓 কলেজ">🎓 কলেজ</option>
+        <option value="🏛️ বিশ্ববিদ্যালয়">🏛️ বিশ্ববিদ্যালয়</option>
+      </optgroup>
+
+      <optgroup label="🪖 প্রতিরক্ষা ও আইনশৃঙ্খলা">
+        <option value="✈️ বিমান বাহিনী">✈️ বিমান বাহিনী</option>
+        <option value="🪖 সেনাবাহিনী">🪖 সেনাবাহিনী</option>
+        <option value="⚓ নৌবাহিনী">⚓ নৌবাহিনী</option>
+        <option value="👮 পুলিশ">👮 পুলিশ</option>
+        <option value="🛡️ বিজিবি">🛡️ বিজিবি</option>
+        <option value="🛡️ আনসার">🛡️ আনসার</option>
+        <option value="🚒 ফায়ার সার্ভিস">🚒 ফায়ার সার্ভিস</option>
+        <option value="অন্যান্য">অন্যান্য</option>
+      </optgroup>
+
+      <optgroup label="🏢 সরকারি চাকরি">
+        <option value="🏛️ প্রশাসন">🏛️ প্রশাসন</option>
+        <option value="🏥 স্বাস্থ্য / হাসপাতাল">🏥 স্বাস্থ্য / হাসপাতাল</option>
+        <option value="💰 কর / কাস্টমস">💰 কর / কাস্টমস</option>
+        <option value="⚡ বিদ্যুৎ / জ্বালানি">⚡ বিদ্যুৎ / জ্বালানি</option>
+        <option value="🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান">🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান</option>
+        <option value="🏢 অন্যান্য সরকারি চাকরি">🏢 অন্যান্য সরকারি চাকরি</option>
+      </optgroup>
+
+      <optgroup label="💼 বেসরকারি চাকরি">
+        <option value="🏢 কোম্পানি">🏢 কোম্পানি</option>
+        <option value="🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান">🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান</option>
+        <option value="🏥 বেসরকারি হাসপাতাল / ক্লিনিক">🏥 বেসরকারি হাসপাতাল / ক্লিনিক</option>
+        <option value="💻 আইটি / সফটওয়্যার">💻 আইটি / সফটওয়্যার</option>
+        <option value="🏭 গার্মেন্টস / শিল্পকারখানা">🏭 গার্মেন্টস / শিল্পকারখানা</option>
+        <option value="🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান">🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান</option>
+        <option value="👨‍🔧 ইঞ্জিনিয়ার">👨‍🔧 ইঞ্জিনিয়ার</option>
+        <option value="📚 বেসরকারি শিক্ষা প্রতিষ্ঠান">📚 বেসরকারি শিক্ষা প্রতিষ্ঠান</option>
+      </optgroup>
+
+      <optgroup label="🌾 অন্যান্য">
+        <option value="🌾 কৃষি">🌾 কৃষি</option>
+        <option value="🏪 ব্যবসা">🏪 ব্যবসা</option>
+        <option value="🛒 দোকান">🛒 দোকান</option>
+        <option value="🌍 প্রবাসী">🌍 প্রবাসী</option>
+        <option value="💻 ফ্রিল্যান্সার">💻 ফ্রিল্যান্সার</option>
+      </optgroup>
+
+    </select>
+  `;
+
+  document.getElementById("department").value =
+    x.department || "";
 
   html += textarea(
     "description",
-    "বিস্তারিত",
+    "বিস্তারিত (Optional)",
     x.description
   );
 
@@ -2408,18 +2465,18 @@ window.saveForm = async function(){
   }
 
 
-  if(type==="profession"){
+ if(type==="profession"){
 
   x={
-    title:fv("title"),
     person:fv("person"),
     father:fv("father"),
+    area:fv("area"),
     profession:fv("profession"),
     department:fv("department"),
     description:fv("description")
   };
 
-}
+} 
 
 
   if(type==="gallery"){
