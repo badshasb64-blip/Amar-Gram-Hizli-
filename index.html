@@ -3128,7 +3128,21 @@ window.closeSearch=function(){
 
 };
 
+window.closeForm=function(){
 
+  document
+    .getElementById("formModal")
+    .classList.add("hidden");
+
+  document
+    .getElementById("formArea")
+    .innerHTML="";
+
+  editId=null;
+  editType=null;
+
+};
+  
 window.doSearch=function(){
 
   const q =
