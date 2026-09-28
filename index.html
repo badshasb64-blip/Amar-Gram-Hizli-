@@ -3163,21 +3163,38 @@ window.saveForm = async function(){
   }
 
 
-  if(type==="family"){
+if(type==="family"){
 
-    x = {
-      familyName: fv("familyName"),
-      headName: fv("headName"),
-      headFatherName: fv("headFatherName"),
+  const oldFamily =
+    editId &&
+    data.family &&
+    data.family[editId]
+      ? data.family[editId]
+      : null;
 
-      maleCount: Number(fv("maleCount")) || 0,
-      femaleCount: Number(fv("femaleCount")) || 0,
+  x = {
+    familyName: fv("familyName"),
+    headName: fv("headName"),
+    headFatherName: fv("headFatherName"),
 
-      description: fv("description"),
+    maleCount:
+      Number(fv("maleCount")) || 0,
 
-      sons: [],
-      daughters: []
-    };
+    femaleCount:
+      Number(fv("femaleCount")) || 0,
+
+    description: fv("description"),
+
+    sons:
+      oldFamily && Array.isArray(oldFamily.sons)
+        ? oldFamily.sons
+        : [],
+
+    daughters:
+      oldFamily && Array.isArray(oldFamily.daughters)
+        ? oldFamily.daughters
+        : []
+  };
 
 }
 
