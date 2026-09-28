@@ -1661,6 +1661,333 @@ function render(type){
 
   }
 
+  /* ==================================================
+     FAMILY
+     Unlimited Family Tree
+  ================================================== */
+
+  if(type==="family"){
+
+    function familyPersonHTML(person, level=0){
+
+      if(!person) return "";
+
+      let html = "";
+
+      const maleCount =
+        Number(person.maleCount) || 0;
+
+      const femaleCount =
+        Number(person.femaleCount) || 0;
+
+      const totalChildren =
+        maleCount + femaleCount;
+
+
+      html += `
+        <div class="family-person"
+             style="margin-left:${level * 18}px;">
+
+          <div class="family-person-name">
+
+            👤 ${
+              person.name ||
+              "নাম দেওয়া হয়নি"
+            }
+
+          </div>
+
+
+          <div class="family-person-count">
+
+            👦 ছেলে: ${maleCount}
+            &nbsp; | &nbsp;
+
+            👧 মেয়ে: ${femaleCount}
+            &nbsp; | &nbsp;
+
+            👥 সন্তান: ${totalChildren}
+
+          </div>
+      `;
+
+
+      /* =========================
+         ছেলে
+      ========================= */
+
+      if(person.sons && person.sons.length){
+
+        html += `
+          <div class="family-children">
+        `;
+
+        person.sons.forEach(child=>{
+
+          html += familyPersonHTML(
+            child,
+            level + 1
+          );
+
+        });
+
+        html += `
+          </div>
+        `;
+
+      }
+
+
+      /* =========================
+         মেয়ে
+      ========================= */
+
+      if(person.daughters && person.daughters.length){
+
+        html += `
+          <div class="family-children">
+        `;
+
+        person.daughters.forEach(child=>{
+
+          html += familyPersonHTML(
+            child,
+            level + 1
+          );
+
+        });
+
+        html += `
+          </div>
+        `;
+
+      }
+
+
+      html += `
+        </div>
+      `;
+
+
+      return html;
+
+    }
+
+
+    /* =========================
+       FAMILY TOTAL
+    ========================= */
+
+    let totalMale = 0;
+    let totalFemale = 0;
+
+
+    function countFamily(person){
+
+      if(!person) return;
+
+
+      totalMale +=
+        Number(person.maleCount) || 0;
+
+      totalFemale +=
+        Number(person.femaleCount) || 0;
+
+
+      if(person.sons){
+
+        person.sons.forEach(
+          child =>
+            countFamily(child)
+        );
+
+      }
+
+
+      if(person.daughters){
+
+        person.daughters.forEach(
+          child =>
+            countFamily(child)
+        );
+
+      }
+
+    }
+
+
+    items.forEach(
+      ([id,item]) => {
+
+        totalMale +=
+          Number(item.maleCount) || 0;
+
+        totalFemale +=
+          Number(item.femaleCount) || 0;
+
+
+        if(item.children){
+
+          item.children.forEach(
+            child =>
+              countFamily(child)
+          );
+
+        }
+
+      }
+    );
+
+
+    const totalMembers =
+      totalMale + totalFemale;
+
+
+    /* =========================
+       FAMILY SUMMARY
+    ========================= */
+
+    let familyHTML = `
+
+      <div class="family-summary">
+
+        🌳 <b>বংশের মোট হিসাব</b>
+
+        <div>
+
+          👨 পুরুষ: ${totalMale}
+
+          &nbsp; | &nbsp;
+
+          👩 নারী: ${totalFemale}
+
+          &nbsp; | &nbsp;
+
+          👥 মোট: ${totalMembers}
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    /* =========================
+       FAMILY LIST
+    ========================= */
+
+    items.forEach(
+      ([id,item]) => {
+
+        familyHTML += `
+
+          <div class="family-tree-card">
+
+            <h3>
+              🌳 ${
+                item.familyName ||
+                "পরিবার / বংশ"
+              }
+            </h3>
+
+        `;
+
+
+        if(item.headName){
+
+          familyHTML += `
+
+            <div class="family-head">
+
+              👤 বংশের প্রধান:
+              <b>${item.headName}</b>
+
+            </div>
+
+          `;
+
+        }
+
+
+        if(item.headFatherName){
+
+          familyHTML += `
+
+            <div class="family-father">
+
+              👴 বাবা:
+              ${item.headFatherName}
+
+            </div>
+
+          `;
+
+        }
+
+
+        familyHTML += `
+
+            <div class="family-root">
+
+              <div class="family-person-name">
+
+                👤 ${
+                  item.headName ||
+                  "বংশের প্রধানের নাম দেওয়া হয়নি"
+                }
+
+              </div>
+
+
+              <div class="family-person-count">
+
+                👦 ছেলে:
+                ${Number(item.maleCount) || 0}
+
+                &nbsp; | &nbsp;
+
+                👧 মেয়ে:
+                ${Number(item.femaleCount) || 0}
+
+                &nbsp; | &nbsp;
+
+                👥 সন্তান:
+                ${
+                  (Number(item.maleCount) || 0) +
+                  (Number(item.femaleCount) || 0)
+                }
+
+              </div>
+
+            </div>
+
+
+            ${
+              item.description
+              ? `
+                <div class="family-description">
+
+                  ${item.description}
+
+                </div>
+              `
+              : ""
+            }
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    el.innerHTML =
+      familyHTML;
+
+    return;
+
+  }
 
   /* ==================================================
      অন্যান্য সব SECTION
@@ -2172,30 +2499,36 @@ function buildForm(type,x){
   }
 
 
-  if(type==="family"){
+ if(type==="family"){
 
     html += input(
       "familyName",
-      "পরিবার / বংশের নাম *",
+      "পরিবার / বংশের নাম",
       x.familyName
     );
 
     html += input(
       "headName",
-      "পরিবারের প্রধান",
+      "বংশের প্রধান",
       x.headName
     );
 
     html += input(
-      "address",
-      "ঠিকানা — পাড়া / বাড়ি",
-      x.address
+      "headFatherName",
+      "বংশের প্রধানের বাবার নাম",
+      x.headFatherName
     );
 
-    html += textarea(
-      "members",
-      "পরিবারের সদস্যদের তথ্য",
-      x.members
+    html += input(
+      "maleCount",
+      "ছেলে সংখ্যা",
+      x.maleCount || ""
+    );
+
+    html += input(
+      "femaleCount",
+      "মেয়ে সংখ্যা",
+      x.femaleCount || ""
     );
 
     html += textarea(
@@ -2205,6 +2538,15 @@ function buildForm(type,x){
     );
 
   }
+
+এখানে "members" আর থাকবে না।
+
+কিন্তু এখনই এটা বসাবেন না। কারণ পরের ধাপে আমাদের “সন্তান যোগ করুন” সিস্টেমটাও বসাতে হবে। না হলে শুধু সংখ্যা লেখা যাবে, কিন্তু আপনি যে দানেশ → আসলাম/আসাদুল → বাদশা/মিনহাজ → পরের প্রজন্ম কাঠামো চাচ্ছেন সেটা হবে না।
+
+এখন আপনার পরের কোডটা দরকার: এই "if(type==="family"){...}" অংশের পরে Save করার যে JavaScript function আছে, সেটা পাঠান। সাধারণত "save...", "saveData", "saveItem" বা "update..." ধরনের function থাকবে।
+
+ওটা দিলে আমি পরের ধাপে ডেটা সংরক্ষণ করার পুরো Family Tree ব্যবস্থা তৈরি করে দেব।
+
 
 
   if(type==="institution"){
@@ -2822,11 +3164,17 @@ window.saveForm = async function(){
   if(type==="family"){
 
     x={
-      familyName:fv("familyName"),
-      headName:fv("headName"),
-      address:fv("address"),
-      members:fv("members"),
-      description:fv("description")
+      familyName: fv("familyName"),
+      headName: fv("headName"),
+      headFatherName: fv("headFatherName"),
+
+      maleCount: Number(fv("maleCount")) || 0,
+      femaleCount: Number(fv("femaleCount")) || 0,
+
+      description: fv("description"),
+
+      // ভবিষ্যতের Family Tree-এর জন্য
+      children: x.children || []
     };
 
   }
