@@ -2018,17 +2018,26 @@ window.openForm = function(type,id=null){
 
   }
 
-  editId=id;
 
-  editType=type;
+  /* =========================
+     পুরোনো Form পরিষ্কার
+  ========================= */
+
+  const formArea =
+    document.getElementById("formArea");
+
+  formArea.innerHTML = "";
+
+
+  editId = id;
+
+  editType = type;
+
 
   const old =
-  id ? data[type][id] : {};
-
-
-  document
-  .getElementById("formModal")
-  .classList.remove("hidden");
+    id && data[type] && data[type][id]
+      ? data[type][id]
+      : {};
 
 
   const names = {
@@ -2063,31 +2072,48 @@ window.openForm = function(type,id=null){
 
 
   document
-  .getElementById("formTitle")
-  .innerText =
-  (id ? "✏️ Edit " : "➕ Add ")
-  +names[type];
+    .getElementById("formTitle")
+    .innerText =
+      (id ? "✏️ Edit " : "➕ Add ")
+      + (names[type] || "তথ্য");
 
+
+  /* =========================
+     নতুন Form তৈরি
+  ========================= */
+
+  formArea.innerHTML =
+    buildForm(type,old);
+
+
+  /* =========================
+     Profession Department
+  ========================= */
+
+  if(type === "profession"){
+
+    const department =
+      document.getElementById("f_department");
+
+    if(department){
+
+      department.value =
+        old.department || "";
+
+    }
+
+  }
+
+
+  /* =========================
+     Modal Open
+  ========================= */
 
   document
-  .getElementById("formArea")
-  .innerHTML =
-  buildForm(type,old);
+    .getElementById("formModal")
+    .classList.remove("hidden");
 
 };
-
-
-window.closeForm=function(){
-
-  document
-  .getElementById("formModal")
-  .classList.add("hidden");
-
-  editId=null;
-  editType=null;
-
-};
-
 
 /* =========================
    BUILD FORM
@@ -2261,8 +2287,11 @@ function buildForm(type,x){
 
   }
 
+/* =========================
+   PROFESSION
+========================= */
 
-  if(type==="profession"){
+if(type==="profession"){
 
   html += input(
     "person",
@@ -2270,11 +2299,13 @@ function buildForm(type,x){
     x.person
   );
 
+
   html += input(
     "father",
     "বাবার নাম *",
     x.father
   );
+
 
   html += input(
     "area",
@@ -2282,72 +2313,130 @@ function buildForm(type,x){
     x.area
   );
 
+
   html += input(
     "profession",
     "পেশা *",
     x.profession
   );
 
-  html += `
-    <label>বিভাগ *</label>
 
-    <select id="department">
+  html += select(
+    "department",
+    "বিভাগ *",
+    x.department || "",
+    [
 
-      <option value="">বিভাগ নির্বাচন করুন</option>
+      ["", "বিভাগ নির্বাচন করুন"],
 
-      <optgroup label="🎓 শিক্ষা">
-        <option value="🏫 প্রাথমিক বিদ্যালয়">🏫 প্রাথমিক বিদ্যালয়</option>
-        <option value="🏫 মাধ্যমিক / হাই স্কুল">🏫 মাধ্যমিক / হাই স্কুল</option>
-        <option value="🕌 মাদ্রাসা">🕌 মাদ্রাসা</option>
-        <option value="🔧 কারিগরি / ভোকেশনাল">🔧 কারিগরি / ভোকেশনাল</option>
-        <option value="🎓 কলেজ">🎓 কলেজ</option>
-        <option value="🏛️ বিশ্ববিদ্যালয়">🏛️ বিশ্ববিদ্যালয়</option>
-      </optgroup>
+      ["🏫 প্রাথমিক বিদ্যালয়",
+       "🏫 প্রাথমিক বিদ্যালয়"],
 
-      <optgroup label="🪖 প্রতিরক্ষা ও আইনশৃঙ্খলা">
-        <option value="✈️ বিমান বাহিনী">✈️ বিমান বাহিনী</option>
-        <option value="🪖 সেনাবাহিনী">🪖 সেনাবাহিনী</option>
-        <option value="⚓ নৌবাহিনী">⚓ নৌবাহিনী</option>
-        <option value="👮 পুলিশ">👮 পুলিশ</option>
-        <option value="🛡️ বিজিবি">🛡️ বিজিবি</option>
-        <option value="🛡️ আনসার">🛡️ আনসার</option>
-        <option value="🚒 ফায়ার সার্ভিস">🚒 ফায়ার সার্ভিস</option>
-        <option value="অন্যান্য">অন্যান্য</option>
-      </optgroup>
+      ["🏫 মাধ্যমিক / হাই স্কুল",
+       "🏫 মাধ্যমিক / হাই স্কুল"],
 
-      <optgroup label="🏢 সরকারি চাকরি">
-        <option value="🏛️ প্রশাসন">🏛️ প্রশাসন</option>
-        <option value="🏥 স্বাস্থ্য / হাসপাতাল">🏥 স্বাস্থ্য / হাসপাতাল</option>
-        <option value="💰 কর / কাস্টমস">💰 কর / কাস্টমস</option>
-        <option value="⚡ বিদ্যুৎ / জ্বালানি">⚡ বিদ্যুৎ / জ্বালানি</option>
-        <option value="🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান">🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান</option>
-        <option value="🏢 অন্যান্য সরকারি চাকরি">🏢 অন্যান্য সরকারি চাকরি</option>
-      </optgroup>
+      ["🕌 মাদ্রাসা",
+       "🕌 মাদ্রাসা"],
 
-      <optgroup label="💼 বেসরকারি চাকরি">
-        <option value="🏢 কোম্পানি">🏢 কোম্পানি</option>
-        <option value="🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান">🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান</option>
-        <option value="🏥 বেসরকারি হাসপাতাল / ক্লিনিক">🏥 বেসরকারি হাসপাতাল / ক্লিনিক</option>
-        <option value="💻 আইটি / সফটওয়্যার">💻 আইটি / সফটওয়্যার</option>
-        <option value="🏭 গার্মেন্টস / শিল্পকারখানা">🏭 গার্মেন্টস / শিল্পকারখানা</option>
-        <option value="🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান">🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান</option>
-        <option value="👨‍🔧 ইঞ্জিনিয়ার">👨‍🔧 ইঞ্জিনিয়ার</option>
-        <option value="📚 বেসরকারি শিক্ষা প্রতিষ্ঠান">📚 বেসরকারি শিক্ষা প্রতিষ্ঠান</option>
-      </optgroup>
+      ["🔧 কারিগরি / ভোকেশনাল",
+       "🔧 কারিগরি / ভোকেশনাল"],
 
-      <optgroup label="🌾 অন্যান্য">
-        <option value="🌾 কৃষি">🌾 কৃষি</option>
-        <option value="🏪 ব্যবসা">🏪 ব্যবসা</option>
-        <option value="🛒 দোকান">🛒 দোকান</option>
-        <option value="🌍 প্রবাসী">🌍 প্রবাসী</option>
-        <option value="💻 ফ্রিল্যান্সার">💻 ফ্রিল্যান্সার</option>
-      </optgroup>
+      ["🎓 কলেজ",
+       "🎓 কলেজ"],
 
-    </select>
-  `;
+      ["🏛️ বিশ্ববিদ্যালয়",
+       "🏛️ বিশ্ববিদ্যালয়"],
 
-  document.getElementById("department").value =
-    x.department || "";
+
+      ["✈️ বিমান বাহিনী",
+       "✈️ বিমান বাহিনী"],
+
+      ["🪖 সেনাবাহিনী",
+       "🪖 সেনাবাহিনী"],
+
+      ["⚓ নৌবাহিনী",
+       "⚓ নৌবাহিনী"],
+
+      ["👮 পুলিশ",
+       "👮 পুলিশ"],
+
+      ["🛡️ বিজিবি",
+       "🛡️ বিজিবি"],
+
+      ["🛡️ আনসার",
+       "🛡️ আনসার"],
+
+      ["🚒 ফায়ার সার্ভিস",
+       "🚒 ফায়ার সার্ভিস"],
+
+
+      ["🏛️ প্রশাসন",
+       "🏛️ প্রশাসন"],
+
+      ["🏥 স্বাস্থ্য / হাসপাতাল",
+       "🏥 স্বাস্থ্য / হাসপাতাল"],
+
+      ["💰 কর / কাস্টমস",
+       "💰 কর / কাস্টমস"],
+
+      ["⚡ বিদ্যুৎ / জ্বালানি",
+       "⚡ বিদ্যুৎ / জ্বালানি"],
+
+      ["🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান",
+       "🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান"],
+
+      ["🏢 অন্যান্য সরকারি চাকরি",
+       "🏢 অন্যান্য সরকারি চাকরি"],
+
+
+      ["🏢 কোম্পানি",
+       "🏢 কোম্পানি"],
+
+      ["🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান",
+       "🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান"],
+
+      ["🏥 বেসরকারি হাসপাতাল / ক্লিনিক",
+       "🏥 বেসরকারি হাসপাতাল / ক্লিনিক"],
+
+      ["💻 আইটি / সফটওয়্যার",
+       "💻 আইটি / সফটওয়্যার"],
+
+      ["🏭 গার্মেন্টস / শিল্পকারখানা",
+       "🏭 গার্মেন্টস / শিল্পকারখানা"],
+
+      ["🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান",
+       "🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান"],
+
+      ["👨‍🔧 ইঞ্জিনিয়ার",
+       "👨‍🔧 ইঞ্জিনিয়ার"],
+
+      ["📚 বেসরকারি শিক্ষা প্রতিষ্ঠান",
+       "📚 বেসরকারি শিক্ষা প্রতিষ্ঠান"],
+
+
+      ["🌾 কৃষি",
+       "🌾 কৃষি"],
+
+      ["🏪 ব্যবসা",
+       "🏪 ব্যবসা"],
+
+      ["🛒 দোকান",
+       "🛒 দোকান"],
+
+      ["🌍 প্রবাসী",
+       "🌍 প্রবাসী"],
+
+      ["💻 ফ্রিল্যান্সার",
+       "💻 ফ্রিল্যান্সার"],
+
+
+      ["অন্যান্য",
+       "অন্যান্য"]
+
+    ]
+
+  );
+
 
   html += textarea(
     "description",
