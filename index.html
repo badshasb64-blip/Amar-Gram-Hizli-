@@ -1782,14 +1782,18 @@ if(type==="family"){
       `;
 
 
-      person.sons.forEach(child=>{
+      person.sons.forEach((child,index)=>{
 
-        html += familyPersonHTML(
-          child,
-          level + 1
-        );
+  html += familyPersonHTML(
+    child,
+    level + 1,
+    familyId,
+    personPath
+      ? `${personPath}.sons.${index}`
+      : `sons.${index}`
+  );
 
-      });
+});
 
 
       html += `
@@ -1817,14 +1821,18 @@ if(type==="family"){
       `;
 
 
-      person.daughters.forEach(child=>{
+      person.daughters.forEach((child,index)=>{
 
-        html += familyPersonHTML(
-          child,
-          level + 1
-        );
+  html += familyPersonHTML(
+    child,
+    level + 1,
+    familyId,
+    personPath
+      ? `${personPath}.daughters.${index}`
+      : `daughters.${index}`
+  );
 
-      });
+});
 
 
       html += `
