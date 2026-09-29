@@ -1444,6 +1444,201 @@ window.familyAddChild = async function(familyId, parentPath=""){
   }
 
 };
+
+/* ==================================================
+   FAMILY CHILD EDIT
+================================================== */
+
+window.familyEditChild = async function(familyId, personPath){
+
+  if(
+    !currentUser ||
+    !ADMIN_UIDS.includes(currentUser.uid)
+  ){
+    alert("শুধু Admin Edit করতে পারবেন।");
+    return;
+  }
+
+  const family =
+    data.family &&
+    data.family[familyId]
+      ? data.family[familyId]
+      : null;
+
+  if(!family){
+    alert("পরিবারের তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const person =
+    getFamilyPersonByPath(
+      family,
+      personPath
+    );
+
+  if(!person){
+    alert("ব্যক্তির তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const oldName =
+    person.name || "";
+
+  const newName =
+    prompt(
+      "নতুন নাম লিখুন:",
+      oldName
+    );
+
+  if(newName === null){
+    return;
+  }
+
+  if(!newName.trim()){
+    alert("নাম খালি রাখা যাবে না।");
+    return;
+  }
+
+  person.name = newName.trim();
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `${paths.family}/${familyId}`
+      ),
+      {
+        sons: family.sons || [],
+        daughters: family.daughters || [],
+        maleCount: Number(family.maleCount) || 0,
+        femaleCount: Number(family.femaleCount) || 0
+      }
+    );
+
+    alert("নাম পরিবর্তন হয়েছে।");
+
+  }catch(error){
+
+    alert(
+      "Edit করা যায়নি:\n" +
+      error.message
+    );
+
+  }
+
+};
+
+/* ==================================================
+   FAMILY CHILD DELETE
+================================================== */
+
+window.familyDeleteChild = async function(familyId, personPath){
+
+  if(
+    !currentUser ||
+    !ADMIN_UIDS.includes(currentUser.uid)
+  ){
+    alert("শুধু Admin Delete করতে পারবেন।");
+    return;
+  }
+
+  const family =
+    data.family &&
+    data.family[familyId]
+      ? data.family[familyId]
+      : null;
+
+  if(!family){
+    alert("পরিবারের তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const info =
+    getFamilyParentByPath(
+      family,
+      personPath
+    );
+
+  if(!info){
+    alert("ব্যক্তির তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const child =
+    info.parent[info.key][info.index];
+
+  if(!child){
+    alert("সন্তানের তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const childName =
+    child.name || "এই ব্যক্তি";
+
+  const confirmDelete =
+    confirm(
+      `"${childName}" এবং তার অধীনে থাকা সন্তানদের Delete করতে চান?`
+    );
+
+  if(!confirmDelete){
+    return;
+  }
+
+  /* সন্তানটি Array থেকে বাদ */
+  info.parent[info.key].splice(
+    info.index,
+    1
+  );
+
+  /* Parent-এর ছেলে/মেয়ে সংখ্যা কমানো */
+  if(info.key === "sons"){
+
+    info.parent.maleCount =
+      Math.max(
+        0,
+        (Number(info.parent.maleCount) || 0) - 1
+      );
+
+  }
+
+  if(info.key === "daughters"){
+
+    info.parent.femaleCount =
+      Math.max(
+        0,
+        (Number(info.parent.femaleCount) || 0) - 1
+      );
+
+  }
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `${paths.family}/${familyId}`
+      ),
+      {
+        sons: family.sons || [],
+        daughters: family.daughters || [],
+        maleCount: Number(family.maleCount) || 0,
+        femaleCount: Number(family.femaleCount) || 0
+      }
+    );
+
+    alert("Delete হয়েছে।");
+
+  }catch(error){
+
+    alert(
+      "Delete করা যায়নি:\n" +
+      error.message
+    );
+
+  }
+
+};
   
 /* =========================
    RENDER
