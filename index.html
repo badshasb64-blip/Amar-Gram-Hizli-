@@ -2411,29 +2411,29 @@ if(type==="family"){
 
                   ${
                     Array.isArray(item.sons)
-                    ? item.sons
-                        .map(child =>
-                          familyPersonHTML(
-                            child,
-                            1
-                          )
-                        )
-                        .join("")
-                    : ""
+  ? item.sons.map((child,index) =>
+      familyPersonHTML(
+        child,
+        1,
+        id,
+        `sons.${index}`
+      )
+    ).join("")
+  : ""
                   }
 
 
                   ${
                     Array.isArray(item.daughters)
-                    ? item.daughters
-                        .map(child =>
-                          familyPersonHTML(
-                            child,
-                            1
-                          )
-                        )
-                        .join("")
-                    : ""
+  ? item.daughters.map((child,index) =>
+      familyPersonHTML(
+        child,
+        1,
+        id,
+        `daughters.${index}`
+      )
+    ).join("")
+  : ""
                   }
 
                 </div>
