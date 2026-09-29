@@ -1268,8 +1268,183 @@ Object.keys(paths).forEach(type=>{
   loadData(type);
 
 });
+/* ==================================================
+   FAMILY CHILD FUNCTIONS
+================================================== */
+
+function getFamilyPersonByPath(root, path){
+
+  if(!path) return root;
+
+  const parts = path.split(".");
+  let person = root;
+
+  for(let i=0; i<parts.length; i+=2){
+
+    const key = parts[i];
+    const index = Number(parts[i+1]);
+
+    if(
+      !person ||
+      !Array.isArray(person[key]) ||
+      !person[key][index]
+    ){
+      return null;
+    }
+
+    person = person[key][index];
+
+  }
+
+  return person;
+}
 
 
+function getFamilyParentByPath(root, path){
+
+  const parts = path.split(".");
+
+  if(parts.length < 2) return null;
+
+  const index = Number(parts.pop());
+  const key = parts.pop();
+
+  let parent = root;
+
+  for(let i=0; i<parts.length; i+=2){
+
+    const nextKey = parts[i];
+    const nextIndex = Number(parts[i+1]);
+
+    if(
+      !parent ||
+      !Array.isArray(parent[nextKey]) ||
+      !parent[nextKey][nextIndex]
+    ){
+      return null;
+    }
+
+    parent = parent[nextKey][nextIndex];
+
+  }
+
+  return {
+    parent,
+    key,
+    index
+  };
+
+}
+window.familyAddChild = async function(familyId, parentPath=""){
+
+  if(
+    !currentUser ||
+    !ADMIN_UIDS.includes(currentUser.uid)
+  ){
+    alert("শুধু Admin সন্তান যোগ করতে পারবেন।");
+    return;
+  }
+
+  const family =
+    data.family &&
+    data.family[familyId]
+      ? data.family[familyId]
+      : null;
+
+  if(!family){
+    alert("পরিবারের তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const parent =
+    getFamilyPersonByPath(
+      family,
+      parentPath
+    );
+
+  if(!parent){
+    alert("অভিভাবকের তথ্য পাওয়া যায়নি।");
+    return;
+  }
+
+  const name = prompt("সন্তানের নাম লিখুন:");
+
+  if(name === null || !name.trim()){
+    return;
+  }
+
+  const gender = prompt(
+    "লিঙ্গ নির্বাচন করুন:\n\n1 = ছেলে\n2 = মেয়ে"
+  );
+
+  if(gender !== "1" && gender !== "2"){
+    alert("সঠিকভাবে 1 অথবা 2 লিখুন।");
+    return;
+  }
+
+  const key =
+    gender === "1"
+      ? "sons"
+      : "daughters";
+
+  if(!Array.isArray(parent[key])){
+    parent[key] = [];
+  }
+
+  parent[key].push({
+
+    name: name.trim(),
+
+    maleCount: 0,
+
+    femaleCount: 0,
+
+    sons: [],
+
+    daughters: []
+
+  });
+
+  if(gender === "1"){
+
+    parent.maleCount =
+      (Number(parent.maleCount) || 0) + 1;
+
+  }else{
+
+    parent.femaleCount =
+      (Number(parent.femaleCount) || 0) + 1;
+
+  }
+
+  try{
+
+    await update(
+      ref(
+        db,
+        `${paths.family}/${familyId}`
+      ),
+      {
+        sons: family.sons || [],
+        daughters: family.daughters || [],
+        maleCount: Number(family.maleCount) || 0,
+        femaleCount: Number(family.femaleCount) || 0
+      }
+    );
+
+    alert("সন্তান যোগ হয়েছে।");
+
+  }catch(error){
+
+    alert(
+      "সন্তান যোগ করা যায়নি:\n" +
+      error.message
+    );
+
+  }
+
+};
+  
 /* =========================
    RENDER
 ========================= */
