@@ -2891,17 +2891,77 @@ if(type==="family"){
   }
 
 
-  /* EDUCATION */
+/* EDUCATION */
 
-  if(type==="education"){
+if(type==="education"){
 
-    html += field(x.type,"🎓 শিক্ষার ধরন");
+  const educationNames = {
 
-    html += field(x.person,"👤 ব্যক্তি");
+    university:"🎓 বিশ্ববিদ্যালয়",
 
-    html += field(x.institution,"🏫 প্রতিষ্ঠান");
+    intermediate:"📖 কলেজ ইন্টারমিডিয়েট",
 
-  }
+    honours:"📚 কলেজ অনার্স",
+
+    polytechnic:"⚙️ পলিটেকনিক",
+
+    medical:"🩺 মেডিক্যাল",
+
+    nursing:"👩‍⚕️ নার্সিং কলেজ"
+
+  };
+
+  const educationTitle =
+    educationNames[x.type] ||
+    "🎓 শিক্ষা";
+
+
+  /* শিরোনাম */
+
+  html += `
+    <div style="
+      font-size:16px;
+      font-weight:700;
+      color:#087443;
+      margin-bottom:8px;
+    ">
+      ${educationTitle}
+    </div>
+  `;
+
+
+  /* ব্যক্তি */
+
+  html += field(
+    x.person,
+    "👤 ব্যক্তি"
+  );
+
+
+  /* বাবা */
+
+  html += field(
+    x.father,
+    "👨 বাবা"
+  );
+
+
+  /* প্রতিষ্ঠান */
+
+  html += field(
+    x.institution,
+    "🏫 প্রতিষ্ঠান"
+  );
+
+
+  /* বিভাগ / বিষয় */
+
+  html += field(
+    x.subject,
+    "📚 বিভাগ / বিষয়"
+  );
+
+}
 
 
 /* PROFESSION */
@@ -3327,40 +3387,57 @@ function buildForm(type,x){
 
   }
 
+if(type==="education"){
 
-  if(type==="education"){
+  html += input(
+    "person",
+    "👤 ব্যক্তির নাম *",
+    x.person
+  );
 
-    html += input(
-      "title",
-      "শিরোনাম *",
-      x.title
-    );
+  html += input(
+    "father",
+    "👨 বাবার নাম *",
+    x.father
+  );
 
-    html += input(
-      "type",
-      "শিক্ষার ধরন",
-      x.type
-    );
+  html += select(
+    "type",
+    "🎓 শিক্ষার ধরন *",
+    x.type || "",
+    [
 
-    html += input(
-      "person",
-      "ব্যক্তির নাম (ঐচ্ছিক)",
-      x.person
-    );
+      ["", "শিক্ষার ধরন নির্বাচন করুন"],
 
-    html += input(
-      "institution",
-      "শিক্ষাপ্রতিষ্ঠানের নাম",
-      x.institution
-    );
+      ["university", "🎓 বিশ্ববিদ্যালয়"],
 
-    html += textarea(
-      "description",
-      "শিক্ষা সম্পর্কিত বিস্তারিত",
-      x.description
-    );
+      ["intermediate", "📖 কলেজ ইন্টারমিডিয়েট"],
 
-  }
+      ["honours", "📚 কলেজ অনার্স"],
+
+      ["polytechnic", "⚙️ পলিটেকনিক"],
+
+      ["medical", "🩺 মেডিক্যাল"],
+
+      ["nursing", "👩‍⚕️ নার্সিং কলেজ"]
+
+    ]
+  );
+
+  html += input(
+    "institution",
+    "🏫 প্রতিষ্ঠানের নাম *",
+    x.institution
+  );
+
+  html += input(
+    "subject",
+    "📚 বিভাগ / বিষয় *",
+    x.subject
+  );
+
+}
+
 
 /* =========================
    PROFESSION
@@ -3945,15 +4022,50 @@ if(type==="family"){
 
   if(type==="education"){
 
-    x={
-      title:fv("title"),
-      type:fv("type"),
-      person:fv("person"),
-      institution:fv("institution"),
-      description:fv("description")
-    };
+  x={
+    person:fv("person"),
+    father:fv("father"),
+    type:fv("type"),
+    institution:fv("institution"),
+    subject:fv("subject")
+  };
+
+  if(!x.person){
+
+    alert("ব্যক্তির নাম দিন।");
+    return;
 
   }
+
+  if(!x.father){
+
+    alert("বাবার নাম দিন।");
+    return;
+
+  }
+
+  if(!x.type){
+
+    alert("শিক্ষার ধরন নির্বাচন করুন।");
+    return;
+
+  }
+
+  if(!x.institution){
+
+    alert("প্রতিষ্ঠানের নাম দিন।");
+    return;
+
+  }
+
+  if(!x.subject){
+
+    alert("বিভাগ / বিষয় দিন।");
+    return;
+
+  }
+
+}
 
 
  if(type==="profession"){
