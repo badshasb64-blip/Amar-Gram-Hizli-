@@ -2201,6 +2201,15 @@ if(type==="family"){
     const totalChildren =
       maleCount + femaleCount;
 
+    const hasChildren =
+  (Array.isArray(person.sons) &&
+   person.sons.length > 0) ||
+  (Array.isArray(person.daughters) &&
+   person.daughters.length > 0);
+
+const childrenBoxId =
+  `family_children_${familyId}_${personPath.replace(/\./g,"_") || "root"}`;
+
 
     html += `
       <div class="family-person"
