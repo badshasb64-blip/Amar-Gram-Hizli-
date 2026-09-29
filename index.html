@@ -2719,6 +2719,156 @@ ${
 
 }  
 
+  /* ==================================================
+   EDUCATION
+   ধরন অনুযায়ী আলাদা বিভাগ
+================================================== */
+
+if(type==="education"){
+
+  const educationGroups = [
+
+    {
+      type:"university",
+      title:"🎓 বিশ্ববিদ্যালয়"
+    },
+
+    {
+      type:"intermediate",
+      title:"📖 কলেজ ইন্টারমিডিয়েট"
+    },
+
+    {
+      type:"honours",
+      title:"📚 কলেজ অনার্স"
+    },
+
+    {
+      type:"polytechnic",
+      title:"⚙️ পলিটেকনিক"
+    },
+
+    {
+      type:"medical",
+      title:"🩺 মেডিক্যাল"
+    },
+
+    {
+      type:"nursing",
+      title:"👩‍⚕️ নার্সিং কলেজ"
+    }
+
+  ];
+
+
+  let educationHTML = "";
+
+
+  educationGroups.forEach(group=>{
+
+    const groupItems =
+      items.filter(
+        ([id,x]) =>
+          x.type === group.type
+      );
+
+
+    /* এই বিভাগে কেউ না থাকলে বিভাগ দেখাবে না */
+
+    if(!groupItems.length){
+      return;
+    }
+
+
+    /* মোট ব্যক্তি */
+
+    const total =
+      groupItems.length;
+
+
+    educationHTML += `
+
+      <div class="education-group card">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:10px;
+          margin-bottom:14px;
+          flex-wrap:wrap;
+        ">
+
+          <h2 style="
+            margin:0;
+            color:#086c40;
+            font-size:20px;
+          ">
+            ${group.title}
+          </h2>
+
+
+          <div style="
+            background:#e7f6ee;
+            color:#087443;
+            padding:6px 11px;
+            border-radius:20px;
+            font-size:13px;
+            font-weight:700;
+          ">
+            👥 মোট ${total} জন
+          </div>
+
+        </div>
+
+
+        <div>
+
+          ${
+            groupItems
+              .map(
+                ([id,item]) =>
+                  makeCard(
+                    type,
+                    id,
+                    item
+                  )
+              )
+              .join("")
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  if(!educationHTML){
+
+    el.innerHTML = `
+
+      <div class="empty">
+
+        🎓 এখনো কোনো শিক্ষার তথ্য যোগ করা হয়নি।
+
+      </div>
+
+    `;
+
+  }else{
+
+    el.innerHTML =
+      educationHTML;
+
+  }
+
+
+  return;
+
+}
 
   /* ==================================================
      অন্যান্য সব SECTION
