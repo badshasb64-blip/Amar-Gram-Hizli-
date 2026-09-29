@@ -2249,6 +2249,22 @@ const childrenBoxId =
 
         <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
 
+${
+  hasChildren
+  ? `
+    <button
+      id="${childrenBoxId}_btn"
+      class="primary"
+      style="padding:6px 9px; font-size:12px;"
+      onclick="toggleFamilyChildren('${childrenBoxId}')">
+
+      ▶ সন্তান দেখুন
+
+    </button>
+  `
+  : ""
+}
+
   <button
     class="primary"
     style="padding:6px 9px; font-size:12px;"
