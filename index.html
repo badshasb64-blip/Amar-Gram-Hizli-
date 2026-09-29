@@ -1752,6 +1752,32 @@ window.familyDeleteChild = async function(familyId, personPath){
   }
 
 };
+  /* =========================================
+   FAMILY TREE TOGGLE
+========================================= */
+
+window.toggleFamilyChildren = function(id){
+
+  const box = document.getElementById(id);
+  const button = document.getElementById(id + "_btn");
+
+  if(!box || !button) return;
+
+  if(box.style.display === "none"){
+
+    box.style.display = "block";
+
+    button.innerHTML = "▲ সন্তান লুকান";
+
+  }else{
+
+    box.style.display = "none";
+
+    button.innerHTML = "▶ সন্তান দেখুন";
+
+  }
+
+};
   
 /* =========================
    RENDER
