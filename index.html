@@ -1673,8 +1673,12 @@ if(type==="family"){
      FAMILY PERSON TREE
   ========================= */
 
-  function familyPersonHTML(person, level=0){
-
+  function familyPersonHTML(
+  person,
+  level=0,
+  familyId,
+  personPath=""
+){
     if(!person) return "";
 
     let html = "";
@@ -1725,11 +1729,38 @@ if(type==="family"){
         </div>
 
 
-        <div style="margin-top:6px;">
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
 
-          ➕ সন্তান যোগ করুন
+  <button
+    class="primary"
+    style="padding:6px 9px; font-size:12px;"
+    onclick="familyAddChild('${familyId}','${personPath}')">
 
-        </div>
+    ➕ সন্তান
+
+  </button>
+
+
+  <button
+    class="edit"
+    style="padding:6px 9px; font-size:12px;"
+    onclick="familyEditChild('${familyId}','${personPath}')">
+
+    ✏️ Edit
+
+  </button>
+
+
+  <button
+    class="danger"
+    style="padding:6px 9px; font-size:12px;"
+    onclick="familyDeleteChild('${familyId}','${personPath}')">
+
+    🗑️ Delete
+
+  </button>
+
+</div>
     `;
 
 
