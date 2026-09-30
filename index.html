@@ -605,10 +605,23 @@ footer{
   </div>
 
   <div class="stat">
-    <b id="homeProfession">0</b>
-    <span>💼 পেশা</span>
-    <small>জন</small>
-  </div>
+  <b>💼 পেশা</b>
+
+  <small>
+    👨‍💼 চাকরিজীবী
+    <strong id="homeJob">0</strong> জন
+  </small>
+
+  <small>
+    🏪 ব্যবসায়ী
+    <strong id="homeBusiness">0</strong> জন
+  </small>
+
+  <small>
+    ✈️ প্রবাসী
+    <strong id="homeExpat">0</strong> জন
+  </small>
+</div>
 
 </div>
 
@@ -4634,14 +4647,122 @@ function updateStats(){
 
 
   /* =========================
-     PROFESSION
-     যতজন ব্যক্তির পেশার তথ্য
-     আছে = মোট পেশাজীবী
-  ========================= */
+   PROFESSION
+   চাকরিজীবী / ব্যবসায়ী / প্রবাসী
+========================= */
 
-  const professionCount =
-    Object.keys(data.profession || {}).length;
+let jobCount = 0;
+let businessCount = 0;
+let expatCount = 0;
 
+
+/* চাকরিজীবী বিভাগ */
+
+const jobDepartments = [
+
+  "🏫 প্রাথমিক বিদ্যালয়",
+  "🏫 মাধ্যমিক / হাই স্কুল",
+  "🕌 মাদ্রাসা",
+  "🔧 কারিগরি / ভোকেশনাল",
+  "🎓 কলেজ",
+  "🏛️ বিশ্ববিদ্যালয়",
+
+  "✈️ বিমান বাহিনী",
+  "🪖 সেনাবাহিনী",
+  "⚓ নৌবাহিনী",
+  "👮 পুলিশ",
+  "🛡️ বিজিবি",
+  "🛡️ আনসার",
+  "🚒 ফায়ার সার্ভিস",
+
+  "🏛️ প্রশাসন",
+  "🏥 স্বাস্থ্য / হাসপাতাল",
+  "💰 কর / কাস্টমস",
+  "⚡ বিদ্যুৎ / জ্বালানি",
+  "🏦 সরকারি ব্যাংক / আর্থিক প্রতিষ্ঠান",
+  "🏢 অন্যান্য সরকারি চাকরি",
+
+  "🏢 কোম্পানি",
+  "🏦 বেসরকারি / আর্থিক প্রতিষ্ঠান",
+  "🏥 বেসরকারি হাসপাতাল / ক্লিনিক",
+  "💻 আইটি / সফটওয়্যার",
+  "🏭 গার্মেন্টস / শিল্পকারখানা",
+  "📚 বেসরকারি শিক্ষা প্রতিষ্ঠান",
+  "👨‍🔧 ইঞ্জিনিয়ার"
+
+];
+
+
+/* সব পেশার তথ্য যাচাই */
+
+Object.values(data.profession || {})
+.forEach(item => {
+
+  const department =
+    item.department || "";
+
+
+  if(jobDepartments.includes(department)){
+
+    jobCount++;
+
+  }
+
+
+  if(
+    department === "🏪 ব্যবসা" ||
+    department === "🛒 দোকান" ||
+    department === "🏪 বেসরকারি ব্যবসা প্রতিষ্ঠান"
+  ){
+
+    businessCount++;
+
+  }
+
+
+  if(department === "🌍 প্রবাসী"){
+
+    expatCount++;
+
+  }
+
+});
+
+
+/* Home-এ দেখানো */
+
+const homeJob =
+  document.getElementById("homeJob");
+
+const homeBusiness =
+  document.getElementById("homeBusiness");
+
+const homeExpat =
+  document.getElementById("homeExpat");
+
+
+if(homeJob){
+
+  homeJob.innerText =
+    jobCount;
+
+}
+
+
+if(homeBusiness){
+
+  homeBusiness.innerText =
+    businessCount;
+
+}
+
+
+if(homeExpat){
+
+  homeExpat.innerText =
+    expatCount;
+
+}
 
   /* =========================
      HOME STATS
@@ -4684,12 +4805,6 @@ function updateStats(){
   }
 
 
-  if(homeProfession){
-
-    homeProfession.innerText =
-      professionCount;
-
-  }
 
 
   /* =========================
