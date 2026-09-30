@@ -134,6 +134,46 @@ button{cursor:pointer}
   margin-left:3px;
 }
 
+.stat b{
+  display:block;
+  font-size:16px;
+  color:#333;
+  white-space:nowrap;
+}
+
+.stat b strong{
+  color:#07804c;
+  margin-left:3px;
+}
+
+.stat small{
+  display:block;
+  margin-top:5px;
+  font-size:10px;
+  color:#333;
+  white-space:nowrap;
+}
+
+.stat small strong{
+  color:#07804c;
+  margin-left:3px;
+}
+
+/* পেশা কার্ড */
+.stat:nth-child(3){
+  padding-left:6px;
+  padding-right:6px;
+}
+
+.stat:nth-child(3) b{
+  font-size:16px;
+}
+
+.stat:nth-child(3) small{
+  font-size:10px;
+  margin-top:3px;
+}
+  
   /* পেশা কার্ড ছোট ও সুন্দর করার জন্য */
 .stat:nth-child(3) b{
   font-size:16px;
@@ -614,7 +654,12 @@ footer{
 <div class="stats">
 
   <div class="stat">
-  <b id="homeFamilyPopulation">জনসংখ্যা 0 জন</b>
+  <b>
+    জনসংখ্যা
+    <strong id="homeFamilyPopulation">0</strong>
+    জন
+  </b>
+
   <small>
     👨‍👩‍👧‍👦 বংশ
     <strong id="homeFamily">0</strong> টি
@@ -4814,11 +4859,9 @@ if(homeExpat){
 
 
   if(homeFamilyPopulation){
-
-    homeFamilyPopulation.innerText =
-      "জনসংখ্যা " + familyPopulation + " জন " ;
-
-  }
+  homeFamilyPopulation.innerText =
+    familyPopulation;
+}
 
 
   if(homeEducation){
