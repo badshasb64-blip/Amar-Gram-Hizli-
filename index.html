@@ -121,7 +121,14 @@ button{cursor:pointer}
   color:#07804c;
 }
 .stat span{font-size:12px}
-
+  
+.stat small{
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+  color:#718178;
+  }
+  
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -4587,48 +4594,139 @@ window.deleteItem=async function(type,id){
 
 function updateStats(){
 
+  /* =========================
+     FAMILY
+     বংশ = মোট Family record
+     জনসংখ্যা = সব বংশের
+     maleCount + femaleCount
+  ========================= */
+
+  const familyCount =
+    Object.keys(data.family || {}).length;
+
+  let familyPopulation = 0;
+
+  Object.values(data.family || {})
+    .forEach(family => {
+
+      familyPopulation +=
+        (Number(family.maleCount) || 0) +
+        (Number(family.femaleCount) || 0);
+
+    });
+
+
+  /* =========================
+     EDUCATION
+     যতজন ব্যক্তির শিক্ষা তথ্য
+     আছে = মোট শিক্ষার্থী
+  ========================= */
+
+  const educationCount =
+    Object.keys(data.education || {}).length;
+
+
+  /* =========================
+     PROFESSION
+     যতজন ব্যক্তির পেশার তথ্য
+     আছে = মোট পেশাজীবী
+  ========================= */
+
+  const professionCount =
+    Object.keys(data.profession || {}).length;
+
+
+  /* =========================
+     HOME STATS
+  ========================= */
+
+  const homeFamily =
+    document.getElementById("homeFamily");
+
+  const homeFamilyPopulation =
+    document.getElementById("homeFamilyPopulation");
+
+  const homeEducation =
+    document.getElementById("homeEducation");
+
+  const homeProfession =
+    document.getElementById("homeProfession");
+
+
+  if(homeFamily){
+
+    homeFamily.innerText =
+      familyCount;
+
+  }
+
+
+  if(homeFamilyPopulation){
+
+    homeFamilyPopulation.innerText =
+      "জনসংখ্যা " + familyPopulation;
+
+  }
+
+
+  if(homeEducation){
+
+    homeEducation.innerText =
+      educationCount;
+
+  }
+
+
+  if(homeProfession){
+
+    homeProfession.innerText =
+      professionCount;
+
+  }
+
+
+  /* =========================
+     ADMIN STATS
+     এগুলো আগের মতোই থাকবে
+  ========================= */
+
   const people =
-  Object.keys(data.people||{})
-  .filter(id=>
-    data.people[id].public!=="no"
-  ).length;
+    Object.keys(data.people || {})
+    .filter(id =>
+      data.people[id].public !== "no"
+    ).length;
 
 
   const institutions =
-  Object.values(data.institution||{})
-  .filter(x=>
-    !x.category ||
-    x.category==="institution"
-  ).length;
+    Object.values(data.institution || {})
+    .filter(x =>
+      !x.category ||
+      x.category === "institution"
+    ).length;
 
 
   const photos =
-  Object.keys(data.gallery||{}).length;
-
-
-  document.getElementById("homePeople")
-    .innerText=people;
-
-  document.getElementById("homeInstitution")
-    .innerText=institutions;
-
-  document.getElementById("homePhoto")
-    .innerText=photos;
+    Object.keys(data.gallery || {}).length;
 
 
   document.getElementById("adminPeople")
-    .innerText=
-    Object.keys(data.people||{}).length;
+    .innerText =
+      Object.keys(data.people || {}).length;
+
 
   document.getElementById("adminInstitution")
-    .innerText=institutions;
+    .innerText =
+      institutions;
+
 
   document.getElementById("adminNotice")
-    .innerText=
-    Object.keys(data.notice||{}).length;
+    .innerText =
+      Object.keys(data.notice || {}).length;
+
 
   document.getElementById("adminGallery")
-    .innerText=photos;
+    .innerText =
+      photos;
 
 }
 
