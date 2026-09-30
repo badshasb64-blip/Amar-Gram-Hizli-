@@ -3030,15 +3030,127 @@ if(type==="family"){
 
   /* INSTITUTION */
 
-  if(type==="institution"){
+if(type==="institution"){
 
-    html += field(x.type,"🏷️ ধরন");
+  const institutionIcons = {
 
-    html += field(x.location,"📍 ঠিকানা");
+    school:"🏫",
+    madrasa:"🕌",
+    college:"🎓",
+    university:"🏛️",
+    kindergarten:"🏫",
+    hospital:"🏥",
+    clinic:"⚕️",
+    eidgah:"🕌",
+    cemetery:"⚰️",
+    other:"📍"
 
-    html += field(x.phone,"📞 ফোন");
+  };
 
-  }
+  const icon =
+    institutionIcons[x.type] || "🏢";
+
+
+  /* প্রতিষ্ঠানের ধরন */
+
+  html += `
+    <div style="
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+    ">
+
+      <span style="font-size:24px;">
+        ${icon}
+      </span>
+
+      <span style="
+        background:#e8f7ef;
+        color:#087443;
+        padding:6px 12px;
+        border-radius:20px;
+        font-size:13px;
+        font-weight:700;
+      ">
+        ${x.type || "প্রতিষ্ঠান"}
+      </span>
+
+    </div>
+  `;
+
+
+  /* প্রতিষ্ঠা */
+
+  html += field(
+    x.established,
+    "📅 প্রতিষ্ঠা"
+  );
+
+
+  /* অবস্থান */
+
+  html += field(
+    x.location,
+    "📍 অবস্থিত"
+  );
+
+  /* প্রধান ব্যক্তি */
+
+const headLabels = {
+
+  school:"👨‍🏫 প্রধান শিক্ষক",
+
+  madrasa:"👨‍🏫 মুহতামিম / অধ্যক্ষ",
+
+  college:"👨‍🏫 অধ্যক্ষ",
+
+  university:"👨‍🏫 উপাচার্য",
+
+  kindergarten:"👨‍🏫 প্রধান শিক্ষক",
+
+  hospital:"👨‍⚕️ পরিচালক",
+
+  clinic:"👨‍⚕️ পরিচালক",
+
+  eidgah:"👤 দায়িত্বপ্রাপ্ত",
+
+  cemetery:"👤 দায়িত্বপ্রাপ্ত",
+
+  other:"👤 প্রধান"
+
+};
+
+html += field(
+  x.headName,
+  headLabels[x.type] || "👤 প্রধান"
+);
+
+
+  /* বর্তমান সভাপতি */
+
+  html += field(
+    x.president,
+    "👤 বর্তমান সভাপতি"
+  );
+
+
+  /* বর্তমান সহ-সভাপতি */
+
+  html += field(
+    x.vicePresident,
+    "👤 বর্তমান সহ-সভাপতি"
+  );
+
+
+  /* বিস্তারিত */
+
+  html += field(
+    x.description,
+    "📄 বিস্তারিত"
+  );
+
+}
 
 
 /* EDUCATION */
