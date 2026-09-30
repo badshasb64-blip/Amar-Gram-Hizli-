@@ -3490,52 +3490,98 @@ function buildForm(type,x){
 
   }
 
+if(type==="institution"){
+
+  html += input(
+    "name",
+    "প্রতিষ্ঠানের নাম *",
+    x.name
+  );
 
 
-  if(type==="institution"){
+  html += select(
+    "type",
+    "প্রতিষ্ঠানের ধরন",
+    x.type || "স্কুল",
+    [
+      ["স্কুল","🏫 স্কুল"],
+      ["মাদ্রাসা","🕌 মাদ্রাসা"],
+      ["কলেজ","🎓 কলেজ"],
+      ["বিশ্ববিদ্যালয়","🏛️ বিশ্ববিদ্যালয়"],
+      ["কিন্ডারগার্টেন","🏫 কিন্ডারগার্টেন"],
+      ["হাসপাতাল","🏥 হাসপাতাল"],
+      ["ক্লিনিক","⚕️ ক্লিনিক"],
+      ["দোকান","🏪 দোকান"],
+      ["অন্যান্য","📍 অন্যান্য"]
+    ]
+  );
 
-    html += input(
-      "name",
-      "প্রতিষ্ঠানের নাম *",
-      x.name
-    );
 
-    html += select(
-      "type",
-      "প্রতিষ্ঠানের ধরন",
-      x.type || "স্কুল",
-      [
-        ["স্কুল","🏫 স্কুল"],
-        ["মাদ্রাসা","🕌 মাদ্রাসা"],
-        ["কলেজ","🎓 কলেজ"],
-        ["বিশ্ববিদ্যালয়","🏛️ বিশ্ববিদ্যালয়"],
-        ["কিন্ডারগার্টেন","🏫 কিন্ডারগার্টেন"],
-        ["হাসপাতাল","🏥 হাসপাতাল"],
-        ["ক্লিনিক","⚕️ ক্লিনিক"],
-        ["দোকান","🏪 দোকান"],
-        ["অন্যান্য","📍 অন্যান্য"]
-      ]
-    );
+  /* প্রতিষ্ঠানের ছবি */
 
-    html += input(
-      "location",
-      "ঠিকানা / অবস্থান",
-      x.location
-    );
+  html += input(
+    "image",
+    "🖼️ প্রতিষ্ঠানের ছবির ImgBB লিংক",
+    x.image
+  );
 
-    html += input(
-      "phone",
-      "ফোন",
-      x.phone
-    );
 
-    html += textarea(
-      "description",
-      "প্রতিষ্ঠান সম্পর্কে বিস্তারিত",
-      x.description
-    );
+  /* প্রতিষ্ঠার সাল */
 
-  }
+  html += input(
+    "established",
+    "📅 প্রতিষ্ঠার সাল",
+    x.established
+  );
+
+
+  /* কোন পাড়ায় অবস্থিত */
+
+  html += input(
+    "location",
+    "📍 কোন পাড়ায় অবস্থিত",
+    x.location
+  );
+
+
+  /* প্রধান / প্রিন্সিপাল */
+
+  html += input(
+    "headName",
+    "👨‍🏫 প্রধান / প্রিন্সিপালের নাম",
+    x.headName
+  );
+
+
+  /* সভাপতি */
+
+  html += input(
+    "president",
+    "👤 বর্তমান সভাপতি",
+    x.president
+  );
+
+
+  /* সহ-সভাপতি */
+
+  html += input(
+    "vicePresident",
+    "👤 বর্তমান সহ-সভাপতি",
+    x.vicePresident
+  );
+
+
+  /* বিস্তারিত */
+
+  html += textarea(
+    "description",
+    "📄 প্রতিষ্ঠান সম্পর্কে বিস্তারিত",
+    x.description
+  );
+
+}
+
+  
 
 if(type==="education"){
 
@@ -4158,16 +4204,29 @@ if(type==="family"){
 
   if(type==="institution"){
 
-    x={
-      name:fv("name"),
-      type:fv("type"),
-      category:"institution",
-      location:fv("location"),
-      phone:fv("phone"),
-      description:fv("description")
-    };
+  x={
+    name:fv("name"),
 
-  }
+    type:fv("type"),
+
+    category:"institution",
+
+    image:fv("image"),
+
+    established:fv("established"),
+
+    location:fv("location"),
+
+    headName:fv("headName"),
+
+    president:fv("president"),
+
+    vicePresident:fv("vicePresident"),
+
+    description:fv("description")
+  };
+
+}
 
 
   if(type==="education"){
