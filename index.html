@@ -3933,11 +3933,16 @@ if(type==="profession"){
     x.area
   );
 
-
+html += input(
+  "profession",
+  "💼 পেশা *",
+  x.profession
+);
+  
  html += input(
   "institution",
   "🏢 প্রতিষ্ঠানের নাম *",
-  x.institution || x.profession
+  x.institution
 );
 
 
@@ -4558,7 +4563,7 @@ if(type==="family"){
 
     profession:fv("profession"),
 
-    institution:fv("institution") || fv("profession"),
+    institution:fv("institution"),
 
     department:fv("department"),
     description:fv("description")
