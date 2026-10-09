@@ -3113,9 +3113,10 @@ function makeCard(type,id,x){
   x.title ||
   x.name ||
   x.familyName ||
-  x.profession ||
+  (type === "profession"
+    ? (x.profession || x.jobTitle || "পেশার তথ্য")
+    : "") ||
   "তথ্য";
-
 
   let html = `
 
@@ -4552,12 +4553,16 @@ if(type==="family"){
     person:fv("person"),
     father:fv("father"),
     area:fv("area"),
-    institution:fv("institution"),
+
+    profession:fv("profession"),
+
+    institution:fv("institution") || fv("profession"),
+
     department:fv("department"),
     description:fv("description")
   };
 
-} 
+}
 
 
   if(type==="gallery"){
