@@ -648,6 +648,53 @@ textarea{
   font-weight:600;
 }
 
+
+  
+/* HEADER PHOTO SLIDESHOW */
+
+.top-header {
+  position: sticky;
+  top: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: #087443;
+}
+
+.header-slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.header-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.header-slide.active {
+  opacity: 1;
+}
+
+.top-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 65, 37, 0.82),
+    rgba(0, 100, 57, 0.60)
+  );
+}
+
   
 </style>
 </head>
@@ -655,6 +702,28 @@ textarea{
 <body>
 
 <header class="top-header">
+  <!-- HEADER SLIDESHOW -->
+  <div class="header-slideshow">
+
+    <img
+      class="header-slide active"
+      src="https://i.ibb.co.com/jkZzXwNt/FB-IMG-1790756715284.jpg"
+      alt="হিজলী গ্রামের ছবি"
+    >
+
+    <img
+      class="header-slide"
+      src="https://i.ibb.co.com/DPxd464X/IMG-20260927-WA0005.jpg"
+      alt="হিজলী গ্রামের ছবি"
+    >
+
+    <img
+      class="header-slide"
+      src="https://i.ibb.co.com/jkZzXwNt/FB-IMG-1790756715284.jpg"
+      alt="হিজলী গ্রামের ছবি"
+    >
+
+  </div>
   <div class="header-row">
     <div class="logo-title">
       <div class="logo">🏡</div>
@@ -5206,6 +5275,37 @@ window.doSearch=function(){
 ========================= */
 
 showPage("home");
+
+/* HEADER AUTO SLIDESHOW */
+
+(function () {
+  function startHeaderSlideshow() {
+    const slides = document.querySelectorAll(
+      ".header-slideshow .header-slide"
+    );
+
+    if (slides.length < 2) return;
+
+    let current = 0;
+
+    setInterval(function () {
+      slides[current].classList.remove("active");
+
+      current = (current + 1) % slides.length;
+
+      slides[current].classList.add("active");
+    }, 4000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      startHeaderSlideshow
+    );
+  } else {
+    startHeaderSlideshow();
+  }
+})();
 
 </script>
 
