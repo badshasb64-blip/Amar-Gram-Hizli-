@@ -3931,11 +3931,11 @@ if(type==="profession"){
   );
 
 
-  html += input(
-    "profession",
-    "পেশা *",
-    x.profession
-  );
+ html += input(
+  "institution",
+  "🏢 প্রতিষ্ঠানের নাম *",
+  x.institution || x.profession
+);
 
 
   html += select(
