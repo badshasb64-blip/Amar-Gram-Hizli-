@@ -5331,35 +5331,336 @@ window.doSearch=function(){
 
 showPage("home");
 
-/* HEADER AUTO SLIDESHOW */
+
+/* =========================
+   HEADER SLIDESHOW MANAGER
+========================= */
 
 (function () {
-  function startHeaderSlideshow() {
-    const slides = document.querySelectorAll(
-      ".header-slideshow .header-slide"
-    );
+
+  const slidePath = "headerSlides";
+  const slideRef = ref(db, slidePath);
+
+  let slideTimer = null;
+  let slideRecords = {};
+  let fallbackSlidesHTML = "";
+
+  function isSlideAdmin(user) {
+    return !!user &&
+      ADMIN_UIDS.includes(user.uid);
+  }
+
+  function startSlides() {
+    const box = document.querySelector(".header-slideshow");
+    if (!box) return;
+
+    if (slideTimer) {
+      clearInterval(slideTimer);
+      slideTimer = null;
+    }
+
+    const slides = box.querySelectorAll(".header-slide");
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === 0);
+    });
 
     if (slides.length < 2) return;
 
     let current = 0;
 
-    setInterval(function () {
+    slideTimer = setInterval(() => {
       slides[current].classList.remove("active");
-
       current = (current + 1) % slides.length;
-
       slides[current].classList.add("active");
     }, 4000);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener(
-      "DOMContentLoaded",
-      startHeaderSlideshow
-    );
-  } else {
-    startHeaderSlideshow();
+  function showPublicSlides(records) {
+    const box = document.querySelector(".header-slideshow");
+    if (!box) return;
+
+    const items = Object.entries(records || {})
+      .filter(([id, item]) =>
+        item && typeof item.url === "string" &&
+        /^https:\/\/\S+$/i.test(item.url)
+      );
+
+    if (items.length === 0) {
+      box.innerHTML = fallbackSlidesHTML;
+      startSlides();
+      return;
+    }
+
+    box.innerHTML = "";
+
+    items.forEach(([id, item], index) => {
+      const img = document.createElement("img");
+
+      img.className =
+        "header-slide" + (index === 0 ? " active" : "");
+
+      img.src = item.url;
+      img.alt = item.title || "হিজলী গ্রামের ছবি";
+      img.loading = index === 0 ? "eager" : "lazy";
+
+      box.appendChild(img);
+    });
+
+    startSlides();
   }
+
+  function ensureManagerUI() {
+    if (document.getElementById("headerSlideAdminBtn")) return;
+
+    const button = document.createElement("button");
+    button.id = "headerSlideAdminBtn";
+    button.type = "button";
+    button.textContent = "🖼️ হেডার স্লাইড পরিচালনা";
+    button.style.cssText =
+      "display:none;position:fixed;right:12px;bottom:85px;" +
+      "z-index:9998;background:#087443;color:white;border:0;" +
+      "border-radius:12px;padding:12px 14px;font-size:14px;" +
+      "font-weight:bold;box-shadow:0 3px 12px #0003;";
+
+    button.addEventListener("click", openSlideManager);
+    document.body.appendChild(button);
+
+    const modal = document.createElement("div");
+    modal.id = "headerSlideManager";
+    modal.style.cssText =
+      "display:none;position:fixed;inset:0;z-index:9999;" +
+      "background:#0009;padding:16px;overflow:auto;";
+
+    modal.innerHTML = `
+      <div style="background:white;color:#17352a;max-width:520px;
+        margin:30px auto;padding:18px;border-radius:16px;">
+        <div style="display:flex;justify-content:space-between;
+          align-items:center;gap:10px;">
+          <h3 style="margin:0;">🖼️ হেডার স্লাইড পরিচালনা</h3>
+          <button id="headerSlideClose" type="button"
+            style="font-size:22px;">×</button>
+        </div>
+
+        <p style="font-size:13px;">
+          ছবির সরাসরি HTTPS URL দিয়ে নতুন ছবি যোগ করো।
+        </p>
+
+        <form id="headerSlideForm">
+          <label>ছবির নাম (ঐচ্ছিক)</label>
+          <input id="headerSlideTitle" type="text"
+            placeholder="যেমন: হিজলী গ্রামের দৃশ্য"
+            style="box-sizing:border-box;width:100%;padding:11px;
+            margin:6px 0 12px;border:1px solid #ccc;border-radius:8px;">
+
+          <label>ছবির URL</label>
+          <input id="headerSlideURL" type="url" required
+            placeholder="https://..."
+            style="box-sizing:border-box;width:100%;padding:11px;
+            margin:6px 0 12px;border:1px solid #ccc;border-radius:8px;">
+
+          <button type="submit"
+            style="background:#087443;color:white;border:0;
+            padding:11px 16px;border-radius:8px;font-weight:bold;">
+            ＋ ছবি যোগ করো
+          </button>
+        </form>
+
+        <hr style="margin:18px 0;">
+        <h4>বর্তমান ছবিগুলো</h4>
+        <div id="headerSlideList"></div>
+        <p style="font-size:12px;color:#666;">
+          Firebase-এ নতুন ছবি যোগ হলে সেটি দর্শকদের স্লাইডশোতেও দেখা যাবে।
+        </p>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById("headerSlideClose")
+      .addEventListener("click", closeSlideManager);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeSlideManager();
+    });
+
+    document.getElementById("headerSlideForm")
+      .addEventListener("submit", addSlide);
+
+    renderSlideList();
+  }
+
+  function openSlideManager() {
+    if (!isSlideAdmin(currentUser)) {
+      alert("শুধু অনুমোদিত Admin এই কাজ করতে পারবেন।");
+      return;
+    }
+
+    renderSlideList();
+    document.getElementById("headerSlideManager").style.display = "block";
+  }
+
+  function closeSlideManager() {
+    document.getElementById("headerSlideManager").style.display = "none";
+  }
+
+  async function addSlide(event) {
+    event.preventDefault();
+
+    if (!isSlideAdmin(currentUser)) {
+      alert("Admin Login করুন।");
+      return;
+    }
+
+    const title =
+      document.getElementById("headerSlideTitle").value.trim();
+
+    const url =
+      document.getElementById("headerSlideURL").value.trim();
+
+    if (!/^https:\/\/\S+$/i.test(url)) {
+      alert("সঠিক HTTPS ছবির URL দিন।");
+      return;
+    }
+
+    try {
+      const newRef = push(slideRef);
+
+      await set(newRef, {
+        title: title || "হিজলী গ্রামের ছবি",
+        url: url,
+        createdAt: Date.now()
+      });
+
+      document.getElementById("headerSlideForm").reset();
+      alert("ছবি সফলভাবে যোগ হয়েছে।");
+
+    } catch (error) {
+      alert("ছবি যোগ করা যায়নি:\n" + error.message);
+    }
+  }
+
+  async function editSlide(id, item) {
+    if (!isSlideAdmin(currentUser)) return;
+
+    const title = prompt("ছবির নাম লিখুন:", item.title || "");
+    if (title === null) return;
+
+    const url = prompt("ছবির HTTPS URL লিখুন:", item.url || "");
+    if (url === null) return;
+
+    if (!/^https:\/\/\S+$/i.test(url.trim())) {
+      alert("সঠিক HTTPS ছবির URL দিন।");
+      return;
+    }
+
+    try {
+      await update(ref(db, slidePath + "/" + id), {
+        title: title.trim() || "হিজলী গ্রামের ছবি",
+        url: url.trim()
+      });
+
+      alert("ছবির তথ্য পরিবর্তন হয়েছে।");
+
+    } catch (error) {
+      alert("পরিবর্তন করা যায়নি:\n" + error.message);
+    }
+  }
+
+  async function deleteSlide(id) {
+    if (!isSlideAdmin(currentUser)) return;
+
+    if (!confirm("এই ছবিটি কি মুছে দিতে চাও?")) return;
+
+    try {
+      await remove(ref(db, slidePath + "/" + id));
+      alert("ছবি মুছে ফেলা হয়েছে।");
+
+    } catch (error) {
+      alert("ছবি মুছে ফেলা যায়নি:\n" + error.message);
+    }
+  }
+
+  function renderSlideList() {
+    const list = document.getElementById("headerSlideList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    const entries = Object.entries(slideRecords || {});
+
+    if (!entries.length) {
+      list.textContent =
+        "Firebase-এ এখনো কোনো স্লাইড যোগ করা হয়নি।";
+      return;
+    }
+
+    entries.forEach(([id, item]) => {
+      const card = document.createElement("div");
+      card.style.cssText =
+        "border:1px solid #ddd;border-radius:10px;padding:10px;" +
+        "margin:10px 0;";
+
+      const img = document.createElement("img");
+      img.src = item.url || "";
+      img.alt = item.title || "স্লাইড";
+      img.style.cssText =
+        "width:100%;height:110px;object-fit:cover;border-radius:8px;";
+
+      const title = document.createElement("p");
+      title.textContent = item.title || "হিজলী গ্রামের ছবি";
+
+      const edit = document.createElement("button");
+      edit.type = "button";
+      edit.textContent = "✏️ এডিট";
+      edit.style.marginRight = "8px";
+      edit.addEventListener("click", () => editSlide(id, item));
+
+      const del = document.createElement("button");
+      del.type = "button";
+      del.textContent = "🗑️ ডিলিট";
+      del.addEventListener("click", () => deleteSlide(id));
+
+      card.append(img, title, edit, del);
+      list.appendChild(card);
+    });
+  }
+
+  function init() {
+    const box = document.querySelector(".header-slideshow");
+    if (!box) return;
+
+    fallbackSlidesHTML = box.innerHTML;
+
+    ensureManagerUI();
+
+    onValue(slideRef, snapshot => {
+      slideRecords = snapshot.val() || {};
+      showPublicSlides(slideRecords);
+      renderSlideList();
+    }, error => {
+      console.error("Header slides load error:", error);
+    });
+
+    onAuthStateChanged(auth, user => {
+      currentUser = user;
+
+      const button =
+        document.getElementById("headerSlideAdminBtn");
+
+      if (button) {
+        button.style.display =
+          isSlideAdmin(user) ? "block" : "none";
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
 })();
 
 </script>
