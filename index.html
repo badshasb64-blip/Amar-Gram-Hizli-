@@ -3557,38 +3557,60 @@ if(type==="mosque"){
 
   html += field(x.vicePresident,"🤝 সহসভাপতি");
 
-  /* IMAGE GALLERY */
+  
+/* IMAGE GALLERY */
 
-  if(x.imageUrls){
+if(x.imageUrls){
 
-    const urls = x.imageUrls
-      .split(/\n/)
-      .map(url=>url.trim())
-      .filter(url=>/^https?:\/\//i.test(url));
+  const urls = x.imageUrls
+    .split(/\n/)
+    .map(url => url.trim())
+    .filter(url => /^https?:\/\//i.test(url));
 
-    if(urls.length){
+  if(urls.length){
 
-      html += `<div class="mosque-gallery">`;
+    html += `
+      <div style="
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:6px;
+        margin:10px 0;
+      ">
+    `;
 
-      urls.forEach((url,index)=>{
+    urls.forEach(url => {
 
-        html += `
+      html += `
+        <div style="
+          width:100%;
+          aspect-ratio:1/1;
+          overflow:hidden;
+          border-radius:8px;
+        ">
           <img
             src="${esc(url)}"
-            alt="মসজিদ / ঈদগাহের ছবি ${index+1}"
+            alt="মসজিদ / ঈদগাহের ছবি"
             loading="lazy"
-            onclick="window.open(this.src,'_blank')"
-            style="width:100%;max-width:150px;height:120px;object-fit:cover;border-radius:10px;cursor:pointer;margin:4px;"
+            style="
+              width:100%;
+              height:100%;
+              object-fit:cover;
+              display:block;
+              pointer-events:none;
+            "
           >
-        `;
+        </div>
+      `;
 
-      });
+    });
 
-      html += `</div>`;
-
-    }
+    html += `</div>`;
 
   }
+
+}
+
+
 
   /* RAMADAN TIMINGS */
 
