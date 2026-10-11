@@ -4308,49 +4308,139 @@ html += input(
   }
 
 
-  if(type==="mosque"){
+  
+/* MOSQUE FORM */
 
-    html += input(
-      "name",
-      "মসজিদ / ঈদগাহের নাম *",
-      x.name
-    );
+if(type==="mosque"){
 
-    html += select(
-      "type",
-      "ধরন",
-      x.type || "মসজিদ",
-      [
-        ["মসজিদ","🕌 মসজিদ"],
-        ["ঈদগাহ","🌙 ঈদগাহ"]
-      ]
-    );
+  html += input(
+    "name",
+    "মসজিদ / ঈদগাহের নাম *",
+    x.name
+  );
 
-    html += input(
-      "location",
-      "অবস্থান",
-      x.location
-    );
+  html += select(
+    "type",
+    "প্রতিষ্ঠানের ধরন",
+    x.type || "ওয়াক্ত মসজিদ",
+    [
+      ["জামে মসজিদ","🕌 জামে মসজিদ"],
+      ["ওয়াক্ত মসজিদ","🕌 ওয়াক্ত মসজিদ"],
+      ["ঈদগাহ","🌙 ঈদগাহ"],
+      ["মসজিদ","মসজিদ (আগের তথ্য)"]
+    ]
+  );
 
-    html += input(
-      "imam",
-      "ইমাম / দায়িত্বশীল",
-      x.imam
-    );
+  html += input(
+    "location",
+    "📍 অবস্থান",
+    x.location
+  );
 
-    html += input(
-      "phone",
-      "ফোন",
-      x.phone
-    );
+  html += input(
+    "head",
+    "👤 প্রধানের নাম",
+    x.head
+  );
 
-    html += textarea(
-      "description",
-      "বিস্তারিত",
-      x.description
-    );
+  html += input(
+    "imam",
+    "🕌 ইমাম / দায়িত্বশীল",
+    x.imam
+  );
 
-  }
+  html += input(
+    "president",
+    "🤝 সভাপতির নাম",
+    x.president
+  );
+
+  html += input(
+    "vicePresident",
+    "🤝 সহসভাপতির নাম",
+    x.vicePresident
+  );
+
+  html += textarea(
+    "imageUrls",
+    "🖼️ ছবির URL (প্রতি লাইনে একটি URL)",
+    x.imageUrls
+  );
+
+  html += `<h3>🌙 রমজানের সময়সূচি</h3>`;
+
+  html += input(
+    "sahri1",
+    "১–১০ রমজান: সাহরির শেষ সময়",
+    x.sahri1
+  );
+
+  html += input(
+    "iftar1",
+    "১–১০ রমজান: ইফতারের সময়",
+    x.iftar1
+  );
+
+  html += input(
+    "sahri2",
+    "১১–২০ রমজান: সাহরির শেষ সময়",
+    x.sahri2
+  );
+
+  html += input(
+    "iftar2",
+    "১১–২০ রমজান: ইফতারের সময়",
+    x.iftar2
+  );
+
+  html += input(
+    "sahri3",
+    "২১–শেষ রমজান: সাহরির শেষ সময়",
+    x.sahri3
+  );
+
+  html += input(
+    "iftar3",
+    "২১–শেষ রমজান: ইফতারের সময়",
+    x.iftar3
+  );
+
+  html += `<h3>🌙✨ ঈদুল ফিতর</h3>`;
+
+  html += input(
+    "fitrName",
+    "ঈদুল ফিতরের নাম / পরিচিতি",
+    x.fitrName
+  );
+
+  html += input(
+    "fitrTime",
+    "ঈদুল ফিতরের নামাজের সময়",
+    x.fitrTime
+  );
+
+  html += `<h3>🌙🐄🐐 ঈদুল আজহা</h3>`;
+
+  html += input(
+    "adhaName",
+    "ঈদুল আজহার নাম / পরিচিতি",
+    x.adhaName
+  );
+
+  html += input(
+    "adhaTime",
+    "ঈদুল আজহার নামাজের সময়",
+    x.adhaTime
+  );
+
+  html += textarea(
+    "description",
+    "📝 বিস্তারিত",
+    x.description
+  );
+
+}
+
 
 
   if(type==="contact"){
