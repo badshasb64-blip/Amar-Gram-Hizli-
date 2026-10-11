@@ -4832,19 +4832,43 @@ if(type==="family"){
   }
 
 
-  if(type==="mosque"){
+  
+if(type==="mosque"){
 
-    x={
-      name:fv("name"),
-      type:fv("type"),
-      category:"mosque",
-      location:fv("location"),
-      imam:fv("imam"),
-      phone:fv("phone"),
-      description:fv("description")
-    };
+  x={
+    ...x,
 
-  }
+    name:fv("name"),
+    type:fv("type"),
+    category:"mosque",
+
+    location:fv("location"),
+    head:fv("head"),
+    imam:fv("imam"),
+    president:fv("president"),
+    vicePresident:fv("vicePresident"),
+
+    imageUrls:fv("imageUrls"),
+
+    sahri1:fv("sahri1"),
+    iftar1:fv("iftar1"),
+
+    sahri2:fv("sahri2"),
+    iftar2:fv("iftar2"),
+
+    sahri3:fv("sahri3"),
+    iftar3:fv("iftar3"),
+
+    fitrName:fv("fitrName"),
+    fitrTime:fv("fitrTime"),
+
+    adhaName:fv("adhaName"),
+    adhaTime:fv("adhaTime"),
+
+    description:fv("description")
+  };
+
+}
 
 
   if(type==="contact"){
