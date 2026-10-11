@@ -3539,17 +3539,134 @@ html += field(x.institution,"🏢 প্রতিষ্ঠানের নাম
   }
 
 
-  /* MOSQUE */
 
-  if(type==="mosque"){
 
-    html += field(x.type,"🕌 ধরন");
+/* MOSQUE */
 
-    html += field(x.location,"📍 অবস্থান");
+if(type==="mosque"){
 
-    html += field(x.imam,"👤 ইমাম");
+  html += field(x.type,"🕌 ধরন");
+
+  html += field(x.location,"📍 অবস্থান");
+
+  html += field(x.head,"👤 প্রধানের নাম");
+
+  html += field(x.imam,"🕌 ইমাম / দায়িত্বশীল");
+
+  html += field(x.president,"🤝 সভাপতি");
+
+  html += field(x.vicePresident,"🤝 সহসভাপতি");
+
+  /* IMAGE GALLERY */
+
+  if(x.imageUrls){
+
+    const urls = x.imageUrls
+      .split(/\n/)
+      .map(url=>url.trim())
+      .filter(url=>/^https?:\/\//i.test(url));
+
+    if(urls.length){
+
+      html += `<div class="mosque-gallery">`;
+
+      urls.forEach((url,index)=>{
+
+        html += `
+          <img
+            src="${esc(url)}"
+            alt="মসজিদ / ঈদগাহের ছবি ${index+1}"
+            loading="lazy"
+            onclick="window.open(this.src,'_blank')"
+            style="width:100%;max-width:150px;height:120px;object-fit:cover;border-radius:10px;cursor:pointer;margin:4px;"
+          >
+        `;
+
+      });
+
+      html += `</div>`;
+
+    }
 
   }
+
+  /* RAMADAN TIMINGS */
+
+  if(x.sahri1 || x.iftar1 ||
+     x.sahri2 || x.iftar2 ||
+     x.sahri3 || x.iftar3){
+
+    html += `<h3>🌙 রমজানের সময়সূচি</h3>`;
+
+    html += field(
+      x.sahri1,
+      "১–১০ রমজান: সাহরির শেষ সময়"
+    );
+
+    html += field(
+      x.iftar1,
+      "১–১০ রমজান: ইফতারের সময়"
+    );
+
+    html += field(
+      x.sahri2,
+      "১১–২০ রমজান: সাহরির শেষ সময়"
+    );
+
+    html += field(
+      x.iftar2,
+      "১১–২০ রমজান: ইফতারের সময়"
+    );
+
+    html += field(
+      x.sahri3,
+      "২১–শেষ রমজান: সাহরির শেষ সময়"
+    );
+
+    html += field(
+      x.iftar3,
+      "২১–শেষ রমজান: ইফতারের সময়"
+    );
+
+  }
+
+  /* EID-UL-FITR */
+
+  if(x.fitrName || x.fitrTime){
+
+    html += `<h3>🌙✨ ঈদুল ফিতর</h3>`;
+
+    html += field(x.fitrName,"পরিচিতি");
+
+    html += field(x.fitrTime,"নামাজের সময়");
+
+  }
+
+  /* EID-UL-ADHA */
+
+  if(x.adhaName || x.adhaTime){
+
+    html += `<h3>🌙🐄🐐 ঈদুল আজহা</h3>`;
+
+    html += field(x.adhaName,"পরিচিতি");
+
+    html += field(x.adhaTime,"নামাজের সময়");
+
+  }
+
+  /* DESCRIPTION */
+
+  if(x.description){
+
+    html += `
+      <div class="description">
+        ${esc(x.description)}
+      </div>
+    `;
+
+  }
+
+}
 
 
   /* CONTACT */
